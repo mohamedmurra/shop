@@ -1,0 +1,12 @@
+dj-database-url
+django
+gunicorn
+whitenoice
+gitignore
+psycopg2
+dj-static
+django-phonenumber-filed
+django-crispy-forms
+django-bootstrap4
+docopt
+pytz
