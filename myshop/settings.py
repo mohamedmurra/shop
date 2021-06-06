@@ -44,7 +44,6 @@ INSTALLED_APPS = [
     'crispy_forms',
     'slick_reporting',
     'bootstrap4',
-    'api',
     'rest_framework',
 
 ]
