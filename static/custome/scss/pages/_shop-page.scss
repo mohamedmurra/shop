@@ -1,0 +1,106 @@
+$bg-top-bar:  $primary-dark;
+$select-form:$gray-500;
+
+
+.shop-page-rightbar{
+    .rightbar{
+        margin-top: 30px;
+    }
+}
+.shop-page{
+    
+
+    .toolbar{
+    
+        .toolbox{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            
+    
+            .toolbox-left{
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+    
+                .btn{
+                    color: var(--color-text);
+                    padding: 0;
+                    display: flex;
+                    align-items: center;
+                    font-size: $font-size-base;
+                    margin-right: 30px;
+                }
+                .btn::before{
+                    font-family: 'Font Awesome\ 5 Free';
+                    font-weight: 900;
+                    margin-right: 10px;
+                    display: flex;
+                    align-items: center;
+                    height: 15px;
+                    width: 15px;
+                }
+                .btn[aria-expanded="false"]::before{
+                    content: "\f0c9" ;
+                }
+                .btn[aria-expanded="true"]::before{
+                    content: "\f00d" ;
+                    font-size: 13px;
+                }
+    
+                .toolbox-info{
+                    color: var(--color-text);
+                    span{
+                        color: $secondary;
+                    }
+                }
+            }
+            
+            .toolbox-right{
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                .toolbox-sort{
+                    display: flex;
+                    align-items: center;
+                    margin-right: 10px;
+                    label{
+                        color: var(--color-text);
+                        margin-bottom: 0;
+                        margin-right: 15px;
+                    }
+                    
+                }
+                .toolbox-layout{
+                    .btn-layout svg {
+                        fill: $body-color-secondary;
+                        margin-left: 10px;
+                    }
+                    .btn-layout.active svg {
+                        fill: $secondary;
+                    }
+                }
+            }
+        }
+    
+        
+    }
+    .productbar{
+        padding-top: 15px;
+
+        .product{
+            margin-bottom: 30px;
+        }
+    }
+
+    
+}
+.content {
+    display: none;
+  }
+  .noContent {
+    color: var(--color-text) !important;
+    background-color: transparent !important;
+    pointer-events: none;
+  }

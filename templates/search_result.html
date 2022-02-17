@@ -1,0 +1,144 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<style type="text/css">
+ .imago {
+  width: 375 px;
+  height: 365;
+ }
+</style>
+<!-- Shop Page One content -->
+<div class="container-fuild">
+ <div class="page-header" style="background-image: url('images/miscellaneous/page-header.png')">
+  <div class="container">
+   <h1 class="page-title">Shop</h1>
+  </div><!-- End .container -->
+ </div>
+ <nav aria-label="breadcrumb">
+  <div class="container">
+   <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'store' %}">Home</a></li>
+    <li class="breadcrumb-item "><a href="{% url 'main' %}">Shop</a></li>
+   </ol>
+  </div>
+ </nav>
+
+
+</div>
+
+<div class="pro-content page-content shop-page shop-page-two">
+ <div class="container">
+  <div class="row">
+   <div class="col-12 col-lg-9">
+
+    <div class="toolbar">
+     <div class="toolbox">
+      <div class="toolbox-left">
+
+       <div class="toolbox-info">
+         <span>{{count}}</span> Products found
+       </div><!-- End .toolbox-info -->
+      </div><!-- End .toolbox-left -->
+     </div>
+    </div>
+    <div id="swap" class="productbar">
+     <div class="row">
+      {% for product in Products %}
+      <div class="col-12 col-md-4">
+       <div class="product">
+        <article>
+         <div class="pro-thumb">
+
+          <img class="img-fluid imago" src="{{product.image.url}}" alt="Product-Image">
+
+          <div class="badges">
+           <div class="badge badge-info">
+            Featured
+           </div>
+
+           {% if product.aviable %}
+
+           <div class="badge badge-danger">
+            Sale
+           </div>
+           {% else %}
+           <div class="badge badge-danger">
+            Out stack
+           </div>
+           {% endif %}
+
+          </div>
+
+          <div class="pro-hover-icons">
+            <div class="icons">
+              {% if product.aviable %}
+              <button data-product={{product.id}} data-action='add' class="btn-light icon update-cart" onclick="notificationCart();">
+                <img src="{% static 'custome\revolution\assets\svg\action\ic_add_shopping_cart_24px.svg' %}" alt="">
+                <i class="fas fa-shopping-bag"></i>
+              </button>
+              {% endif %}
+              <button data-product={{product.id}} data-action='wish' class="btn-light icon update-cart" onclick="notificationWishlist();">
+                <img src="{% static 'custome\revolution\assets\svg\action\ic_list_24px.svg' %}" alt="">
+                <i class="fas fa-align-right" data-fa-transform="rotate-90"></i>
+              </button>
+            </div>
+          </div>
+         </div>
+
+         <div class="pro-info">
+          <div class="pro-category">
+           {{product.catagory}}
+          </div>
+          <h3><a href="{% url 'detail' product.slug %}">{{product.name}}</a></h3>
+
+          <div class="pro-price">
+           {% if product.discount|floatformat:2 %}
+           <ins>${{product.new_price|floatformat:2}}</ins>
+           <del>${{product.price|floatformat:2}}</del>
+           {% else %}
+           <ins>${{product.price|floatformat:2}}</ins>
+           {% endif %}
+          </div>
+          <div class="pro-options">
+           <div class="color-option">
+
+            </ul>
+           </div>
+          </div>
+         </div>
+
+
+        </article>
+       </div>
+      </div>
+      {% endfor %}
+     </div>
+    </div>
+
+    <nav aria-label="navigation">
+     <ul class="pagination">
+       {% if page_obj.has_previous %}
+      <li class="page-link disabled"><a href="?page=1">First</a></li>
+      <li class="page-link active" aria-current="page"><a href="?page={{page_obj.previous_page_number}}">Previous</a>
+      </li>
+      {% endif %}
+      {% for num in page_obj.paginator.page_range %}
+      {% if page_obj.number == num %}
+      <li class="page-link active"><a href="?page={{num}}">{{num}}</a></li>
+      {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %} <li class="page-link"><a
+        href="?page={{num}}">{{num}}</a></li>
+       {% endif %}
+       {% endfor %}
+       {% if page_obj.has_next %}
+       <li class="page-link"><a href="?page={{page_obj.next_page_number}}">Next</a></li>
+
+       <li class="page-link"><a href="?page={{page_obj.paginator.num_page}}">Last</a></li>
+       {% endif %}
+     </ul>
+    </nav>
+   </div>
+  </div>
+ </div>
+</div>
+{% endblock content %}

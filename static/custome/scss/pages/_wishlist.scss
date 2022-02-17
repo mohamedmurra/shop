@@ -1,0 +1,154 @@
+// ....compare....
+
+.wishlist-content{
+    h3{
+         color: var(--color-text);
+        font-family: $font-family-base-bold;
+        font-size: $font-size-lg;
+    }
+    .top-table{
+        thead{
+            background-color: $white;
+          
+        }
+        tbody{
+          
+            tr{
+              
+                background-color: var(--color-article1-background);
+                align-items: center;
+                border: 2px solid;
+                border-color: var(--color-border);
+                margin-bottom: 30px;
+                .item-price{
+                    color: $secondary;
+                    font-family: $font-family-base-bold;
+                    font-size: $font-size-lg;
+                }
+                td{
+                    display: flex;
+                    justify-content: center;
+                    border: none;
+                    .item-detail{
+                        justify-content: flex-start;
+                        h4{
+                            color: var(--color-text);
+                            font-size: $font-size-lg;
+                            font-weight: $font-weight-bold;
+                        }
+                        .item-controls{
+                         
+                            .btn{
+                                font-size: 12px;
+                                border:1px solid $gray-300;
+                                padding: 0 5px;
+                            }
+                        }
+                    
+                        .pro-category{
+                            font-family: $font-family-base;
+                            color:var(--color-text-secondary);
+                            text-transform: uppercase;
+                        }
+                      
+                    }
+                    .item-control{
+                        text-align: right;
+                        .btn{
+                            padding: 6px 12px;
+                            border: 2px solid $border-color;
+                        }
+                    }
+                 &:last-child{
+                    justify-content: flex-end;
+                 }
+                }
+              
+            }
+        }
+    }  
+  
+
+    .media-main{
+        background-color: white;
+        .media{
+            
+            padding: 20px;
+            img{
+                width: 140px;
+                height: 140px;
+                border:$border-width solid #ddd;
+                margin-right: 1rem;
+            }
+        }
+        .media-body{
+            .texting{
+                h6{
+                    span{
+                        color: $danger;
+                    }
+                }
+                .buttons{
+                    display: flex;
+
+                    .input-group{
+                        margin-right: 5px;
+                    }
+                }
+                    
+            }
+            .detail{
+                text-align: end;
+                p{
+                    margin-bottom: 5px;
+                    color:#a1abb6;
+                }
+                .share{
+                    margin-bottom: 5px;
+                    a{
+                    color:#a1abb6;
+                    .fas{
+                        color:#a1abb6;
+                    }
+                    }
+                
+                }
+    
+            }
+        }
+       
+    }
+  
+}
+@media only screen and (min-width:992px) and (max-width:1200px){
+    .wishlist-content .top-table tbody tr .text-success{
+        font-size: 0.7rem;
+    }
+}   
+
+
+@media only screen and (max-width:992px){
+    .wishlist-content{
+        td.col-12{
+            padding-bottom: 0;
+            h3{
+                margin-bottom: 0;
+            }
+            &:last-child{
+                padding-bottom: 0.75rem;
+            }
+        }
+    } 
+    .wishlist-content .top-table{
+        text-align: center;
+    }
+    .wishlist-content .top-table tbody tr{
+        flex-direction: column;
+    }
+    .wishlist-content .top-table tbody tr td{
+        justify-content: center;
+    }
+    .wishlist-content .top-table tbody tr td:last-child {
+        justify-content: center;
+    }
+}

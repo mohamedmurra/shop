@@ -1,0 +1,767 @@
+.banners-content{
+    padding-top: 10px;  
+    .container-fluid{
+        padding-left: 18px; 
+        padding-right: 18px;
+
+        [class^=col]{
+            padding-right: 5px;
+            padding-left: 5px;
+
+        }
+        figure{
+            
+            position: relative;
+            background-color: var(--color-article1-background);
+            border-radius: $border-radius;
+            overflow: hidden;
+            margin-bottom: 0px;
+            padding: 30px;
+            width: 100%;
+            
+
+            img{
+                width: auto;
+                max-height: 145px;
+                min-height: 145px;
+            }
+            
+            &.right{
+                img{
+                    float: right;
+                }
+            }
+        }
+
+        .banner-caption{
+            position: absolute;
+            width: 100%;
+            z-index: 1;
+
+            h3{
+                font-family: $font-family-base-bold;
+                color: var(--color-text);
+                margin: 0;
+                margin-top: -3px;
+                white-space: normal;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+                height: 60px;
+            }
+            p{
+                color: $secondary;
+                margin-bottom: 15px;
+                white-space: normal;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: -webkit-box;
+                -webkit-line-clamp: 1;
+                -webkit-box-orient: vertical;
+              
+            }
+
+            .btn{
+                margin-top: 15px;
+                padding: 15px 12px;
+            }
+
+            &.left-caption{
+                top: 0;
+                left: 0;
+                padding-left: 30px;
+                padding-top: 30px;
+                padding-right: 180px;
+                text-align: left;
+            }
+            &.right-caption{
+                top: 0;
+                left: 0;
+                padding-left: 180px;
+                padding-top: 30px;
+                text-align: left;
+            }
+        }
+    }
+}
+.banners{
+    .banner-image {
+        img{
+            width: 100%;
+        }
+    }
+}
+
+.banner-text{
+    position: absolute;
+    top: 10px;
+    margin-left: 15px;
+    h2 , h3{
+        font-family: $font-family-base-bold;
+        font-size: ($font-size-lg + 1rem);
+        text-align: left;
+    }
+    h2{
+        color: $white;
+    }
+    h3{
+        color: #000;
+    }
+}
+.full-width-banner{
+    margin-bottom: 30px;
+
+    .banner-image{
+        border-radius: $border-radius;
+        overflow: hidden;
+        margin-bottom: 0;
+        // height: 270px;
+
+        a{
+            display: block;
+        }
+    }
+}
+
+.full-screen-banner{
+    margin-bottom: 30px;
+
+    .banner-image{
+        border-radius: $border-radius;
+        overflow: hidden;
+        margin-bottom: 0;
+        a{
+            display: block;
+        }
+    }
+}
+
+
+.fullwidth-banner{
+     /* The image used */
+    background-image: url("../images/banners/furniture-bg.jpg");
+
+    /* Set a specific height */
+    height: 582px;
+
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .parallax-banner-text{
+        text-align: center;
+        padding: 30px;
+h3{
+    font-family: $font-family-base-bold;
+    color: $secondary;
+    margin-bottom: 0;
+    line-height: 1.5;
+        white-space: normal;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+}
+        h2{
+            font-size: 3rem;
+            font-family: $font-family-base-bold;
+            color: $body-color;
+            margin: 0;
+            line-height: 1.5;
+            white-space: normal;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+        }
+        p{
+            line-height: 1.5;
+            white-space: normal;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+        }
+        
+    }
+}
+.fullwidth-banner6{
+    /* The image used */
+   background-image: url("../images/index-6/bg-paralax.jpg");
+
+   /* Set a specific height */
+   height: 582px;
+
+   /* Create the parallax scrolling effect */
+   background-attachment: fixed;
+   background-position: center;
+   background-repeat: no-repeat;
+   background-size: cover;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+
+   .parallax-banner-text{
+       text-align: center;
+       padding: 30px;
+
+       h2{
+           font-size: 4rem;
+           font-family: $font-family-base-bold;
+           color: $white;
+           margin: 0;
+           line-height: 1;
+           white-space: normal;
+           overflow: hidden;
+           text-transform: uppercase;
+           margin-bottom: 15px;
+         
+       }
+       p{
+             color: $white;
+           line-height: 1.5;
+           white-space: normal;
+           overflow: hidden;
+           text-overflow: ellipsis;
+           display: -webkit-box;
+           -webkit-line-clamp: 3;
+           -webkit-box-orient: vertical;
+       }
+       
+   }
+}
+
+
+
+.fullwidth-banner5{
+    /* The image used */
+   background-image: url("../images/index-4/paralex.jpg");
+
+   /* Set a specific height */
+   height: 582px;
+
+   /* Create the parallax scrolling effect */
+   background-attachment: fixed;
+   background-position: center;
+   background-repeat: no-repeat;
+   background-size: cover;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+
+   .parallax-banner-text{
+       text-align: center;
+
+       h2{
+           font-size: 3rem;
+           font-family: $font-family-base-bold;
+           color: color-yiq($primary);
+           margin: 0;
+       }
+       h4{
+        font-size: 2rem;
+        font-family: $font-family-base-bold;
+           color: $secondary;
+       }
+       .btn-link{
+           color: color-yiq($primary) ;
+           border: 1px solid ;
+           &:hover{
+            color: $secondary;
+           }
+       }
+       
+   }
+}
+.fullwidth-banner4-2{
+    /* The image used */
+   background-color: var(--color-article1-background);
+   /* Create the parallax scrolling effect */
+   background-attachment: fixed;
+   background-position: center;
+   background-repeat: no-repeat;
+   background-size: cover;
+
+
+   .parallax-banner-text{
+       text-align: center;
+
+       h2{
+           font-size: 3rem;
+           font-family: $font-family-base-bold;
+           color: color-yiq($primary);
+           margin: 0;
+       }
+       h4{
+        font-size: 2rem;
+        font-family: $font-family-base-bold;
+           color: $secondary;
+       }
+       .btn-link{
+           color: color-yiq($primary) ;
+           border: 1px solid ;
+           &:hover{
+            color: $secondary;
+           }
+       }
+       
+   }
+}
+
+.banners-content4{
+ padding-bottom: 70px;
+   .banner-image{
+       position: relative;
+       margin-bottom: 30px;
+       img{
+           width: 100%;
+       }
+   }
+        .banner-caption{
+            position: absolute;
+            top: 0;
+            z-index: 2;
+            h3{
+                font-family: $font-family-base-bold;
+                margin: 0;
+                margin-top: -6px;
+                color: $white;
+            }
+            h2{
+                font-family: $font-family-base-bold;
+                margin: 0;
+                margin-top: -6px;
+                color: $white;
+                font-size: ($font-size-lg + 1);
+            }
+
+            p{
+                color: $secondary;
+            }
+            .btn{
+                border: 1px solid ;
+                color: $white;
+                margin-top: 15px;
+                padding: 10px 15px;
+                &:hover{
+                    color: $secondary;
+                }
+            }
+            &.left-caption{
+                padding-top: 20px;
+                padding-left: 20px;
+                text-align: left;
+                
+            }
+        }
+}
+
+.bodyrtl{
+    .banners-content .container-fluid figure.right img{
+        float: left;
+    }
+    .banners-content .container-fluid .banner-caption.right-caption{
+        padding-left: 30px;
+        padding-right: 180px;
+        text-align: right;
+    }
+    .banners-content .container-fluid .banner-caption.left-caption{
+        padding-left: 180px;
+        padding-right: 30px;
+        text-align: right;
+    }
+    .banners-content4 .container .right3 .banner-caption.left-caption{
+        padding-top: 60px;
+        padding-left: 30px;
+        padding-right: 30px;
+        text-align: right;
+    }
+    .banners-content4 .container .banner-caption.left-caption{
+      
+        padding-right: 30px;
+        text-align: right;
+    }
+    .banner-text{
+        margin-right: 15px;
+        margin-left: 0;
+        h2 , h3{
+            text-align: right;
+        }
+    }
+}
+@media only screen and (max-width:1199px){
+  
+    .banner-text{
+        h2 , h3{
+            font-size: ($font-size-lg + 0.5rem);
+        }
+    }
+}
+
+@media only screen and (max-width:991px){
+    .side-banner{
+        margin-bottom: 30px;
+    }
+    .banners-content .container-fluid {
+        figure{
+            margin-bottom: 10px;
+        }
+        .col-12:last-child figure{
+            margin-bottom: 0;
+        }
+    }
+    .banner-text{
+        h2 , h3{
+            font-size: ($font-size-lg + 1rem);
+        }
+    }
+    .banners-content4{
+      
+           .container{
+               .col-12{
+                figure{
+                    margin-bottom: 30px;
+                }
+                &:last-child figure{
+                    margin-bottom: 0;
+                }
+               }
+           
+            }
+        }
+
+    .rev-section{
+        .banners{
+            display: flex;
+            margin-top: 30px;
+       
+        }
+    }
+
+
+ .bodyrtl{
+    .rev-section{
+        .banners{
+            .banner-image{
+                margin-right: 0px;
+                margin-left: 30px;
+                margin-bottom: 0;
+                text-align: center;
+                &:last-child {
+                    margin-left: 0;
+                }
+            }
+        }
+    }
+ }
+}
+@media only screen and (max-width:767px){
+    .pro-content .fullwidth-banner2-2 , .fullwidth-banner , .fullwidth-banner5{
+        height: 415px;
+    }
+}
+
+@media only screen and (max-width:576px){
+    .banners-content .container-fluid .banner-caption.right-caption{
+        padding-left: 155px;
+        padding-top: 25px;
+    }
+    .banners-content .container-fluid figure.right img{
+        float: left;
+    }
+    .banners-content .container-fluid figure{
+        padding-bottom: 60px;
+    }
+    .banners-content .container-fluid .banner-caption.left-caption{
+  
+        padding-top: 25px;
+        padding-bottom: 25px;
+        padding-right: 0px;
+        padding-left: 155px;
+    }
+    .fullwidth-banner .parallax-banner-text h2 {
+        font-size: 2rem;
+    }
+    .fullwidth-banner .parallax-banner-text p {
+        font-size: 14px;
+    }
+    .fullwidth-banner5 .parallax-banner-text h2 {
+        font-size: 2rem;
+    }
+    .fullwidth-banner5 .parallax-banner-text p {
+        font-size: 14px;
+    }
+}
+
+
+@media only screen and (max-width: 576px){
+    .bodyrtl{
+        .banners-content .container-fluid .banner-caption.left-caption {
+            padding-right: 30px;
+            padding-left: 155px;
+        }
+    }
+}
+@media only screen and (max-width: 576px){
+    .bodyrtl{
+        .banners-content .container-fluid .banner-caption.right-caption {
+            padding-right: 155px;
+            padding-left: 0px;
+        }
+    }
+}
+@media only screen and (max-width: 768px){
+    .banners-content4 {
+        padding-bottom: 30px;
+    }
+    .banner_.banner-5 .collection-banner{
+        margin-bottom: 30px;
+        img{
+            width: 100%;
+        }
+      
+       
+    }
+    .banner_.banner-5{
+        .col-md-4{
+            &:last-child{
+                .collection-banner{
+                    margin-bottom: 0;
+                }
+            }
+        }
+    }
+.bodyrtl{
+    .tabs-content .nav .nav-link {
+        margin-left: 6px !important;
+        margin-right: 0 !important;
+    }
+    
+
+}
+}
+
+
+@media only screen and (max-width:991px) and (min-width:768px){
+.fullwidth-banner5{
+    height: 1100px;
+}
+.rev-section{
+    .banners{
+        figure{
+            margin-bottom: 0px !important;
+           
+        }
+       }
+       .col-12:last-child > figure{
+            margin-bottom: 0;
+       }
+}
+
+}
+
+
+@media only screen and (max-width:576px){
+    .banners-content .container-fluid figure img {
+        width: auto;
+        max-height: 115px;
+        min-height: 100px;
+    }
+    .banner-1 .contain-banner a, .banner-1 .contain-banner h2, .banner-1 .contain-banner h4{
+        font-size: 16px;
+    }
+}
+
+
+
+
+.banner_{
+    .collection-banner{
+        position: relative;
+        overflow: hidden;
+        .contain-banner{
+            position: absolute;
+            top: 0;
+            width: 100%;
+            height: 100%;
+    
+            display: flex;
+    
+            align-items: center;
+            padding-left: 50px;
+            padding-right: 50px;
+    
+            h2{
+                font-size: 65px;
+
+            }
+        }
+    }
+}
+.banner-1{
+    .contain-banner{
+        a,h2,h4{
+            color: $black;
+        }
+        h4{
+            font-family: $font-family-base;
+        }
+        h2{
+            font-family: $font-family-base-medium;
+            line-height: 1;
+        }
+        a:hover{
+            color: $secondary;
+        }
+    }
+}
+.banner_.banner-2{
+    .collection-banner{
+       
+        .contain-banner{
+            padding-left: 30px;
+            padding-right: 30px;
+            justify-content: flex-end;
+            text-align: right;
+            h4{
+                
+                color: $secondary;
+                font-size: 20px;
+            }
+            h2{
+                font-size: 28px;
+            }
+            .btn{
+                padding: 0;
+            }
+        }
+    }
+}
+
+.banner_.banner-3{
+    .collection-banner{
+       
+        .contain-banner{
+            padding-left: 30px;
+            padding-right: 30px;
+            justify-content: flex-start;
+            text-align: left;
+
+            h2{
+                font-size: 22px;
+                color: $white;
+                margin-bottom: 5px;
+            }
+            .btn{
+                padding:5px 0;
+                color: $white;
+            }
+        }
+    }
+}
+
+.banner_.banner-4{
+    .collection-banner{
+       
+        .contain-banner{
+            padding-left: 30px;
+            padding-right: 30px;
+            padding-top: 30px;
+            justify-content: flex-end;
+            align-items: flex-start;
+            text-align: right;
+
+            h2{
+                font-size: 30px;
+                color: $white;
+            }
+            h4{
+                font-size: 18px;
+                color: $white;
+            }
+            .btn{
+                padding:5px 0;
+                color: $white;
+            }
+        }
+    }
+}
+
+.banner_.banner-5{
+    .collection-banner{
+       
+        .contain-banner{
+            justify-content: center;
+            align-items: flex-end;
+            padding-left: 15px;
+            padding-right: 15px;
+            padding-bottom: 15px;
+
+            div{
+                width: 100%;
+                padding: 10px;
+                background-color: var(--color-article1-background);
+                box-shadow:0 0 5px 0 rgba(0,0,0,0.2);
+            }
+            h2{
+ 
+                font-size:22px;
+              
+            }
+            h4{
+                font-size: 16px;
+                margin-bottom: 0;
+            }
+           
+        }
+    }
+}
+
+.banner_.banner-6{
+    .collection-banner{
+       
+        .contain-banner{
+           
+
+            h2{
+                font-weight: bold;
+                font-size:50px;
+              
+            }
+            h4{
+                font-size: 35px;
+
+            }
+           
+        }
+    }
+}
+
+@media only screen and (max-width:767px){
+  
+ .banner-1{
+     .col-md-6{
+         &:first-child{
+            .collection-banner{
+                margin-bottom: 30px;
+            }
+         }
+     }
+    
+ }
+}
+@media only screen and (max-width:576px){
+    .banner_ .collection-banner .contain-banner h2 {
+        font-size: 45px;
+    }
+}   

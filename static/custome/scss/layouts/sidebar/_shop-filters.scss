@@ -1,0 +1,256 @@
+.shop-page{
+    .card.card-body{
+        background-color: var(--color-article1-background);
+    } 
+    h3{
+        color: var(--color-text);
+        display: block;
+        font-size: $font-size-lg;
+        font-family: $font-family-base-bold;
+        margin-bottom: 15px;
+    }
+
+    .dropdown-toggle{
+        display: block;
+        font-size: $font-size-lg;
+        font-family: $font-family-base-bold;
+        margin-bottom: 15px;
+
+        &::after{
+            font-size: 16px;
+            right: 0;
+        }
+    }
+  
+    .widget{
+        margin-bottom: 15px;
+        .card-body{
+            padding:15px 15px;
+            border:none;
+        }
+        &:last-child{
+            margin-bottom: 0;
+        }
+    }
+
+    .product-category,
+    .color-range,
+    .price-select,
+    .popular-tags{
+        ul{
+            list-style-type: none;
+            margin-bottom: 0;
+
+            li{
+                label{
+                    display: flex;
+                    align-items: center;
+                    color: var(--color-text);
+                    input[type="radio"], input[type="checkbox"]{
+                        margin-right: 5px;
+                    }
+                    &:hover{
+                        color: $secondary;
+                    }
+                }
+                &:last-child label{
+                    margin-bottom: 0;
+                }
+                &.active{
+                    color: $secondary;
+                }
+            }
+        }
+    }
+
+    .popular-tags{
+        margin-bottom: 15px;
+        ul{
+            list-style-type: none;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            li{
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                font-weight: 400;
+                font-size: 14px;
+                padding: 5px 15px;
+                margin-right: .4rem;
+                margin-bottom: .4rem;
+                line-height: 1;
+                color: $body-color;
+                border-radius: 3px;
+                background-color: transparent;
+                border: .1rem solid transparent;
+
+                &.active{
+                    color: $secondary;
+                    background-color: transparent;
+                    border-color: $border-color;
+                }
+            }
+            li:hover, li:focus {
+                box-shadow: none;
+                color: $secondary;
+                border-color: $border-color;
+                text-decoration: none;
+                background-color: transparent;
+                outline: none !important;
+            }
+
+        }
+    }
+}
+
+.fillter-right{
+   
+    
+   
+    .navbar{
+        padding: 0;
+    }
+    .navbar-collapse{
+        z-index: 2;
+        background-color: var(--color-article1-background);
+        margin-top: -25px;
+        padding-top: 15px;
+        position: relative;
+        .price-select,.color-range, .product-category{
+           
+            margin-bottom: 15px;
+        }
+    }
+    
+    .navbar-toggler[aria-expanded="false"]{
+        .fa-bars{
+            display: inline-block;
+        }
+        .fa-times{
+            display: none;
+        }
+    }
+    .navbar-toggler[aria-expanded="true"]{
+      .fa-bars{
+          display: none;
+      }
+      .fa-times{
+        display: inline-block;
+        width: 17px;
+    }
+    }
+    .navbar-toggler{
+        font-family: $font-family-base-bold;
+        font-size: $font-size-base;
+        padding: 0;
+       color: var(--color-text);
+        .fas{
+            color: var(--color-text);
+        }
+    }
+    .navbar-toggler:hover, .navbar-toggler:focus{
+        outline: none !important;
+    }
+  
+}
+
+
+
+
+.bodyrtl{
+    .shop-page .toolbar .toolbox .toolbox-left .btn{
+        margin-right: 0px;
+        margin-left: 30px;
+    }
+    .shop-page .toolbar .toolbox .toolbox-left .btn::before{
+        margin-right: 0px;
+        margin-left: 10px;
+    }
+    .shop-page .toolbar .toolbox .toolbox-right .toolbox-sort{
+        margin-right: 0px;
+        margin-left: 10px;
+    }
+    .shop-page .toolbar .toolbox .toolbox-right .toolbox-sort label{
+        margin-right: 0px;
+        margin-left: 15px;
+    }
+    .shop-page .toolbar .toolbox .toolbox-right .toolbox-layout .btn-layout svg{
+        margin-left: 0px;
+        margin-right: 10px;
+    }
+    .shop-page{
+        .product-category,
+        .color-range,
+        .price-select,
+        .popular-tags {
+            ul{
+                li{
+                    label{
+                        input[type="radio"], input[type="checkbox"]{
+                        margin-left: 5px;
+                        margin-right: 0;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .shop-page .popular-tags ul li{
+        margin-right: 0;
+        margin-left: .4rem;
+    }
+    .shop-page .dropdown-toggle::after{
+        right: auto;
+        left: 0;
+    }
+}
+
+@media only screen and (max-width: 991px){
+    .shop-page .leftbar{
+        margin-top: 30px;
+    }
+    .fillter-right{
+        display: block;
+        margin-bottom: 15px;
+    }
+    .fillter-bottom{
+        display: none !important;
+    }
+    .shop-page .toolbar .toolbox{
+        align-items: self-start !important;
+        justify-content: start !important;
+        flex-direction: column;
+    }
+    .shop-page .toolbar .toolbox .toolbox-left .btn{
+        margin-bottom: 15px;
+    }   
+    .shop-page .toolbar .toolbox .toolbox-right .toolbox-layout  svg{
+        margin-left: 0 !important;
+    }
+    .shop-page .toolbar .toolbox .toolbox-right .toolbox-sort{
+        margin-bottom: 15px;
+    }
+    .shop-page .toolbar .toolbox .toolbox-left{
+        align-items: start !important;
+        justify-content: start !important;
+        flex-direction: column;
+        margin-bottom: 15px;
+    }
+    .shop-page .toolbar .toolbox .toolbox-right{
+        align-items: start !important;
+        justify-content: start !important;
+        flex-direction: column;
+        margin-bottom: 15px;
+    }
+}
+@media only screen and (min-width: 992px){
+    .fillter-right{
+        display: none;
+    }
+    .fillter-bottom{
+        display: flex !important;
+     
+    }
+ 
+}

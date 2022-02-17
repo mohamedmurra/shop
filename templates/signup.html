@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+  
+     
+     <!-- login Content -->
+            <div class="container-fuild">
+              <div class="page-header" style="background-image: url('images/miscellaneous/page-header.png')">
+                <div class="container">
+                  <h1 class="page-title">Dashboard</h1>
+                </div><!-- End .container -->
+              </div>
+              <nav aria-label="breadcrumb">
+                <div class="container">
+                  <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'store' %}">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Signup</li>
+                  </ol>
+                </div>
+              </nav>
+            
+            
+            </div>
+    <section class="pro-content account-content">
+        <div class="container"> 
+            <div class="row">
+                
+              <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                <h2 >New Customer</h2>
+                  <div class="registration-process">
+                   
+                    <form method='POST' action=''>
+                      {% csrf_token %}
+                        <div class="from-group row mb-3">
+                            <div class="input-group col-12">
+                              
+                              <input type="text" name="username" class="form-control" id="validationCustom01" placeholder="Enter Your username" required>
+                            
+                            </div>
+                          </div>
+                        <div class="from-group row mb-3">
+                          <div class="input-group col-12">
+                            
+                            <input type="email" name="email" class="form-control" id="inlineFormInputGroup00" placeholder="Enter Your Email " required>
+                            
+                          </div>
+                        </div>
+                        <div class="from-group row mb-3">
+                            <div class="input-group col-12">
+                              
+                              <input type="password" name="password1" class="form-control" id="inlineFormInputGroup11" placeholder="Enter Your Password" required>
+                            </div>
+                          </div>
+                        <div class="from-group row mb-3">
+                            <div class="input-group col-12">
+                                                
+                              <input type="password" name="password2" class="form-control" id="inlineFormInputGroup11" placeholder="Enter Your Password" required>
+                            </div>
+                        </div>
+
+                          <div class="from-group">
+                              <button type="submit" class="btn btn-primary swipe-to-top">Create Account</button>
+                            
+                          </div>
+                    </form>
+                  </div>
+              </div>
+              <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                  <h2>Already Registered?</h2>
+                  
+                  <div class="registration-process">
+                    <p>If u already have account. </p>
+                    <form>
+                        
+                          <div class="from-group">
+                              <a href="{% url 'login' %}" class="btn btn-secondary swipe-to-top">Login</a>
+                            
+                          </div>
+                    </form>
+                  </div>
+              </div>
+            </div>
+
+        </div>
+      </section>
+        
+{% endblock content %}

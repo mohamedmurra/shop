@@ -1,151 +1,201 @@
-{% extends 'main.html' %}
+{% extends 'base.html' %}
 {% load static %}
-
 {% block content %}
-    <div class="row">
-     <div class="col-lg-6">
-      <div class="box-element" id="form-wrapper">
-       <form id="form">
-        <div id="user-info">
-         <div class="form-field">
-          <input required class="form-control" type="text" name="name" placeholder="Name..">
-         </div>
-         <div class="form-field">
-          <input required class="form-control" type="email" name="email" placeholder="Email..">
-         </div>
+<style type='text/css'>
+.hidden{
+  display: none ;
+}
+</style>
+      <!-- Page Header -->
+      <div class="container-fuild">
+        <div class="page-header">
+          <div class="container">
+            <h1 class="page-title">Checkout</h1>
+          </div><!-- End .container -->
         </div>
-    
-        <div id="shipping-info">
-         <hr>
-         <p>Shipping Information:</p>
-         <hr>
-         <div class="form-field">
-          <input class="form-control" type="text" name="address" placeholder="Address..">
-         </div>
-         <div class="form-field">
-          <input class="form-control" type="text" name="area" placeholder="area..">
-         </div>
-         <div class="form-field">
-          <input class="form-control" type="text" name="street" placeholder="street..">
-         </div>
-         <div class="form-field">
-          <input class="form-control" type="text" name="building" placeholder="building..">
-         </div>
-         <div class="form-field">
-          <input class="form-control" type="text" name="location_url" placeholder="location_url..">
-         </div>
-        <div class="form-field">
-            <input class='form-control' type="text" name="city" placeholder="city..">
-        </div>
-    
-        <hr>
-        <input id="form-button" class="btn btn-success btn-block" type="submit" value="Continue">
-       </form>
+        <nav aria-label="breadcrumb">
+          <div class="container">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="{% url 'store' %}">Home</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Checkout</li>
+            </ol>
+          </div>
+        </nav>
+      
+      
       </div>
-    
-      <br>
-      <div class="box-element hidden" id="payment-info">
-       <small>Paypal Options</small>
-       <button id="make-payment">Make Payment</button>
-      </div>
-    
-     </div>
-    
-     <div class="col-lg-6">
-      <div class="box-element">
-       <a class="btn btn-outline-dark" href="{% url 'cart' %}">&#x2190; Back to Cart</a>
-       <hr>
-       <h3>Order Summary</h3>
-       <hr>
+       <!-- checkout Content -->
+       <section class="pro-content checkout-area">             
+        <div class="container"> 
+          <div class="row">
+              <div class="col-12 col-xl-12">
+                  <div class="row">
+                      <div class="col-12 col-lg-3">
+                       <div class="checkoutd-nav">
+                          <ul class="nav flex-column nav-pills mb-3" id="pills-tab" role="tablist">
+                              <li class="nav-item">
+                                  <a class="nav-link  active" id="pa_payment" data-toggle="pill" href="#pills-order"  >Payment</a>
+                                </li>
+                            </ul>
+                       </div>
+                 
+                    </div>
+                    <div class="col-12 col-lg-9">
+                        <div class="checkout-module">
+                   
+                        
+                            <div class="tab-content" >
+                              <div class="tab-pane fade show active" id="pills-order" role="tabpanel" aria-labelledby="pills-order-tab">
+                                  <table class="table top-table">
+                                      <tbody>
+                                        
+                                        {% for item in items %}
+                                          
+                                      
+                                          <tr class="d-flex">
+                                              <td class="col-12 col-md-2">
+                                                    <img class="img-fluid" src="{{item.product.image.url}}" alt="Imagetag">
+                                              </td>
+                                              <td class="col-12 col-md-4">
+                                                  <div class="item-detail">
+                                                      <span class="pro-category">{{item.product.catagory}}</span>
+                                                      <h3>{{item.product.name}}
+                                                      </h3>
+                                                      <div class="item-attributes"></div>
+                                                      
+                                                  </div>
+                                              </td>
+                                              <td class="col-12 col-md-1 item-price">${% if item.product.discount %}
+                                              <ins>${{item.product.new_price|floatformat:2}}
+                                                <del>
+                                                  ${{item.product.price|floatformat:2}}
+                                                </del>
+                                              </ins>
+                                              {% else %}
+                                              <ins>${{item.product.price|floatformat:2}}</ins>
+                                              {% endif %}</td>
+                                              <td class="col-12 col-md-3 justify-content-center" >
+                                                  <div class="input-group-control">
+                                                    <span class="form-control" >{{item.quantity}}</span>                 
+                                                </div>
+                                              </td>
+                                              <td class="col-12 col-md-2 item-total">${{item.get_total}}</td>
+                                           
+                                            
+                                          </tr>
+                                            {% endfor %}
+                                      </tbody>
+                                    </table>
+                                    <div class="row justify-content-end"> 
+                                      <div class="col-12">
+                                        <div class="bill-total"> 
+                                            <ul>
+                                                
+                                                {% if order.coupon.code %}
+                                                <li>Subtotal</li>
+                                                <li>Discount(Coupon)</li>
+                                                <li>Code</li>
+                                                  
+                                                {% endif %}
+                                                  
+                                                <li class="text-danger">Total</li>
+                                              </ul>
+                                              <ul>
+                                                {% if order.coupon.code %}
+                                                <li>${{order.get_cart_total}}</li>
+                                                 <li>${{order.get_discount}}</li>
+                                                <li>{{order.coupon.code}}</li>
+                                                
+                                                {% endif %}
+                                                <li class="text-danger">${{order.get_cart_total_after_discount}}</li>
+                                               </ul>
+                                        </div>   
+                                      </div>
+                                    </div>
+                                    <div class="col-12 col-sm-12 ">
+                                        <div class="row">
+                                          <div class="heading">
+                                            <h4>Payment Methods</h4>
+                                       
+                                          </div>
+                                       
+                                          <ul hidden id='payement_list' class="payement-way">
+                                              <li>
+                                                  <!-- Default checked -->
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" class="custom-control-input" 
+                                                id="defaultChecked" name="defaultExampleRadios" checked>
+                                                <label class="custom-control-label"
+                                                  for="defaultChecked"><img src="{% static 'custome/images/miscellaneous/instamojo.png' %}" alt="Image"></label>
+                                              </div>
+                                              </li>
+                                            <li>  <!-- Default unchecked -->
+                                              <div class="custom-control custom-radio">
+                                                  <input type="radio" class="custom-control-input" 
+                                                  id="defaultUnchecked1" name="defaultExampleRadios">
+                                                  <label class="custom-control-label" 
+                                                  for="defaultUnchecked1"><img src="{% static 'custome/images/miscellaneous/hyperpay.png' %}" alt="Image"></label>
+                                              </div>
+                                            </li>
+                                          
+                                            <li>
+                                                <div class="custom-control custom-radio">
+                                                    <input type="radio" class="custom-control-input" 
+                                                    id="defaultUnchecked2" name="defaultExampleRadios">
+                                                    <label class="custom-control-label" 
+                                                    for="defaultUnchecked2"><img src="{% static 'custome/images/miscellaneous/cod.png' %}" alt="Image"></label>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="custom-control custom-radio">
+                                                    <input type="radio" class="custom-control-input" 
+                                                    id="defaultUnchecked3" name="defaultExampleRadios">
+                                                    <label class="custom-control-label" 
+                                                    for="defaultUnchecked3"><img src="{% static 'custome/images/miscellaneous/stripe.png' %}" alt="Image"></label>
+                                                </div>
+                                            </li>
+                                          
+                                            <li>
+                                                <div class="custom-control custom-radio">
+                                                    <input type="radio" class="custom-control-input" 
+                                                    id="defaultUnchecked4" name="defaultExampleRadios">
+                                                    <label class="custom-control-label" 
+                                                    for="defaultUnchecked4">  <img src="{% static 'custome/images/miscellaneous/paypal.png' %}" alt="Image"></label>
+                                                </div>
+                                            </li>
+                                          </ul>                      
+                                        </div>   
+                                    </div>
+                                
+                                    
+                                    {% if order.get_cart_total_after_discount > 0 %}
+                                      
+                                    
+                                    <div class="col-12 col-sm-12 justify-content-end btn-cont">
+                                        <div class="row">
+                                        
+                                      <a href=""  class="btn btn-secondary" >Place Order</a>
+                                        </div>
+                                    </div>
+                                    {% else %}
+                                    <div class="col-12 col-sm-12 justify-content-end btn-cont">
+                                      <div class="row">
+                                    
+                                        <a href="{% url 'main' %}" class="btn btn-secondary">Continue shopping</a>
+                                      </div>
+                                    </div>
+                                    {% endif %}
+                                    
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+
+                  </div>
+              </div>
        
-       {% for item in items %}
-       <div class="cart-row">
-        <div style="flex:2"><img class="row-image" src="{{item.product.image.url}}"></div>
-        <div style="flex:2">
-         <p>{{item.product.name}}</p>
+          </div>
         </div>
-        <div style="flex:1">
-         <p>${{item.product.price|floatformat:2}}</p>
-        </div>
-        <div style="flex:1">
-         <p>{{item.quantity}}</p>
-        </div>
-       </div>
-       {% endfor %}
-       <h5>{{order.get_cart_items}}</h5>
-       <h5>Total: ${{order.get_cart_total|floatformat:2}}</h5>
-      </div>
-     </div>
-    </div>
-    <script type="text/javascript">
-        var shipping ='{{order.shipping}}'
-        var total ='{{order.get_cart_total|floatformat:2}}'
-        if(shipping == 'False'){
-            document.getElementById('shipping-info').innerHTML =''
-        }
-        if(user != 'AnonymousUser'){
-            document.getElementById('user-info').innerHTML=''
-        }
-        if(shipping == 'False' && user != 'AnonymousUser'){
-            document.getElementById('form-wrapper').classList.add('hidden')
-            document.getElementById('payment-info').classList.remove('hidden')
-        }
-        var form =document.getElementById('form')
-        form.addEventListener('submit',function(e){
-            e.preventDefault()
-            console.log('form submited...')
-            document.getElementById('form-button').classList.add('hidden');
-            document.getElementById('payment-info').classList.remove('hidden');
-        })
-
-        document.getElementById('make-payment').addEventListener('click',function(e){
-            SubmitFormData()
-        })
-        function SubmitFormData (){
-            console.log('button clicked')
-            var userformData ={
-                'name':null,
-                'email':null,
-                'total':total
-            }
-             var ShippingInfo = {
-                'address': null,
-                'area': null,
-                'street': null,
-                'building': null,
-                'location_url': null,
-                'city': null,
-
-            }
-            if (shipping != 'False'){
-                ShippingInfo.address =form.address.value
-                ShippingInfo.area = form.area.value
-                ShippingInfo.street = form.street.value
-                ShippingInfo.building = form.building.value
-                ShippingInfo.location_url = form.location_url.value
-                ShippingInfo.city = form.city.value
-            }
-            if (user == 'AnonymousUser') {
-                userformData.name = form.name.value
-                userformData.email = form.email.value}
-
-            var url='/prosess-order/' 
-            fetch(url,{
-                method:'POST',
-                headers:{
-                    'Content-Type':'application/json',
-                    'X-CSRFToken': csrftoken,
-                },
-                body:JSON.stringify({'form':userformData ,'shipping':ShippingInfo})
-
-            })
-            .then((response) => response.json())
-
-            .then((data) =>{
-                console.log('sucsses',data)
-                alert('transictions completed')
-                window.location.href ="{% url 'store' %}"
-            })    
-        }
-    </script>
+      </section>
 {% endblock content %}
+     

@@ -1,0 +1,99 @@
+{% load static %}
+<style type='text/css'> 
+.brando{
+  width: 125px;
+  height:60px;
+}
+.foo{
+  width:28px;
+  height:28px;
+}
+</style>
+
+<div class="wrapper" style="display: none;">
+      <div class="brands-content pro-content">
+        <div class="container">
+          <div class="brands-carousel-js row">
+            
+            {% for brand in Brands %}
+
+            <div class="brand">
+              <img class='brando' src="{{brand.image.url}}" alt="brand-logo">
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+        <footer id="footerOne" class="footer-area footer-one footer-desktop">
+          <div class="container">
+            <div class="row justify-content-center">
+              <div class="col-12 col-lg-6 newsletter">
+                <h5>
+                  Subscribe Our Newsletter
+                </h5>
+                <h3> Newsletter</h3>
+                <p>Subscribe to Newsletter to get latest offers and News and chance to get Discount
+                  and coupon code for free.</p>
+                  
+                                  {% if messages %}
+                                  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                  <ul class='message-wrapper'>
+                                  
+                                    {% for message in messages %}
+                                    <li {% if message.tags %} class="{{message.tags}}" {% endif %}>
+                                      <strong>{{message}}</strong>
+                                      <button type="button" class="close" data-label='Close'>
+                                        <span aria-hidden="true">&times;</span>
+                                      </button>
+                                    </li>
+                                    {% endfor %}
+                                  
+                                  </ul>
+                                  </div>
+                                  {% endif %}
+                 
+        
+                <form method="POST" action="{% url 'Subscribe' %}" class="input-group">
+                  {% csrf_token %}
+                  <input name="email" type="email" class="form-control" placeholder="Enter Your Email..." aria-label="Enter Your Email..."
+                    aria-describedby="button-addon2">
+                  <div class="input-group-append">
+                    <button class="btn btn-secondary" type="submit" >Subscribe</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+          <div class="container-fluid p-0">
+            <div class="copyright-content">
+              <div class="container">
+                <div class="row align-items-center">
+                  <div class="col-12 col-md-6">
+                    <div class="footer-info">
+                      ©&nbsp;2022 Murra, Inc.&nbsp;•&nbsp;
+                    </div>
+        
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <ul class="socials">
+                      <li><a href="#" class="fab fb fa-facebook-square "><img class="foo" src="{% static 'custome/social/fb.png' %}" alt=""></a></li>
+                      <li><a href="#" class="fab tw fa-twitter-square"><img class="foo" src="{% static 'custome/social/tw.png' %}" alt=""></a></li>
+                      <li><a href="#" class="fab sk fa-skype"><img class="foo" src="{% static 'custome/social/pn.png' %}" alt=""></a></li>
+                      <li><a href="#" class="fab In fa-linkedin"><img class="foo" src="{% static 'custome/social/gp.png' %}" alt=""></a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </footer>
+
+
+<div class="mobile-overlay"></div>
+<a href="#" class="btn-secondary " id="back-to-top" title="Back to top">&uarr;</a>
+
+
+<div class="notifications" id="notificationWishlist">Product Added To Wishlist</div>
+<div class="notifications" id="notificationCart">Product Added To Cart</div>
+<div class="notifications" id="notificationCompare">Product Added For Compare</div>
+

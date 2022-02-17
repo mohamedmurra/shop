@@ -1,0 +1,189 @@
+// ...........footer.............
+
+
+
+.footer-six{
+
+    background-color: var(--color-page-background);
+    .pro-heading-title4{
+        padding-bottom: 30px;
+        .inner-heading .inner-text h2{
+            margin: 0;
+        }
+    }
+    .footer-bottom{
+        padding-top: 60px;
+        padding-bottom: 60px;
+    }
+  h2{
+      text-transform: uppercase;
+      font-size: 16px;
+      margin-bottom: 15px;
+  }
+   .categories{
+     
+       .cat-list{
+           li{
+               list-style: none;
+               margin-bottom: 10px;
+               .fab{
+                   margin-right: 15px;
+               }
+               a {
+           
+
+                &:hover{
+                    .fb{
+                        color: #3b5998;
+                    }
+                    .tw {
+                        color: #00acee;
+                    }
+                    .sk {
+                        color: #00aff0;
+                    }
+                    .in {
+                        color: #0077B5;
+                    }
+                    .ig {
+                        color: #3f729b;
+                    }
+                }
+                
+              
+
+            }
+               &:last-child{
+                   margin-bottom: 0;
+               }
+           }
+       }
+       p{
+        margin-bottom: 15px;
+        padding-bottom: 30px;
+        border-bottom: 1px solid;
+        border-color: var(--color-border);
+    }
+    h4{
+        font-family: $font-family-base-medium;
+        font-size: 14px;
+        color: $gray-600;
+        strong{
+            color: $black;
+        }
+    }
+   }
+    .socials {
+        display: flex;
+        justify-content: flex-start;
+        margin-bottom: 0;
+        margin-top: 15px;
+        li{
+            font-size: ($font-size-lg + 0.475);
+            margin-right: 15px;
+            list-style: none;
+            a {
+                color: var(--color-text-dark);
+                transition: 0.4s;
+
+                &.fb:hover{
+                    color: #3b5998;
+                }
+                
+                &.tw:hover {
+                    color: #00acee;
+                }
+                &.sk:hover {
+                    color: #00aff0;
+                }
+                &.In:hover {
+                    color: #0077B5;
+                }
+                &.ig:hover {
+                    color: #3f729b;
+                }
+
+            }
+        }
+    } 
+  .instagram-content {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    a{
+        display: block;
+
+        &:last-child{
+            picture{
+                padding-right: 0;
+            }
+        }
+    }
+    picture {
+        overflow: hidden;
+        display: block;
+        cursor: pointer;
+        padding-right: 5px;
+        padding-bottom: 5px;
+      
+    }
+
+}
+   
+   
+    .copyright-main{
+        background-color: var(--color-article2-background);
+        .copyright-content{
+            padding-top: 10px;
+            padding-bottom: 10px;
+            .footer-info{
+                font-size: $font-size-base;
+                color: var(--color-text);
+            }
+            .payment{
+                text-align: right;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width:992px){
+    .footer-bottom{
+        .links,.social,.address{
+            padding-bottom: 15px;
+        }  
+       
+        .social{
+            padding-top: 0;
+        }
+    }
+}
+
+@media only screen and (max-width:768px){
+    
+    .footer-bottom{
+        .justify-content-center{
+            justify-content: flex-start !important;
+        }
+      
+        .social{
+            padding-top: 0;
+        }
+    }
+    .footer-six .pro-heading-title4{
+        padding-bottom: 15px;
+    }
+}
+
+@media only screen and (max-width:768px){
+    .footer-six .copyright-main .copyright-content{
+        .footer-info{
+            padding: 5px 0;
+        }
+        .justify-content-end{
+            justify-content: flex-start !important;
+        }
+      
+    }
+}

@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+     <!-- About-us Content -->
+    <section class="pro-content empty-content">
+        <div class="container">
+            
+            <div class="row">
+              <div class="col-12">
+                  <div class="pro-empty-page">
+                    <h2 style="font-size: 150px;"><i class="far fa-check-circle"></i></h2>
+                    <h1 >Thank You</h1>
+                    <p>
+                      You have successfully place your order. Your order transaction id is {{orders.tansaction_id}}
+                      Go to the 
+                      <a href="{% url 'account' %}" class="btn-link"><b>Order page</b></a>.
+                    </p>
+                  </div>
+              
+              </div>
+            </div>
+          
+        </div>  
+        
+        
+    </section>
+
+{% endblock content %}

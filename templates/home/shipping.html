@@ -1,0 +1,102 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Shipping {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+
+  <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
+      <div class="d-block mb-4 mb-md-0">
+          <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
+              <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
+                  <li class="breadcrumb-item">
+                      <a href="#">
+                          <svg class="icon icon-xxs" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+                      </a>
+                  </li>
+                  <li class="breadcrumb-item active" aria-current="page">Shipping</li>
+              </ol>
+          </nav>
+          <h2 class="h4">All Adress</h2>
+      </div>
+  </div>
+
+  <div class="card card-body border-0 shadow table-wrapper table-responsive">
+      <table class="table table-hover">
+          <thead>
+              <tr>
+                  <th class="border-gray-200"> id</th>
+                  <th class="border-gray-200">Customer</th>						
+                  <th class="border-gray-200"> phone_number</th>
+                  <th class="border-gray-200"> Adrees</th>
+                  <th class="border-gray-200">City</th>
+                  <th class="border-gray-200">State</th>
+                <th class="border-gray-200">Aria</th>
+              </tr>
+          </thead>
+          <tbody>
+              
+              {% for ship in not_shipped %}    
+              <!-- Item -->
+              <tr>
+                  <td>
+                      <a href="{% url 'order_update' ship.order.tansaction_id %}" class="fw-bold">
+                          {{ship.order.tansaction_id}}
+                      </a>
+                  </td>
+                  <td>
+                      <span class="fw-normal">{{ship.name}}</span>
+                  </td>                       
+                  <td><span class="fw-normal">{{ship.phone_number}}</span></td>
+                  <td><span class="fw-bold">{{ship.address}}</span></td>
+                  <td><span class="fw-bold ">{{ship.city}}</span></td>
+                  <td><span class="fw-bold ">{{ship.state}}</span></td>
+                  <td><span class="fw-bold ">{{ship.aria}}</span></td>
+                  
+              </tr> 
+            {% endfor %}
+
+          </tbody>
+      </table>
+      <div class="card-footer px-3 border-0 d-flex flex-column flex-lg-row align-items-center justify-content-between">
+          <nav aria-label="Page navigation example">
+              <ul class="pagination mb-0">{% if page_obj.has_previous %}
+                  <li class="page-item">
+                      <a class="page-link" href="?page={{page_obj.previous_page_number}}">Previous</a>
+                  </li>
+                  <li class="page-item">
+                      <a class="page-link" href="?page=1">1</a>
+                  </li>
+                {% endif %}
+                {% for num in page_obj.paginator.page_range %}
+                {% if page_obj.number == num %}
+                  <li class="page-item active">
+                      <a class="page-link" href="?page={{num}}">{{num}}</a>
+                  </li>
+                {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                  <li class="page-item">
+                      <a class="page-link" href="?page={{num}}">{{num}}</a>
+                  </li>
+                {% endif %}
+                {% endfor %}
+                {% if page_obj.has_next %}
+                  <li class="page-item">
+                      <a class="page-link" href="?page={{page_obj.next_page_number}}">Next</a>
+                  </li>
+                  <li class="page-item">
+                      <a class="page-link" href="?page={{page_obj.paginator.num_page}}">Last</a>
+                  </li>
+                {% endif %}
+              </ul>
+          </nav>
+          <div class="fw-normal small mt-4 mt-lg-0">Showing <b>{{count}}</b></div>
+      </div>
+  </div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

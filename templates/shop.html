@@ -1,0 +1,399 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+  
+<style type='text/css'>
+.moss{
+  width: 200px ;
+  height: 150px ;
+}
+.pro-img{
+  width: 400px ;
+  height: 250px ;
+}
+.meme{
+  width: 230px;
+  height: 200px;
+}
+</style>
+
+      <!-- Page Header -->
+      <!-- Revolution Layer Slider -->
+            <div class="carousel-content box-dot-rev">
+              <div class="container-fuild">
+                <div id="rev_slider_1077_1_wrapper" class="rev_slider_wrapper fullscreen-container" data-alias="scroll-effect136"
+                  data-source="gallery" style="padding:0px;">
+                  <!-- START REVOLUTION SLIDER 5.4.1 fullscreen mode -->
+                  <div id="rev_slider_1077_1" class="rev_slider fullscreenbanner" style="display:none;" data-version="5.4.1">
+                    <ul>
+                      <!-- SLIDE  1-->
+                      <li data-index="rs-3044" data-transition="slideoverhorizontal" data-slotamount="default"
+                        data-hideafterloop="0" data-hideslideonmobile="off" data-easein="Power4.easeInOut"
+                        data-easeout="Power4.easeInOut" data-masterspeed="1000" data-thumb="" data-rotate="0"
+                        data-fstransition="fade" data-fsmasterspeed="1500" data-fsslotamount="7" data-saveperformance="off"
+                        data-title="Big &amp; Bold" data-param1="" data-param2="" data-param3="" data-param4="" data-param5=""
+                        data-param6="" data-param7="" data-param8="" data-param9="" data-param10="" data-description="">
+                        <!-- MAIN IMAGE -->
+                        <img src="{% static 'custome/images/slide-2.jpg' %}" alt="" data-bgposition="top center"
+                          data-bgfit="cover" data-bgrepeat="no-repeat" data-bgparallax="10" class="rev-slidebg" data-no-retina>
+                        <!-- LAYERS -->
+            
+                        <div class="container" style="position: relative;">
+            
+                          <!-- LAYER NR. 1 -->
+                          <div class="tp-caption BigBold-SubTitle  " id="slide-3043-layer-8" data-x="['left','left','left','left']"
+                            data-hoffset="['0','0','0','0']" data-y="['top','top','top','top']"
+                            data-voffset="['150','90','60','40']" data-fontsize="['18','18','18','14']"
+                            data-width="['100%','100%','100%','100%']" data-height="none" data-whitespace="normal" data-type="text"
+                            data-basealign="slide" data-responsive_offset="off" data-responsive="off" data-frames='[{"from":"y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;",
+                              "speed":1500,"to":"o:1;","delay":650,"ease":"Power3.easeInOut"},
+                              {"delay":"wait","speed":1000,"to":"y:50px;opacity:0;","ease":"Power2.easeInOut"}]'
+                            data-textAlign="['center','center','center','center']" data-paddingtop="[0,0,0,0]"
+                            data-paddingright="[0,0,0,0]" data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]"
+                            style="z-index: 12;  white-space: normal; line-height: 1.5;">Fine weather all year round</div>
+            
+            
+                          <!-- LAYER NR. 2 -->
+            
+                          <div class="tp-caption BigBold-Title   tp-resizeme" id="slide-3043-layer-a"
+                            data-x="['left','left','left','left']" data-hoffset="['0','0','0','0']"
+                            data-y="['top','top','top','top']" data-voffset="['170','120','90','70']"
+                            data-fontsize="['50','40','30','24']" data-lineheight="['70','50','40','30']"
+                            data-width="['100%','100%','100%','100%']" data-height="none"
+                            data-whitespace="['nowrap','nowrap','nowrap','normal']" data-type="text" data-basealign="slide"
+                            data-responsive_offset="off"
+                            data-frames='[{"from":"y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;",
+                                "mask":"x:0px;y:[-100%];s:inherit;e:inherit;","speed":1500,"to":"o:1;",
+                                "delay":500,"ease":"Power3.easeInOut"},{"delay":"wait","speed":1000,"to":"y:[-100%];","mask":"x:inherit;y:inherit;s:inherit;e:inherit;","ease":"Power2.easeInOut"}]'
+                            data-textAlign="['center','center','center','center']" data-paddingtop="[0,0,0,0]"
+                            data-paddingright="[0,0,0,0]" data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]"
+                            style="z-index: 11; white-space: nowrap; color:#fff; ">Rectify Your Feeling<br>With Surroundings </div>
+            
+            
+            
+                          <!-- LAYER NR. 3 -->
+                          <div class="tp-caption BigBold-Button rev-btn " id="slide-3043-layer-7"
+                            data-x="['left','left','left','left']" data-hoffset="['0','0','0','0']"
+                            data-y="['top','top','top','top']" data-voffset="['330','250','200','150']" data-height="none"
+                            data-whitespace="nowrap" data-type="button"
+                            data-actions='[{"event":"click","action":"simplelink","target": "_self","url":"{% url "main" %}"}]'
+                            data-basealign="slide" data-responsive_offset="off" data-responsive="off" data-frames='[{"from":"y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;",
+                                  "speed":1500,"to":"o:1;","delay":650,"ease":"Power3.easeInOut"},
+                                  {"delay":"wait","speed":1000,"to":"y:50px;opacity:0;","ease":"Power2.easeInOut"},
+                                  {"frame":"hover","speed":"300","ease":"Power1.easeInOut",
+                                  "to":"o:1;rX:0;rY:0;rZ:0;z:0;",
+                                  "style":"c:rgba(255, 255, 255, 1.00);bc:rgba(255, 255, 255, 1.00);bw:1px 1px 1px 1px;"}]'
+                            data-textAlign="['center','center','center','center']" data-paddingtop="[13,13,13,13]"
+                            data-paddingright="[25,25,25,25]" data-paddingbottom="[13,13,13,13]" data-paddingleft="[25,25,25,25]"
+                            style="z-index: 13; text-transform: uppercase; white-space: nowrap;outline:none;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;cursor:pointer; border-radius: 3px;">
+                            Shop Now </div>
+            
+                        </div>
+                      </li>
+                      <!-- SLIDE 2 -->
+                      <li data-index="rs-3042" data-transition="slideoverhorizontal" data-slotamount="default"
+                        data-hideafterloop="0" data-hideslideonmobile="off" data-easein="Power4.easeInOut"
+                        data-easeout="Power4.easeInOut" data-masterspeed="1000" data-thumb="" data-rotate="0"
+                        data-fstransition="fade" data-fsmasterspeed="1500" data-fsslotamount="7" data-saveperformance="off"
+                        data-title="Big &amp; Bold" data-param1="" data-param2="" data-param3="" data-param4="" data-param5=""
+                        data-param6="" data-param7="" data-param8="" data-param9="" data-param10="" data-description="">
+                        <!-- MAIN IMAGE -->
+                        <img src="{% static 'custome/images/slide-1.jpg' %}" alt="" data-bgposition="top center"
+                          data-bgfit="cover" data-bgrepeat="no-repeat" data-bgparallax="10" class="rev-slidebg" data-no-retina>
+                        <!-- LAYERS -->
+            
+                        <div class="container" style="position: relative;">
+            
+                          <!-- LAYER NR. 1 -->
+                          <div class="tp-caption BigBold-SubTitle  " id="slide-3043-layer-c" data-x="['left','left','left','left']"
+                            data-hoffset="['15','15','15','15']" data-y="['top','top','top','top']"
+                            data-voffset="['150','90','60','40']" data-fontsize="['18','18','18','14']"
+                            data-width="['100%','100%','100%','100%']" data-height="none" data-whitespace="normal" data-type="text"
+                            data-basealign="slide" data-responsive_offset="off" data-responsive="off" data-frames='[{"from":"y:[-100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;",
+                               "speed":1500,"to":"o:1;","delay":650,"ease":"Power3.easeInOut"},
+                               {"delay":"wait","speed":1000,"to":"y:50px;opacity:0;","ease":"Power2.easeInOut"}]'
+                            data-textAlign="['left','left','left','left']" data-paddingtop="[0,0,0,0]" data-paddingright="[0,0,0,0]"
+                            data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]"
+                            style="z-index: 12;  white-space: normal; line-height: 1.5;">Read Blog</div>
+            
+            
+                          <!-- LAYER NR. 2 -->
+            
+                          <div class="tp-caption BigBold-Title   tp-resizeme" id="slide-3043-layer-1"
+                            data-x="['left','left','left','left']" data-hoffset="['15','15','15','15']"
+                            data-y="['top','top','top','top']" data-voffset="['170','120','90','70']"
+                            data-fontsize="['50','40','30','24']" data-lineheight="['70','50','40','30']"
+                            data-width="['100%','100%','100%','100%']" data-height="none"
+                            data-whitespace="['nowrap','nowrap','nowrap','normal']" data-type="text" data-basealign="slide"
+                            data-responsive_offset="off"
+                            data-frames='[{"from":"y:[-100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;",
+                                 "mask":"x:0px;y:[-100%];s:inherit;e:inherit;","speed":1500,"to":"o:1;",
+                                 "delay":500,"ease":"Power3.easeInOut"},{"delay":"wait","speed":1000,"to":"y:[-100%];","mask":"x:inherit;y:inherit;s:inherit;e:inherit;","ease":"Power2.easeInOut"}]'
+                            data-textAlign="['left','left','left','left']" data-paddingtop="[0,0,0,0]" data-paddingright="[0,0,0,0]"
+                            data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]"
+                            style="z-index: 11; white-space: nowrap; color:#212121; ">Update Yourself by<br>Latest Technology</div>
+            
+            
+            
+                          <!-- LAYER NR. 3 -->
+                          <div class="tp-caption BigBold-Button rev-btn " id="slide-3043-layer-9"
+                            data-x="['left','left','left','left']" data-hoffset="['15','15','15','15']"
+                            data-y="['top','top','top','top']" data-voffset="['330','250','200','150']" data-height="none"
+                            data-whitespace="nowrap" data-type="button"
+                            data-actions='[{"event":"click","action":"simplelink","target": "_self","url":"{% url "blog_home" %}"}]'
+                            data-basealign="slide" data-responsive_offset="off" data-responsive="off" data-frames='[{"from":"y:[-100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;",
+                                   "speed":1500,"to":"o:1;","delay":650,"ease":"Power3.easeInOut"},
+                                   {"delay":"wait","speed":1000,"to":"y:50px;opacity:0;","ease":"Power2.easeInOut"},
+                                   {"frame":"hover","speed":"300","ease":"Power1.easeInOut",
+                                   "to":"o:1;rX:0;rY:0;rZ:0;z:0;",
+                                   "style":"c:rgba(255, 255, 255, 1.00);bc:rgba(255, 255, 255, 1.00);bw:1px 1px 1px 1px;"}]'
+                            data-textAlign="['center','center','center','center']" data-paddingtop="[13,13,13,13]"
+                            data-paddingright="[25,25,25,25]" data-paddingbottom="[13,13,13,13]" data-paddingleft="[25,25,25,25]"
+                            style="z-index: 13; text-transform: uppercase; white-space: nowrap;outline:none;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;cursor:pointer; border-radius: 3px;">
+                            See Blog</div>
+            
+                        </div>
+                      </li>
+            
+            
+                      <!-- SLIDE  3-->
+                      <li data-index="rs-3045" data-transition="slideoverhorizontal" data-slotamount="default"
+                        data-hideafterloop="0" data-hideslideonmobile="off" data-easein="Power4.easeInOut"
+                        data-easeout="Power4.easeInOut" data-masterspeed="1000" data-thumb="" data-rotate="0"
+                        data-fstransition="fade" data-fsmasterspeed="1500" data-fsslotamount="7" data-saveperformance="off"
+                        data-title="Big &amp; Bold" data-param1="" data-param2="" data-param3="" data-param4="" data-param5=""
+                        data-param6="" data-param7="" data-param8="" data-param9="" data-param10="" data-description="">
+                        <!-- MAIN IMAGE -->
+                        <img src="{% static 'custome\images/full-width.jpg' %}" alt="" data-bgposition="top center"
+                          data-bgfit="cover" data-bgrepeat="no-repeat" data-bgparallax="10" class="rev-slidebg" data-no-retina>
+                        <!-- LAYERS -->
+            
+                        <div class="container" style="position: relative;">
+            
+                          <!-- LAYER NR. 1 -->
+                          <div class="tp-caption BigBold-SubTitle  " id="slide-3043-layer-2" data-x="['left','left','left','left']"
+                            data-hoffset="['603','480','300','20']" data-y="['top','top','top','top']"
+                            data-voffset="['150','90','60','40']" data-fontsize="['18','18','18','14']"
+                            data-width="['580','580','100%','100%']" data-height="none" data-whitespace="normal" data-type="text"
+                            data-basealign="slide" data-responsive_offset="off" data-responsive="off" data-frames='[{"from":"y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;",
+                             "speed":1500,"to":"o:1;","delay":650,"ease":"Power3.easeInOut"},
+                             {"delay":"wait","speed":1000,"to":"y:50px;opacity:0;","ease":"Power2.easeInOut"}]'
+                            data-textAlign="['left','left','left','left']" data-paddingtop="[0,0,0,0]" data-paddingright="[0,0,0,0]"
+                            data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]"
+                            style="z-index: 12;  white-space: normal; line-height: 1.5;"></div>
+            
+            
+                          <!-- LAYER NR. 2 -->
+            
+                          <div class="tp-caption BigBold-Title   tp-resizeme" id="slide-3043-layer-b"
+                            data-x="['left','left','left','left']" data-hoffset="['602','480','300','20']"
+                            data-y="['top','top','top','top']" data-voffset="['170','120','90','70']"
+                            data-fontsize="['50','40','30','24']" data-lineheight="['70','50','40','30']"
+                            data-width="['580','580','100%','100%']" data-height="none"
+                            data-whitespace="['nowrap','nowrap','nowrap','normal']" data-type="text" data-basealign="slide"
+                            data-responsive_offset="off"
+                            data-frames='[{"from":"y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;",
+                               "mask":"x:0px;y:[-100%];s:inherit;e:inherit;","speed":1500,"to":"o:1;",
+                               "delay":500,"ease":"Power3.easeInOut"},{"delay":"wait","speed":1000,"to":"y:[-100%];","mask":"x:inherit;y:inherit;s:inherit;e:inherit;","ease":"Power2.easeInOut"}]'
+                            data-textAlign="['left','left','left','left']" data-paddingtop="[0,0,0,0]" data-paddingright="[0,0,0,0]"
+                            data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]"
+                            style="z-index: 11; white-space: nowrap; color:#212121; "></div>
+            
+            
+            
+                          <!-- LAYER NR. 3 -->
+                          <div class="tp-caption BigBold-Button rev-btn " id="slide-3043-layer-3"
+                            data-x="['left','left','left','left']" data-hoffset="['602','480','300','20']"
+                            data-y="['top','top','top','top']" data-voffset="['330','250','200','150']" data-height="none"
+                            data-whitespace="nowrap" data-type="button"
+                            data-actions='[{"event":"click","action":"simplelink","target": "_self","url":"{% url "main" %}"}]'
+                            data-basealign="slide" data-responsive_offset="off" data-responsive="off" data-frames='[{"from":"y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;",
+                                 "speed":1500,"to":"o:1;","delay":650,"ease":"Power3.easeInOut"},
+                                 {"delay":"wait","speed":1000,"to":"y:50px;opacity:0;","ease":"Power2.easeInOut"},
+                                 {"frame":"hover","speed":"300","ease":"Power1.easeInOut",
+                                 "to":"o:1;rX:0;rY:0;rZ:0;z:0;",
+                                 "style":"c:rgba(255, 255, 255, 1.00);bc:rgba(255, 255, 255, 1.00);bw:1px 1px 1px 1px;"}]'
+                            data-textAlign="['center','center','center','center']" data-paddingtop="[13,13,13,13]"
+                            data-paddingright="[25,25,25,25]" data-paddingbottom="[13,13,13,13]" data-paddingleft="[25,25,25,25]"
+                            style="z-index: 13; text-transform: uppercase; white-space: nowrap;outline:none;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;cursor:pointer; border-radius: 3px;">
+                            Shop Now</div>
+            
+                        </div>
+                      </li>
+                    </ul>
+                    <div class="tp-bannertimer tp-bottom" style="visibility: hidden !important;"></div>
+                  </div>
+                </div><!-- END REVOLUTION SLIDER -->
+              </div>
+            </div>
+      <!-- end Revolution Layer Slider -->
+
+    <div class="tri-top-sellers tri-slick pro-content">
+      <div class="container">
+        <div class="products-area">
+           <div class="row justify-content-center">
+             <div class="col-12 col-lg-6">
+               <div class="pro-heading-title">
+                 <h2 class="justify-content-center text-center"> OUR CATEGORIES
+                 </h2>
+                 </div>
+               </div>
+           </div>
+        
+        </div>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <div class="brands-carousel-js  Categories-content ">
+                    {% for cata in catagory %}
+                    <div class="">
+                      <div class="product">
+                        <article>   
+                                <div class="pro-thumb">
+                                  <img class="img-fluid moss" src="{{cata.image.url}}" alt="Product-Image">
+                                </div>
+                                <div class="pro-info">
+                                  <div class="pro-heading">
+                                     <h3 ><a href="{% url 'pro_main' cata.slug %}">{{cata.name}}</a></h3>
+                                  </div>
+                                </div>                   
+                              </article>
+                            </div>
+                          </div>
+                          
+                          {% endfor %}
+                  </div>
+              </div>
+          </div>
+      </div>
+    
+    </div>
+       
+     <!-- full width banner with tabs -->
+    <div class="tri-banners-content tri-slick pro-content">
+        
+        <div class="fullwidth-banner3   pro-content">
+          <section class="deal-of-the-day" >
+            <div class="container">
+              <div class="products-area">
+                 <div class="row justify-content-center">
+                   <div class="col-12 col-lg-6">
+                     <div class="pro-heading-title">
+                       <h2 class="justify-content-center text-center"> DEALS OF THE Week
+                       </h2>
+                       </div>
+                     </div>
+                 </div>
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                  <div class="col-12">
+                      <div class="deal-of-the-day-js center-product-style .slider-nav row">
+                        
+                        {% for product in products %}
+                        
+                        {% if product.discount %}   
+                        <div class=" ">
+                          <div class="product">
+                              <article>
+                                <div class="pro-thumb">
+                                  <img class="img-fluid pro-img" src="{{product.image.url}}" alt="Product-Image">
+                                  <div class="pro-hover-icons">
+                                    <div class="icons">
+                                      <button data-product={{product.id}} data-action='add' class="icon btn-light update-cart" onclick="notificationCart();">
+                                        <img src="{% static 'custome\revolution\assets\svg\action\ic_add_shopping_cart_24px.svg' %}" alt="">
+                                          <i class="fas fa-shopping-bag"></i>
+                                      </button>
+                                      <button data-product={{product.id}} data-action='wish' class="btn-light icon update-cart" onclick="notificationWishlist();">
+                                        <img src="{% static 'custome\revolution\assets\svg\action\ic_list_24px.svg' %}" alt="">
+                                        <i class="fas fa-align-right" data-fa-transform="rotate-90"></i>
+                                      </button>
+                                    </div>
+                                </div>
+                                </div>
+                                <div class="pro-info">
+                                  <div class="pro-heading">
+                                     <h3 ><a href="{% url 'detail' product.slug %}">{{product.name}}</a></h3>
+                                     <div class="pro-price"> 
+                                       {% if product.discount %}    
+                                      <ins>${{product.new_price|floatformat:2}}
+                                          <del>
+                                              ${{product.price|floatformat:2}}     
+                                            </del> 
+                                      </ins>
+                                      {% else %} 
+                                      <ins>${{product.price|floatformat:2}}</ins>
+                                      {% endif %}
+                                    </div>
+                                   
+                                  </div>
+                                </div>     
+                              </article>
+                          </div>
+                        </div> 
+                        {% endif %}
+                        {% endfor %}
+                      </div>
+                  </div>
+              </div>
+          </div>
+         </section>
+        </div>                                                      
+      
+    </div> 
+    
+  <div class="tri-Featured-sellers tri-slick  pro-content">
+    <div class="container">
+      <div class="products-area">
+        <div class="row justify-content-center">
+          <div class="col-12 col-lg-6">
+            <div class="pro-heading-title">
+              <h2 class="justify-content-center text-center">ON SALE PRODUCTS
+              </h2>
+            </div>
+          </div>
+        </div>
+  
+      </div>
+    </div>
+    <div class="container-fluid">
+      <div class="col-12">
+        <div class="on-sale-product-js .slider-nav row">
+          
+          {% for product in top %}  
+          <div class=" ">
+            <div class="pro-category-product  dark-bg2">
+              <div class="pro-cate-content">
+                <h3>{{product.name}} <strong>{{product.catagory}}</strong> </h3>
+                <div class="pro-price">
+                  
+                  {% if product.discount %}
+                    
+                  <ins>${{product.new_price}}
+                    <del>
+                      ${{product.price}}
+                    </del>
+                  </ins>
+                  {% endif %}
+                    
+                </div>
+                <a href="{% url 'pro_main' product.catagory.slug %}" class="btn btn-link" tabindex="0">Shop Now
+                  <i class="fas fa-angle-double-right"></i>
+                </a>
+              </div>
+              <div class="tri-cate-image">
+                <img class="img-fluid " src="{{product.image.url}}" alt="Banner Image">
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  
+  </div>
+
+{% endblock content %}

@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+  
+
+      <!-- Page Header -->
+    <div class="container-fuild">
+        <div class="page-header" style="background-image: url('images/miscellaneous/page-header.png')">
+          <div class="container">
+            <h1 class="page-title">Contact<span>Easy feel to contact us</span></h1>
+          </div><!-- End .container -->
+        </div>
+        <nav aria-label="breadcrumb">
+          <div class="container">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{% url 'store' %}">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Contact</li>
+              </ol>
+          </div>
+        </nav>
+
+
+    </div>       
+        <!-- contact Content -->
+    <section class="pro-content contact-content">
+      <div class="container"> 
+        <div class="row">
+          <div class="col-12 col-sm-12">
+            <div class="row">
+                <div class="col-12 col-lg-6">
+                    <h2 class="title mb-1">Contact Information</h2>
+                    <p class="mb-3">this is the contact Information for the company</p>
+                      <div class="row">
+                          <div class="col-sm-6">
+                            <div class="contact-info">
+                              <h3>The Office</h3>
+  
+                              <ul class="contact-list">
+                                <li>
+                                    <i class="fas fa-map-marker"></i>
+                                  70 Washington   New York, United States
+                                </li>
+                                <li>
+                                    <i class="fa fa-phone" aria-hidden="true"></i>
+                                  <a href="tel:#">+92 423 567</a>
+                                </li>
+                                <li>
+                                    <i class="fas fa-envelope"></i>
+                                  <a href="mailto:#">xyz@abc.com</a>
+                                </li>
+                              </ul><!-- End .contact-list -->
+                            </div><!-- End .contact-info -->
+                          </div><!-- End .col-sm-7 -->
+                        </div>
+                    
+                </div> 
+                <div class="col-12 col-lg-6">
+                    <div class="form-start">
+                        <form method="POST" action=''>
+                          {% csrf_token %}
+                          <label class="first-label">subject</label>
+                          <div class="input-group">
+                              
+                          
+                              <input name="subject" type="text" class="form-control" id="validationCustomUsername0" placeholder="Enter Your Name"  required>
+                              <div class="invalid-feedback">
+                                subject of message.
+                              </div>
+                          </div>
+                          <label >Email</label>
+                          <div class="input-group">
+                          
+                              <input name="email" type="email" class="form-control" id="validationCustomUsername1" placeholder="Enter Email here.."  required>
+                              <div class="invalid-feedback">
+                                Please choose a Email.
+                              </div>
+                          </div>  
+                          <label >Message</label>
+                          <textarea  name="message"  placeholder="write..." rows="5" cols="56"></textarea>
+                      
+                          
+                          <button type="submit" class="btn btn-secondary swipe-to-top">SUBMIT <i class="fas fa-location-arrow"></i></button>
+                        </form>
+                    </div>
+              </div>     
+            </div>
+          </div>
+        </div>
+        
+      </div>      
+    </section>
+    {% endblock content %}

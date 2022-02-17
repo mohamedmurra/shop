@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<style type='text/css'>
+.hidden{
+  display: none ;
+}
+</style>
+      <!-- Page Header -->
+      <div class="container-fuild">
+        <div class="page-header">
+          <div class="container">
+            <h1 class="page-title">Shipping</h1>
+          </div><!-- End .container -->
+        </div>
+        <nav aria-label="breadcrumb">
+          <div class="container">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="{% url 'store' %}">Home</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Checkout</li>
+            </ol>
+          </div>
+        </nav>
+      
+      
+      </div>
+       <!-- checkout Content -->
+       <section class="pro-content checkout-area">             
+        <div class="container"> 
+          <div class="row">
+              <div class="col-12 col-xl-12">
+                  <div class="row">
+                      <div class="col-12 col-lg-3">
+                       <div class="checkoutd-nav">
+                          <ul class="nav flex-column nav-pills mb-3" id="pills-tab" role="tablist">
+                              <div class="nav-item">
+                                <a class="nav-link  active" id="pills-shipping-tab" data-toggle="pill" href="#pills-shipping" >Shipping Address</a>
+                              </div>
+                            </ul>
+                       </div>
+                 
+                    </div>
+                    <div class="col-12 col-lg-9">
+                        <div class="checkout-module">
+                   
+                        
+                            <div class="tab-content" >
+                              <div class="tab-pane fade show active" id="pills-shipping" role="tabpanel" aria-labelledby="pills-shipping-tab">
+                                <h3>Shipping address</h3>
+                                <form method="POST" action=''> 
+                                  {% csrf_token %}
+                                  <div class="form-row">
+                                      <div class="from-group col-md-6 mb-3">
+                                          <div class="input-group ">
+                                            
+                                            <input name=phone_number type="text" class="form-control" id="inlineFormInputGroup026" placeholder="phone_number" required>
+                                          </div>
+                                        </div>
+                                        <div class="from-group col-md-6 mb-3">
+                                          <div class="input-group ">
+                                            
+                                            <input name="address" type="text" class="form-control" id="inlineFormInputGroup1" placeholder="address"required>
+                                          </div>
+                                        </div>
+                                  </div>
+                                  <div class="form-row">
+                                          <div class="from-group col-md-6 mb-3">
+                                              <div class="input-group"  >
+                                                
+                                                  <input name='state' type="text" class="form-control" id="inlineFormInputGroup82" placeholder="state"required> 
+                                              </div>
+                                            </div>
+                                        <div class="from-group col-md-6 mb-3">
+                                            <div class="input-group ">
+                                              
+                                              <input name="city" type="text" class="form-control" id="inlineFormInputGroup3" placeholder="city"required>
+                                            </div>
+                                          </div>
+                                  </div>
+                                  <div class="form-row">
+                                      <div class="from-group col-md-6 mb-3">
+                                          <div class="input-group"  >
+                                            
+                                              <input name="aria" type="text" class="form-control" id="inlineFormInputGroup79" placeholder="aria"required> 
+                                          </div>
+                                        </div>
+                                    
+                                  </div>
+                                    <div class="col-12 col-sm-12 justify-content-end btn-cont">
+                                      <div class="row">
+                                        
+                                        <button id="sub_form" class="btn btn-secondary  cta" type='submit'>Continue</button>
+                                      </div>
+                                    </div>
+                                </form>
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+
+                  </div>
+              </div>
+       
+          </div>
+        </div>
+      </section>
+
+{% endblock content %}
+     

@@ -1,0 +1,279 @@
+.Banner-layout1{
+  
+    .slide1{
+        background-color: #fde7e5;
+    }
+    .slide2{
+        background-color: #e7fbfe;
+      
+    }
+    .slide3{
+        height: 94% ;
+        background-color: #fee3d3;
+    }
+    figure{
+        position: relative;
+        background-color: var(--color-article1-background);
+        border-radius: $border-radius;
+        overflow: hidden;
+        margin-bottom: 0px;
+        padding: 30px;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        margin-top: 30px;
+
+        img{
+            width: auto;
+            max-height: 145px;
+            min-height: 145px;
+        }
+        
+        &.right{
+            img{
+                float: right;
+            }
+        }
+
+
+    }
+
+    .banner-caption{
+      
+        width: 100%;
+        z-index: 2;
+
+        h3{
+            font-family: $font-family-base-bold;
+            color: var(--color-text);
+            margin: 0;
+            margin-top: -3px;
+            white-space: normal;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            height: 60px;
+        }
+        p{
+            color: $secondary;
+            margin-bottom: 15px;
+            white-space: normal;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+          
+        }
+
+        .btn{
+            margin-top: 15px;
+            padding: 15px 12px;
+        }
+
+        &.left-caption{
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: flex-start;
+            text-align: left;
+            margin-left: 30px;
+        }
+        &.right-caption{
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: flex-end;
+            text-align: left;
+            margin-right: 30px;
+        }
+        &.top-caption{
+            text-align: center;
+            margin-bottom: 30px;
+        }
+    }
+}
+
+.Banner-layout5{
+  
+    .slide1{
+        background-color: #fde7e5;
+    }
+    .slide2{
+        background-color: #e7fbfe;
+      
+    }
+    .slide3{
+        height: 94% ;
+        background-color: #fee3d3;
+    }
+    figure{
+        position: relative;
+        background-color: var(--color-article1-background);
+        border-radius: $border-radius;
+        overflow: hidden;
+        margin-bottom: 0px;
+        padding: 0 30px;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        margin-top: 30px;
+
+        img{
+            width: auto;
+          
+        }
+        
+        &.right{
+            img{
+                float: right;
+            }
+        }
+
+
+    }
+
+    .banner-caption{
+      
+        width: 100%;
+        z-index: 2;
+        background-repeat: no-repeat;
+        h3{
+            line-height: 1;
+            font-family: $font-family-base-bold;
+            font-size: 45px;
+            color:$black;
+            margin: 0;
+            margin-top: -3px;
+            white-space: normal;
+            overflow: hidden;
+           
+        }
+        p{
+            line-height: 1;
+            color:$black;
+            font-size: 30px;
+            margin-bottom: 15px;
+            white-space: normal;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+          
+        }
+      .btn{
+            font-size: 15px;
+            margin-top: 15px;
+            padding: 0;
+            color: $black;
+            span{
+                border-bottom: 1px solid;
+            }
+          
+        }
+        &.left-caption{
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: flex-start;
+            text-align: center;
+            margin-left: 60px;
+            padding: 50px 0;
+            background-position: 10%;
+            background-image: url("../images/index-5/bg-circle2.png");
+        }
+        &.right-caption{
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: flex-end;
+            text-align: center;
+            margin-right: 60px;
+            padding: 50px 0;
+            background-position: 100% 50%;
+            padding-right: 15px;
+            background-image: url("../images/index-5/bg-circle3.png");
+        }
+        &.top-caption{
+            text-align: center;
+            padding: 50px 0px 80px;
+            background-position: center;
+            background-image: url("../images/index-5/bg-circle1.png");
+        }
+    }
+}
+
+.bodyrtl{
+    .Banner-layout5 .banner-caption.right-caption{
+        margin-right: 0px;
+        margin-left: 60px;
+    }
+    .Banner-layout5 .banner-caption.left-caption{
+        margin-left: 0;
+        margin-right: 60px;
+    }
+    .Banner-layout5 .banner-caption.right-caption{
+        background-position: 0 50%;
+    }
+    .Banner-layout5 .banner-caption.left-caption{
+        background-position: 90%;
+    }
+}
+
+@media only screen and (min-width:768px){
+    .Banner-layout5 figure img{
+        height: 190px;
+    }
+}
+@media only screen and (max-width:768px){
+  
+    .Banner-layout5{
+        .slide1{
+            flex-direction: column-reverse;
+        }
+    }
+    .Banner-layout5 figure{
+        flex-direction: column;
+        align-items: center;
+    }
+    .Banner-layout5 .banner-caption.right-caption{
+        align-items: center;
+        margin-right: 0;
+        padding-right: 0;
+        background-position: 50% 50%;
+    }
+    .bodyrtl .Banner-layout5 .banner-caption.right-caption{
+        margin-left: 0;
+    }
+    .Banner-layout5 .banner-caption.left-caption{
+        background-position: 50%;
+        margin-left: 0;
+        align-items: center;
+    }
+    .bodyrtl .Banner-layout5 .banner-caption.left-caption{
+        margin-right: 0;
+    }
+    .Banner-layout5 .banner-caption.top-caption{
+        margin-bottom: 0;
+        padding-bottom: 77px;
+    }
+}
+
+@media only screen and (max-width:576px){
+    .Banner-layout5 figure{
+        padding: 0;
+    }
+}
+
+@media only screen and (max-width:768px){
+    .Banner-layout5 .banner-caption h3{
+        font-size: 35px;
+    }
+    .Banner-layout5 .banner-caption p{
+        font-size: 25px;
+    }
+}

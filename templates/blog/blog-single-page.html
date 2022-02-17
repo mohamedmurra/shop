@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+
+      <!-- Page Header -->
+      <div class="container-fuild">
+        <div class="page-header" style="background-image: url('images/miscellaneous/page-header.png')">
+          <div class="container">
+            <h1 class="page-title">Blog<span>Stay upto date</span></h1>
+          </div><!-- End .container -->
+        </div>
+        <nav aria-label="breadcrumb">
+          <div class="container">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{% url 'store' %}">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Blog</li>
+              </ol>
+          </div>
+        </nav>
+
+
+    </div> 
+          
+      <!-- Site Content -->
+      <section class="pro-content blog-content">
+    <div class="container"> 
+        <div class="row">
+            <div class="col-12 col-lg-12 pro-blog-content">
+                <div class="row">
+                    <div class="col-12 col-md-12">
+                        <div class="blog">
+                          <div class="blog-thumb">
+                            <img class="img-fluid" src="images/blogs/f_blog_post_1.jpg" style="width: 100%;" alt="Blog-Image">
+                          </div>
+                          
+                          <div class="blog-info">
+                              <div class="blog-meta">
+                                  <a >
+                                      <i class="far fa-calendar-alt"></i>
+                                      14 November, 2018
+                                    </a>
+                                  <a >
+                                    <i class="fas fa-comments"></i>
+                                    33 Comments
+                                  </a>
+                                </div>
+                                  <h3>A Meetup for People of e-Commerce Business</h3>
+                                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                     Animi ea libero nobis hic impedit similique, iste possimus. 
+                                     Libero delectus hic tempore suscipit blanditiis? Odit consequuntur 
+                                     facilis debitis quam accusamus ducimus? It is a long established fact 
+                                     that a reader will be distracted by the readable content of a page 
+                                     when looking at its layout. The point of using Lorem Ipsum is that 
+                                     it has a more-or-less normal distribution of letters, as opposed to 
+                                     using 'Content here, content here', making it look like readable English.
+                                      Many desktop publishing packages and web page editors now use Lorem 
+                                      Ipsum as their default model text, and a search for 'lorem ipsum' 
+                                      will uncover many web sites still in their infancy. Various versions
+                                       have evolved over the years, sometimes by accident, It is a long 
+                                       established fact that a reader will be distracted by the readable 
+                                       content of a page when looking at its layout. The point of using 
+                                       Lorem Ipsum is that it has a more-or-less normal distribution of
+                                        letters, as opposed to using 'Content here, content here', making
+                                      it look like readable English. 
+                                  </p> 
+                                  <p>Many desktop publishing
+                              packages and web page editors now use Lorem Ipsum as their 
+                              default model text, and a search for 'lorem ipsum' will uncover many
+                                web sites still in their infancy. Various versions have evolved over 
+                                the years, sometimes by accident, sometimes on purpose (injected humour 
+                                and the like). sometimes on purpose (injected humour and the like). 
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi ea 
+                                libero nobis hic impedit similique, iste possimus. Libero delectus
+                                  hic tempore suscipit blanditiis? Odit consequuntur facilis debitis
+                                  quam accusamus ducimus? It is a long established fact that a reader
+                                    will be distracted by the readable content of a page when looking 
+                                    at its layout. The point of using Lorem Ipsum is that it has a
+                                    more-or-less normal distribution of letters, as opposed to using
+                                      'Content here, content here', making it look like readable English.
+                                      Many desktop publishing packages and web page editors now use 
+                                      Lorem Ipsum as their default model text, and a search for
+                                        'lorem ipsum' will uncover many web sites still in their 
+                                        infancy. Various versions have evolved over the years,
+                                        sometimes by accident, It is a long established fact
+                                          that a reader will be distracted by the readable 
+                                          content of a page when looking at its layout. 
+                                          The point of using Lorem Ipsum is that it has
+                                          a more-or-less normal distribution of letters,
+                                            as opposed to using 'Content here, content here', 
+                                    making it look like readable English. 
+                                  </p>
+                                                    
+                          </div>
+                        </div>
+                    </div>
+                </div>
+                <nav aria-label="navigation">
+                    <ul class="pagination">
+                        <li class="page-item disabled">
+                            <a class="page-link page-link-prev" href="#" aria-label="Previous" tabindex="-1" aria-disabled="true">
+                                Prev
+                            </a>
+                        </li>
+                        <li class="page-item" aria-current="page"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item-total">of 6</li>
+                        <li class="page-item">
+                            <a class="page-link page-link-next" href="#" aria-label="Next">
+                                Next
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+          
+        </div>
+      </div>
+      </section>
+      
+    {% endblock content %}
+ 
+ 

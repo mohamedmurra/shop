@@ -1,0 +1,282 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+    <div class="container-fuild">
+      <div class="page-header-no-conent" style="background-image: url('images/miscellaneous/page-header.png')"></div>
+      <nav aria-label="breadcrumb">
+        <div class="container">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'store' %}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'main' %}">Products</a></li>
+            <li class="breadcrumb-item active" aria-current="page"> {{objects.name}}</li>
+          </ol>
+        </div>
+      </nav>
+    </div>
+          <!-- Site Content -->
+      <section class="pro-content page-content product-page product-page-one">
+          <div class="container"> 
+            <div class="product-main">
+              <div class="row">
+                <div class="col-12 col-sm-12">
+                  <div class="row">
+                    <div class="col-12 col-lg-6">
+                      <div class="row">
+                        <div class="col-12">
+                          <div class="slider-wrapper">
+                            <div class="slider-for-vertical">
+                                <a class="slider-for__item ex1 fancybox-button" href="{{objects.name}}" data-fancybox-group="fancybox-button" title="Lorem ipsum dolor sit amet">
+                                  <img src="{{objects.image.url}}" alt="Zoom Image" />
+                                </a>
+                              </div>
+                          
+
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-12 col-lg-6">
+                      <div class="row">
+                          <div class="col-12 col-md-12">
+                      <div class="badges">
+                        <div class="badge badge-info">
+                          Featured
+                        </div>
+                        
+                        {% if objects.aviable %}       
+                        <div class="badge badge-danger">
+                          Sale
+                        </div>
+                        {% else %}
+                        <div class="badge badge-dark">
+                          Out Of Stock
+                        </div>
+                        {% endif %}
+                      </div>   
+                      <h2 >{{objects.name}}</h2>
+                      
+                      <div class="pro-price"> 
+                        
+                        {% if objects.discount|floatformat:2 %}
+                        <ins>${{objects.new_price|floatformat:2}}</ins>           
+                        <del>${{objects.price|floatformat:2}}</del>                        
+                          {% else %}
+                        <ins>${{objects.price|floatformat:2}}</ins>
+                        {% endif %}
+                                              
+                      </div>
+                      <div class="pro-rating">
+                        <i class="fas fa-star-half-alt"></i>
+                        <a href="#review" class="btn-link">{{counted}} reviews</a>
+                      </div>
+                      <div class="pro-info">
+                          <div class="pro-single-info"><b>Product ID :</b><span>{{objects.id}}</span></div>
+                          <div class="pro-single-info"><b>Categroy :</b><span><a href="{% url 'pro_main' objects.catagory.slug %}">{{objects.catagory}}</a></span></div>
+                          <div class="pro-single-info"><b>Available :</b>
+                            
+                            {% if objects.aviable %}
+                              
+                            <span class="text-secondary">InStock</span></div>
+                            <div class="pro-single-info"><b>Order Limit :</b><span><a href="#">{{objects.stack}}</a></span></div>
+                            </div>
+                            {% else %}
+                            <span class="text-secondary">OutStock</span></div>
+                            {% endif %}
+                              
+                         
+                      <div class="pro-quantiy">
+
+                          {% if objects.aviable %}
+                            
+                          <button data-action='add' data-product={{objects.id}} type="button" class="btn btn-secondary btn-lg update-cart" onclick="notificationCart();">Add to Cart</button> 
+                        {% else %}
+                          <button  type="button" class="btn btn-danger btn-lg update-cart" onclick="notificationCart();" disabled>Out stock</button>
+                          {% endif %}
+                              
+                      </div>
+                      <div class="pro-buttons">     
+                              <button data-action='wish' data-product={{objects.id}} class="btn btn-link update-cart" onclick="notificationWishlist();"><i class="fas fa-heart"></i>Add to Wishlist</button>
+                      </div>
+                      <div class="pro-social-share">
+                        <!-- AddToAny BEGIN -->
+                        <div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+                            <a class="a2a_dd" href="https://www.addtoany.com/share"></a>
+                            <a class="a2a_button_facebook"></a>
+                            <a class="a2a_button_twitter"></a>
+                            <a class="a2a_button_email"></a>
+                            </div>
+                            <script async src="https://static.addtoany.com/menu/page.js"></script>
+                            <!-- AddToAny END -->
+                      </div>
+                      </div>
+                    </div>
+                    
+          
+                  </div>
+                    </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12 col-md-12 mt-3">
+                  <div class="nav nav-pills" role="tablist">
+                    <a class="nav-link nav-item  active" href="#description" id="description-tab" data-toggle="pill" role="tab">Description</a> 
+                    <a class="nav-link nav-item " href="#additionalInfo" id="additional-info-tab" data-toggle="pill" role="tab" >Additional information</a> 
+                    <a class="nav-link nav-item" href="#review" id="review-tab" data-toggle="pill" role="tab" >Reviews</a> 
+                  </div> 
+                  <div class="tab-content">
+
+                    <div role="tabpanel" class="tab-pane fade active show" id="description" aria-labelledby="description-tab">
+                        <p>{{objects.description}}</p>
+                    </div>  
+                    <div role="tabpanel" class="tab-pane fade" id="additionalInfo" aria-labelledby="additional-info-tab">
+                        <table class="table table-striped table-borderless">
+                            
+                            <tbody>
+                              
+                              {% if objects.brand %}
+                                
+                              
+                              <tr>
+                                <th scope="row">Brand Name:</th>
+                                <td>{{objects.brand}}</td>
+                                
+                              </tr>
+                              {% endif %}
+                            </tbody>
+                          </table>
+                    </div> 
+                    <div role="tabpanel" class="tab-pane fade " id="review" aria-labelledby="review-tab">
+                      <div class="reviews">
+                          <div class="review-bubbles">
+                              <h2>
+                                  Customer Reviews
+                              </h2>
+                              
+                              {% for review in reviews %} 
+                              <div class="review-bubble-single">
+                                  <div class="review-bubble-bg">
+                                      <h4>{{review.title}}</h4>
+                                      <p>BY {{review.user}} <span>{{review.created}}</span></p>
+                                      <p>{{review.body}}</p>
+                                  </div>
+                                  
+                              </div>
+                              {% endfor %}
+                          </div>
+                          <div class="write-review">
+                            {% if request.user.is_authenticated %}
+                            <h2>Write a Review</h2>
+                            <form action="" method="POST" class="write-review-box">
+                              {% csrf_token %}
+                                <div class="from-group row mb-3">
+                                    <div class="col-12"> <label for="inlineFormInputGroup2">Review Title</label></div>
+                                    <div class="input-group col-12">
+                                      
+                                      <input name='title' type="text" class="form-control" id="inlineFormInputGroup2" placeholder="Title of Review">
+                                    </div>
+                                  </div>
+                                  <div class="from-group row mb-3">
+                                      <div class="col-12"> <label for="inlineFormInputGroup3">Review Body</label></div>
+                                      <div class="input-group col-12">
+                                        
+                                        <textarea name='body' class="form-control" id="inlineFormInputGroup3" placeholder="Write Your Review" required></textarea>
+                                      </div>
+                                    </div>
+                                        <button type="submit" class="btn btn-secondary swipe-to-top">Submit</button>
+                            </form>
+                            {% else %}
+                            <p>u need to Login to add comment <a class="btn btn-secondary swipe-to-top" href="{% url 'login' %}">Login</a></p>
+                              {% endif %}
+                          </div>
+                      </div>
+
+                        
+                    </div> 
+                </div>
+            </div>      
+        
+              </div>
+            </div>
+            </div>
+            <div class="pro-content">
+              <div class="container">
+                <div class="row ">
+                    <div class="col-12 col-md-6">
+                        <div class="pro-heading-title">
+                          <h2> Related Products
+                          </h2>
+                          </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-carousel-js row">
+                  
+                  {% for pro in products %}
+                  <div class="">
+                      <div class="product">
+                          <article>
+                            <div class="pro-thumb">
+                              
+                              <img class="img-fluid" id="myImage" src="{{pro.image.url}}" alt="Product-Image">
+
+                              <div class="badges">
+                                <div class="badge badge-info">
+                                  Featured
+                                </div>
+                                {% if pro.aviable %}
+                                <div class="badge badge-danger">
+                                  Sale
+                                </div>
+                                {% endif %}
+                              </div>
+
+                              <div class="pro-hover-icons">
+                                  <div class="icons">
+                                  {% if pro.aviable %}
+                                  <button data-product={{pro.id}} data-action='add' class="btn-light icon update-cart" onclick="notificationCart();">
+                                    <img src="{% static 'custome\revolution\assets\svg\action\ic_add_shopping_cart_24px.svg' %}" alt="">
+                                    <i class="fas fa-shopping-bag"></i>
+                                  </button>
+                                  {% endif %}
+                                  <button data-product={{pro.id}} data-action='wish' class="btn-light icon update-cart"
+                                    onclick="notificationWishlist();">
+                                    <img src="{% static 'custome\revolution\assets\svg\action\ic_list_24px.svg' %}" alt="">
+                                    <i class="fas fa-align-right" data-fa-transform="rotate-90"></i>
+                                  </button>
+                                  </div>
+                              </div>
+                            </div>
+                          
+
+                            <div class="pro-info">
+                                <div class="pro-category">
+                                    {{pro.catagory}}                             
+                                </div>
+                                <h3><a href="{% url 'detail' pro.slug %}">{{pro.name}}</a></h3>
+                                
+                                <div class="pro-price">                     
+                                  
+                              {% if pro.discount|floatformat:2 %}
+                              <ins>${{pro.new_price|floatformat:2}}</ins>
+                              <del>${{pro.price|floatformat:2}}</del>
+                              {% else %}
+                              <ins>${{pro.price|floatformat:2}}</ins>
+                              {% endif %}        
+                                </div>
+                          
+
+                            </div>                   
+                        
+      
+                          </article>
+                      </div>
+                  </div>   
+                  {% endfor %}
+              </div>
+              </div>
+            </div>  
+            
+      </section>
+
+{% endblock content %}

@@ -1,0 +1,69 @@
+// ....compare....
+
+.order-content{
+    h2,h3{
+        color: var(--color-text);
+        font-family: $font-family-base-bold;
+        font-size: $font-size-lg;
+    }
+    .top-table{
+        thead{
+            background-color: $white;
+          
+        }
+        tbody{
+            tr{
+                background-color: $white;
+                align-items: center;
+                border: 2px solid $gray-300;
+                margin-bottom: 30px;
+                td{
+                    display: flex;
+                    justify-content: center !important;
+                    border: none;
+                    color: var(--color-text);
+                    .item-detail{
+                        justify-content: flex-start;
+                        h4{
+                            font-size: $font-size-lg;
+                            font-weight: $font-weight-bold;
+                        }
+                        .item-controls{
+                         
+                            .btn{
+                                font-size: 12px;
+                                border:1px solid $gray-300;
+                                padding: 0 5px;
+                            }
+                        }
+                        .pro-category{
+                            font-family: $font-family-base;
+                            color:$body-color-secondary;
+                            text-transform: uppercase;
+                        }
+                      
+                    }
+                    .item-control{
+                        text-align: right;
+                        .btn{
+                            padding: 6px 12px;
+                            border: 2px solid $border-color;
+                        }
+                    }
+                 &:last-child{
+                    justify-content: center;
+                 }
+                }
+            
+            }
+        }
+    } 
+    .accordian{
+        .collapse{
+            .card-body{
+                margin-bottom: 30px;
+                background-color: var(--color-article2-background);
+            }
+        }
+    }
+}          

@@ -1,0 +1,75 @@
+
+
+.pagination {
+    border-radius: 0;
+    align-items: center;
+    margin-bottom: 0;
+    border-top:1px solid;
+    border-color: var(--color-border);
+    padding: 15px 0 0 0;
+
+    .page-item.disabled .page-link {
+        border-color: transparent;
+        color: $body-color-secondary;
+    }
+    .page-item.active .page-link {
+        color: $secondary;
+        background-color: transparent;
+        border-color: var(--color-border);
+    }
+
+    .page-link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 35px;
+        height: 35px;
+        font-weight: 400;
+        font-size: 14px;
+        padding: 0 .3rem;
+        line-height: 1;
+        color: var(--color-text);
+        border-radius: 200px;
+        background-color: transparent;
+        border: .1rem solid transparent;
+    }
+   
+    .page-link:focus{
+   
+        box-shadow: none;
+    }
+    .page-link:hover {
+        box-shadow: none;
+        color: $secondary;
+        border-color: var(--color-border);
+        text-decoration: none;
+        background-color: transparent;
+        outline: none !important;
+    }
+    .page-item {
+        margin-right: .4rem;
+    }
+
+    .page-item-total {
+        color: $body-color-secondary;
+        font-weight: 400;
+        margin-right: .4rem;
+    }
+
+    .page-link.page-link-prev, .page-link.page-link-next {
+        padding-right: 1rem;
+        min-width: 70px;
+        padding-left: 1rem;
+        border-radius: 3px;
+        background-color: transparent;
+        color: var(--color-text);
+    }
+}
+
+@media only screen and (max-width: 992px){
+    .pagination .page-link.page-link-prev, .pagination .page-link.page-link-next{
+        min-width: 60px;
+        padding-right: 5px;
+        padding-left: 5px;
+    }
+}

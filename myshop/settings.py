@@ -37,28 +37,27 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'phonenumber_field',
-    'users',
-    'codes',
     'MyStore',
+    'account',
+    'Coupon',
+    'Blog',
     'crispy_forms',
-    'slick_reporting',
-    'bootstrap4',
-    'rest_framework',
-
+    'crispy_bootstrap5',
 ]
 
 
-AUTH_USER_MODEL = 'users.CustomUser'
+
+CRISPY_ALLOWD_TEMPLATE ='bootstrap5'
+CRISPY_TEMPLATE_PACK ='bootstrap5'
+
+EMAIL_BACKEND='django.core.mail.backends.console.EmailBackend'
+
+DEFAULT_AUTO_FIELD ='django.db.models.BigAutoField'
 
 LOGIN_URL = '/login/'
-PHONENUMBER_DB_FORMAT = 'NATIONAL'
-PHONENUMBER_DEFAULT_REGION = 'QA'
-DEFAULT_AUTO_FIELDB='django.db.models.BigAutoField'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -68,6 +67,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'myshop.urls'
+
+AUTH_USER_MODEL = 'account.Acount'
 
 TEMPLATES = [
     {
@@ -93,8 +94,12 @@ WSGI_APPLICATION = 'myshop.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'Murra',
+        'USER': 'postgres',
+        'PASSWORD':'mo111995',
+        'HOST':'127.0.0.1',
+        'PORT': '5432'
     }
 }
 
@@ -135,25 +140,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-STATIC_URL = '/staticfiles/'
-STATIC_ROOT =os.path.join(BASE_DIR ,'collected_static')
+STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR / 'staticfiles')
+    os.path.join(BASE_DIR, 'static'),
 ]
 
-MEDIA_URL = '/mediafiles/'
-MEDIA_ROOT = os.path.join(BASE_DIR / 'staticfiles/mediafiles')
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR / 'static/media')
 
-if os.getcwd() == '/app':
-    import dj_database_url
-    db_from_env = dj_database_url.config(conn_max_age=500)
-    DATABASES['default'].update(db_from_env)
-    #Honor the 'X-forwarded-Proto' header for request.is_secure().
-    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-
-    #Allow all host headers
-    ALLOWED_HOSTS = ['alshiyas.herokuapp.com']
-    DEBUG = True
-
-    #Static asset configuration
-    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))

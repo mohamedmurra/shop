@@ -1,65 +1,148 @@
-{% extends 'main.html' %}
+{% extends 'base.html' %}
 {% load static %}
-
 {% block content %}
-<!---->
-<div class="row">
- <div class="col-lg-12">
-  <div class="box-element">
-
-   <a class="btn btn-outline-dark" href="{% url 'store' %}">&#x2190; Continue Shopping</a>
-
-   <br>
-   <br>
-   <table class="table">
-    <tr>
-     <th>
-      <h5>Items: <strong>{{order.get_cart_items}}</strong></h5>
-     </th>
-     <th>
-      <h5>Total:<strong> ${{order.get_cart_total|floatformat:2}}</strong></h5>
-     </th>
-     <th>
-      <a style="float:right; margin:5px;" class="btn btn-success" href="{% url 'checkout' %}">Checkout</a>
-     </th>
-    </tr>
-   </table>
-
-  </div>
-
-  <br>
-  <div class="box-element">
-   <div class="cart-row">
-    <div style="flex:2"></div>
-    <div style="flex:2"><strong>Item</strong></div>
-    <div style="flex:1"><strong>Price</strong></div>
-    <div style="flex:1"><strong>Quantity</strong></div>
-    <div style="flex:1"><strong>Total</strong></div>
-   </div>
-{%for item in items%}
-   <div class="cart-row">
-    <div style="flex:2"><img class="row-image" src="{{item.product.image.url}}"></div>
-    <div style="flex:2">
-     <p>{{item.product.name}}</p>
-    </div>
-    <div style="flex:1">
-     <p>${{item.product.price|floatformat:2}}</p>
-    </div>
-    <div style="flex:1">
-     <p class="quantity">{{item.quantity}}</p>
-     <div class="quantity">
-      <img data-product="{{item.product.id}}" data-action="add" class="chg-quantity update-cart" src="{% static  'images/arrow-up.png' %}">
-
-      <img data-product="{{item.product.id}}" data-action="remove" class="chg-quantity update-cart" src="{% static  'images/arrow-down.png' %}">
+<style type='text/css'>
+  .no{
+    width: 20px;
+    height: 20px;
+  }
+</style>
+      <!-- Page Header -->
+      <!-- Page Header -->
+      <div class="container-fuild">
+        <div class="page-header" style="background-image: url('images/miscellaneous/page-header.png')">
+          <div class="container">
+            <h1 class="page-title">Cart</h1>
+          </div><!-- End .container -->
+        </div>
+        <nav aria-label="breadcrumb">
+          <div class="container">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="{% url 'store' %}">Home</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Cart</li>
+            </ol>
+          </div>
+        </nav>
+      
+      
+      </div>
+    <!-- cart Content -->
+    
+    <section class="pro-content cart-content">      
+      <div class="container cart-area cart-page-one"> 
+        <div class="row">
+              <div class="col-12 col-xl-9">
+                <table class="table top-table">
+                  <tbody>
+                    
+                    {% for item in items %} 
+                      <tr class="d-flex">
+                          <td class="col-12 col-md-2">
+                                <img class="img-fluid" src="{{item.product.image.url}}" alt="CartImage">
+                          </td>
+                          <td class="col-12 col-md-4">
+                              <div class="item-detail">
+                                  <span class="pro-category">{{item.product.catagory}}</span>
+                                  <h3>{{item.product.name}}
+                                  </h3>
+                                  <div class="item-attributes"></div>
+                                  
+                              </div>
+                          </td>
+                          <td class="col-12 col-md-1 item-price">
+                            {% if item.product.discount %}
+                            <ins>${{item.product.new_price|floatformat:2}}
+                              <del>
+                                ${{item.product.price|floatformat:2}}
+                              </del>
+                            </ins>
+                            {% else %}
+                            <ins>${{item.product.price|floatformat:2}}</ins>
+                            {% endif %}
+                          <td class="col-12 col-md-3 justify-content-center" >
+                            <div class="input-group-control">
+                              <span type="number"  class="form-control" >{{item.quantity}}</span>
+                              <span class="input-group-btn">
+                                <button data-product={{item.product.id}} data-action='add' class="icon btn-light update-cart" onclick="notificationCart();">
+                                  <img class="no" src="{% static 'custome\revolution\images\tpcolorpicker\arrow_up.png' %}" alt="">
+                                </button>
+                              <button data-product={{item.product.id}} data-action='remove' class="icon btn-light update-cart"
+                                onclick="notificationCart();">
+                                <img class="no" src="{% static 'custome\revolution\images\tpcolorpicker\arrow_down.png' %}" alt="">
+                              </button>
+                              </span>
+                        </div>
+                          </td>
+                          <td class="col-12 col-md-2 item-total">${{item.get_total}}</td>
+                       
+                        
+                      </tr>
+                      {% endfor %} 
+                  </tbody>
+                </table>
+                
+                {% if request.user.is_authenticated %}
+             
+                <form method="POST" action="{% url 'apply_coupon' %}">
+                <div class="row justify-content-between click-btn">
+                  {% csrf_token %}
+                    <div class="col-12 col-lg-6">
+                          <div class="input-group">
+                              <input type="text" class="form-control" name="code"  placeholder="Coupon Code" aria-label="Coupon Code" aria-describedby="coupon-code">
+                              <div class="input-group-append">
+                                <button class="btn btn-secondary " type="submit">APPLY</button>
+                              </div>
+                            </div>
+                    </div>
+                  </div>
+                </form>
+                    {% endif %}
+              </div>
+              <div class="col-12 col-xl-3">
+                  <div class="summery">
+                      <h3>Cart totals</h3>
+                      <table class="table right-table">
+                     
+                        <tbody>
+                          <tr>
+                            <th >Subtotal</th>
+                            <td  class="justify-content-end d-flex">${{order.get_cart_total}}</td>
+                            
+                          </tr>
+                          
+                          {% if order.coupon %}
+                            
+                          <tr>
+                            <th >Coupon</th>
+                            <td  class="justify-content-end d-flex">${{order.get_discount}}</td>  
+                          </tr>
+                          <tr>
+                            <th>Code</th>
+                            <td class="justify-content-end d-flex">{{order.coupon.code}}</td>
+                          </tr>
+                          
+                          <tr class="item-price">
+                            <th>Total</th>
+                            <td class="justify-content-end d-flex" >${{order.get_cart_total_after_discount}}</td>
+                            
+                          </tr>
+                          {% else %}
+                          <tr class="item-price">
+                            <th>Total</th>
+                            <td class="justify-content-end d-flex">${{order.get_cart_total}}</td>
+                          
+                          </tr>
+                          {% endif %}
+                        </tbody>
+                      </table>
+                      <a href="{% url 'order_shipping' %}" class="btn btn-secondary btn-block" >
+                        PROCEED TO CHECKOUT</a>
+                        <a href="{% url 'main' %}" class="btn btn-link btn-block">CONTINUE SHOPPING</a>
+                  </div>
+                 
+                </div>
+        </div>
      </div>
-    </div>
-    <div style="flex:1">
-     <p>${{item.get_total}}</p>
-    </div>
-   </div>
-{%endfor%}
-  </div>
- </div>
-</div>
+    </section>
+
 {% endblock content %}
- 

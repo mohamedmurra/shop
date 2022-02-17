@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+
+{% block content %}
+        <!-- Page Header -->
+        <div class="container-fuild">
+          <div class="page-header">
+            <div class="container">
+              <h1 class="page-title">WishList</h1>
+            </div><!-- End .container -->
+          </div>
+          <nav aria-label="breadcrumb">
+            <div class="container">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{% url 'store' %}">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">WishList</li>
+              </ol>
+            </div>
+          </nav>
+        
+        
+        </div>
+        <!-- wishlist Content -->
+      <section class="pro-content wishlist-content my-4">
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-lg-12 ">
+                  <table class="table top-table">
+                   
+                      <tbody>
+                    
+                    {% for products in page_obj %}
+                     
+                      
+                        <tr class="d-flex">
+                            <td class="col-12 col-lg-2">
+                                  <img class="img-fluid" src="{{products.product.image.url}}" alt="WishList">
+                            </td>
+                            <td class="col-12 col-lg-3">
+                                <div class="item-detail pr-2">
+                                    <span class="pro-category">{{products.product.catagory}}</span>
+                                    <h3>{{products.product.name}}
+                                    </h3>
+                                    <div class="item-attributes"></div>
+                                    
+                                </div>
+                                
+                            </td>
+                            <td class="col-12 col-lg-2 item-price">${{products.product.price}}</td>
+                            
+                            
+                            {% if products.product.aviable %}
+                              <td class="col-12 col-lg-2 text-success">In stock</td>
+      
+                            <td class="col-12 col-lg-3 align-middle">
+                            <button data-product={{products.product.id}} data-action='add' class="btn btn-secondary btn-lg update-cart" onclick="notificationCart();">Add to Cart</button>
+                          </td>
+                              {% else %}
+                            <td class="col-12 col-lg-2 text-danger">Out of stock</td>
+                          
+                            <td class="col-12 col-lg-3 align-middle">
+                                <button type="button" class="btn btn-danger btn-lg " onclick="notificationCart();" disabled>Out stock</button>
+                            </td>
+                            {% endif %}  
+                            
+                        </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                    <nav aria-label="navigation">
+                        <ul class="pagination">
+                          {% if page_obj.has_previous %}
+                            <li class="page-item disabled">
+                                <a class="page-link page-link-prev" href="?page=1" aria-label="Previous" tabindex="-1" aria-disabled="true">
+                                    First
+                                </a>
+                            </li>
+                                <li class="page-link active" aria-current="page"><a href="?page={{page_obj.previous_page_number}}">Previous</a></li>
+                                {% endif %}
+                            {% for num in page_obj.paginator.page_range %}
+                            {% if page_obj.number == num %}
+                            <li class="page-link active"><a href="?page={{num}}">{{num}}</a></li>
+                            {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %} <li class="page-link"><a
+                                href="?page={{num}}">{{num}}</a></li>
+                              {% endif %}
+                              {% endfor %}
+                              {% if page_obj.has_next %}
+                              <li class="page-link"><a href="?page={{page_obj.next_page_number}}">Next</a></li>
+                            
+                              <li class="page-link"><a href="?page={{page_obj.paginator.num_page}}">Last</a></li>
+                              {% endif %}
+                        </ul>
+                    </nav>
+              
+              </div>
+            </div>
+          </div>
+      </section>    
+{% endblock content %}

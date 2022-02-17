@@ -1,0 +1,186 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+  
+
+      <div class="container-fuild">
+          <div class="page-header" style="background-image: url('images/miscellaneous/page-header.png')">
+            <div class="container">
+              <h1 class="page-title">Blog<span>Stay upto date</span></h1>
+            </div><!-- End .container -->
+          </div>
+          <nav aria-label="breadcrumb">
+            <div class="container">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="{% url 'store' %}">Home</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Blog</li>
+                </ol>
+            </div>
+          </nav>
+  
+  
+        </div> 
+      
+         <!-- Blog Content -->
+       <section class="pro-content blog-content">
+        <div class="container"> 
+            <div class="row">
+              <div class="col-12 col-lg-8 pro-blog-content">
+                  <div class="row">
+                    
+                    {% for post in page_obj %}
+
+                      <div class="col-12 col-md-6">
+                          <div class="blog">
+                            <div class="blog-thumb">
+                              <img class="img-fluid" src="{{post.image.url}}" alt="Blog-Image">
+                            </div>
+                            
+                            <div class="blog-info">
+                                <div class="blog-meta">
+                                    <a >
+                                        <i class="far fa-calendar-alt"></i>
+                                        {{post.created}}
+                                      </a>
+                                    <a>
+                                      <i class="fas fa-comments"></i>
+                                      33 Comments
+                                    </a>
+                                  </div>
+                                    <h3><a href="blog-single-page.html">{{post.title}}</a></h3>
+
+                                    <p>{{post.body}} </p>
+                                      
+                            </div>
+                          </div>
+                      </div>
+
+                    {% endfor %}
+                  </div>
+                  <nav aria-label="navigation">
+                    <ul class="pagination">{% if page_obj.has_previous %}
+                      <li class="page-link disabled"><a href="?page=1">First</a></li>
+                      <li class="page-link active" aria-current="page"><a href="?page={{page_obj.previous_page_number}}">Previous</a></li>
+                      {% endif %}
+                      {% for num in page_obj.paginator.page_range %}
+                      {% if page_obj.number == num %}
+                      <li class="page-link active"><a href="?page={{num}}">{{num}}</a></li>
+                      {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %} <li class="page-link"><a
+                          href="?page={{num}}">{{num}}</a></li>
+                        {% endif %}
+                        {% endfor %}
+                        {% if page_obj.has_next %}
+                        <li class="page-link"><a href="?page={{page_obj.next_page_number}}">Next</a></li>
+                  
+                        <li class="page-link"><a href="?page={{page_obj.paginator.num_page}}">Last</a></li>
+                        {% endif %}
+                    </ul>
+                  </nav>
+              </div>
+              <div class="col-12 col-lg-4  d-lg-block d-xl-block blog-menu"> 
+                  <div class="widget widget-cats">
+                      <h3 class="widget-title">Categories</h3><!-- End .widget-title -->
+
+                      <ul>
+                        
+                        {% for cata in catagory %}
+                          <li><a href="#">{{cata.name}}<span>{{cata.id}}</span></a></li>
+                          {% endfor %}
+                      </ul>
+                  </div>
+                <div class="widget">
+                    <h3 class="widget-title">Popular Post</h3><!-- End .widget-title -->
+                      <div class="media">
+                          <img src="{% static 'custome/images/blogs/Recent-posts-image1.jpg' %}" alt="John Doe">
+                          <div class="media-body">
+                              <h3 ><a href="product-page1.html">Modern Single Sofa</a></h3>
+                            <div class="post-date">
+                                <i class="fa fa-calendar" aria-hidden="true"></i>
+                                <a> june 5, 2018</a>
+                              </div>
+                           
+                          </div>
+                        </div>
+                        <div class="media">
+                            <img src="images/blogs/Recent-posts-image2.jpg" alt="John Doe">
+                            <div class="media-body">
+                                <h3 ><a href="product-page1.html">Modern Single Sofa</a></h3>
+                                <div class="post-date">
+                                    <i class="fa fa-calendar" aria-hidden="true"></i>
+                                    <a> june 5, 2018</a>
+                                  </div>
+                               
+                              </div>
+                          </div>
+
+                          <div class="media">
+                              <img src="{% static 'custome/images/blogs/Recent-posts-image3.jpg' %}" alt="John Doe" class=" mt-1 mb-1">
+                              <div class="media-body">
+                                  <h3 ><a href="product-page1.html">Modern Single Sofa</a></h3>
+                                  <div class="post-date">
+                                      <i class="fa fa-calendar" aria-hidden="true"></i>
+                                      <a > june 5, 2018</a>
+                                    </div>
+                                 
+                                </div>
+                            </div>
+                          
+                        
+                </div>
+                <div class="widget">
+                      <div class="media">
+                          <i class="fas fa-comments mt-1"  style="width:68px;height:68px;    font-size: 50px;
+                          text-align: center;"></i>
+                          <div class="media-body">
+                            <p>Lorem ipsum dolor sit amet, 
+                              consectetur adipiscing elit, 
+                              sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                              <div class="post-date">
+                                  <i class="fa fa-calendar" aria-hidden="true"></i>
+                                  <a > june 5, 2018</a>
+                                </div>
+                          </div>
+                        </div>
+                        <div class="media">
+                            <i class="fas fa-comments mt-1"  style="width:68px;height:68px;    font-size: 50px;
+                            text-align: center;"></i>
+                            <div class="media-body">
+                              <p>Lorem ipsum dolor sit amet, 
+                                consectetur adipiscing elit, 
+                                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                <div class="post-date">
+                                    <i class="fa fa-calendar" aria-hidden="true"></i>
+                                    <a > june 5, 2018</a>
+                                  </div>
+                            </div>
+                          </div>
+                          <div class="media">
+                              <i class="fas fa-comments mt-1"  style="width:68px;height:68px;    font-size: 50px;
+                              text-align: center;"></i>
+                              <div class="media-body">
+                                <p>Lorem ipsum dolor sit amet, 
+                                  consectetur adipiscing elit, 
+                                  sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                  <div class="post-date mb-0">
+                                      <i class="fa fa-calendar" aria-hidden="true"></i>
+                                      <a > june 5, 2018</a>
+                                    </div>
+                              </div>
+                            </div>
+
+                </div>
+                <ul class="socials">
+                    <li><a href="#" class="fab fb fa-facebook-square"></a></li>
+                    <li><a href="#" class="fab tw fa-twitter-square"></a></li>
+                    <li><a href="#" class="fab sk fa-skype"></a></li>
+                    <li><a href="#" class="fab In fa-linkedin"></a></li>
+                    <li><a href="#" class="fab ig fa-instagram"></a></li>
+                </ul>
+
+               
+              </div>
+            </div>
+        </div>
+      </section> 
+{% endblock content %}
