@@ -3,9 +3,22 @@ from  django import forms
 from account.models import Acount
 from Coupon.models import Coupons
 from django.contrib.auth.forms import UserCreationForm ,authenticate
-from .models import Product, Catagory, shippingAddress, Customer, Review, MailMsg, Subscriber,Brand,Order
+from .models import Product, Catagory, Wherehouse, shippingAddress, Customer, Review, MailMsg, Subscriber,Brand,Order,Wherehouse,Expense,Transfere,suplier,Purchase
 
 
+
+class Purchase_form(forms.ModelForm):
+  class Meta:
+    model = Purchase
+    fields ='__all__'
+class Expense_form(forms.ModelForm):
+  class Meta:
+    model = Expense
+    fields =('name','code','amount','note','wherehouse')
+class Suplier_form(forms.ModelForm):
+  class Meta:
+    model = suplier
+    fields ='__all__'
 class coupon_update_form(forms.ModelForm):
   class Meta:
     model = Coupons
@@ -117,3 +130,13 @@ class Shipping_form(forms.ModelForm):
   class Meta:
     model = shippingAddress
     fields =('phone_number','address','city','state','aria')
+
+class wherehouse_form(forms.ModelForm):
+  class Meta:
+    model = Wherehouse
+    fields ='__all__'
+
+class Transfere_form(forms.ModelForm):
+  class Meta:
+    model = Transfere
+    fields =('code','take_from','give_to','status','product','stack','shupping_charge','note')

@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Order cancelled{% endblock title %}
+{% block content %}
+     <!-- About-us Content -->
+    <section class="pro-content empty-content">
+        <div class="container">
+            
+            <div class="row">
+              <div class="col-12">
+                  <div class="pro-empty-page">
+                    <h2 style="font-size: 150px;"><i class="far fa-check-circle"></i></h2>
+                    <h1 >Sorry</h1>
+                    <p>
+                      Your Payment Was cancelled check your info then try again.
+                      <a href="{% url 'store' %}" class="btn-link"><b>Home page</b></a>.
+                    </p>
+                  </div>
+              
+              </div>
+            </div>
+          
+        </div>  
+        
+        
+    </section>
+
+{% endblock content %}

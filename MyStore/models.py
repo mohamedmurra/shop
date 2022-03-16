@@ -1,3 +1,4 @@
+from unicodedata import name
 from django.db import models
 from django.conf import settings
 from django.dispatch import receiver
@@ -34,6 +35,7 @@ class Brand(models.Model):
   name = models.CharField(max_length=100)
   image = models.ImageField(blank=True, null=True)
   slug = models.SlugField(unique=True)
+  note =models.TextField(blank=True,null=True)
 
   def __str__(self):
     return self.name
@@ -45,7 +47,6 @@ class Tags(models.Model):
 
   def __str__(self):
     return self.name
-
 
 class Catagory(models.Model):
   name = models.CharField(max_length=200,unique=True)
@@ -227,4 +228,100 @@ class MailMsg(models.Model):
 
   def __str__(self):
     return self.title
+
+class Supplier(models.Model):
+  name =models.CharField(max_length=100)
+  email =models.EmailField()
+  company_name =models.CharField(max_length=100)
+  phone_number =models.IntegerField()
+  address =models.TextField()
+
+  def __str__(self):
+    return self.name
+
+class Wherehouse(models.Model):
+  name =models.CharField(max_length=100)
+  lucation =models.TextField(null=True,blank=True)
+
+  def __str__(self) :
+      return self.name
+  
+
+class Expense(models.Model):
+  code =models.CharField(max_length=10,unique=True)
+  name =models.CharField(max_length=100)
+  amount =models.IntegerField()
+  date =models.DateTimeField(auto_now_add=True)
+  note =models.TextField(blank=True, null=True)
+  wherehouse =models.ForeignKey(Wherehouse,on_delete=models.SET_NULL ,null=True,blank=True)
+
+
+  def __str__(self):
+    return self.name
+  
+
+class Transfere(models.Model):
+  STATUS_CHOICES =(
+    ('full',' full'),
+    ('empty',' empty'),
+    ('Partial	',' Partial	'),
+    ('Pending', ' Pending'),
+    )
+  code = models.CharField(max_length=10,unique=True,default=tansaction_id_genrater)
+  take_from =models.ForeignKey(Wherehouse,on_delete=models.CASCADE,related_name='lucation_from')
+  give_to =models.ForeignKey(Wherehouse,on_delete=models.CASCADE,related_name='lucation_to')
+  product =models.ForeignKey(Product,on_delete=models.CASCADE)
+  date =models.DateTimeField(auto_now_add=True)
+  stack =models.IntegerField(default=0)
+  shupping_charge =models.IntegerField(null=True,blank=True)
+  status =models.CharField(max_length=20,choices=STATUS_CHOICES,default='Partial')
+  note = models.TextField(blank=True,null=True)
+
+  def __str__(self):
+    return f'taken form {self.take_from} to {self.give_to}'
+
+  @property
+  def totall_product_price(self):
+    totall =self.product.price * self.stack
+    if self.shupping_charge :
+      totall= totall-self.shupping_charge
+    return totall
+
+  @property
+  def product_new_stack(self):
+    totall= self.product.stack + self.stack
+    return totall
+
+class suplier(models.Model):
+  name =models.CharField(max_length=100)
+  phone =models.CharField(max_length=100)
+  Company =models.CharField(max_length=100)
+  image = models.ImageField(upload_to='Supplier',null=False, blank=False)
+  email =models.EmailField()
+  address =models.TextField()
+
+  def __str__(self):
+    return self.name
+
+class Purchase(models.Model):
+  STATUS_CHOICES =(
+    ('recived',' recived'),
+    ('Conseld',' Conseld'),
+    ('Partial	',' Partial	'),
+    ('Pending', ' Pending'),
+    )
+  product =models.ForeignKey(Product,on_delete=models.CASCADE)
+  price =models.IntegerField()
+  Shupping_Cost =models.IntegerField()
+  Document =models.FileField(upload_to='product/files',blank=True,null=True)
+  wherehouse =models.ForeignKey(Wherehouse ,on_delete=models.CASCADE)
+  stack =models.IntegerField()
+  suplier =models.ForeignKey(suplier,on_delete=models.CASCADE)
+  discount =models.IntegerField(blank=True,null=True)
+  status =models.CharField(max_length=20,choices=STATUS_CHOICES,default='Partial')
+  tax =models.IntegerField(blank=True,null=True)
+  added =models.DateTimeField(auto_now_add=True)
+
+  def __str__(self):
+    return f'purchase {self.stack}  of  {self.product}'
 

@@ -1,0 +1,74 @@
+.registration-process{
+    background-color: $body-bg-secondary;
+    padding: 30px 15px;
+    p{
+        color: var(--color-text);
+    }
+  
+    .input-group{
+        .input-group-text{
+            background-color: $white;
+            border-right-width: 0;
+        }
+  
+        
+    }
+    
+}
+.registration-socials{
+ 
+    padding:15px;
+    .right{
+        text-align: right;
+    }
+   .left{
+      justify-content: center;
+   }
+}
+
+#registerTab{
+    .nav-link{
+        font-size: $font-size-lg;
+        font-weight: $font-weight-bold;
+        text-transform: uppercase;
+        text-align: center;
+        border:none;
+        width: 120px;
+
+        &.active{
+             background-color: var(--color-article1-background);
+             color: var(--color-text);
+        }
+    }
+}
+#registerTabContent{
+    
+    .registration-socials{
+        background-color: transparent;
+    }
+}
+
+
+#ChangePasswordTab{
+    .nav-link{
+        font-size: $font-size-lg;
+        font-weight: $font-weight-bold;
+        text-transform: uppercase;
+        text-align: center;
+        background-color: $white;
+        border:none;
+        width: 226px;
+        margin-bottom: 0;
+
+        &.active{
+             background-color: $body-bg-secondary;
+        }
+    }
+}
+
+label.error {
+    position: absolute;
+    bottom: -6px;
+    right: 15px;
+    color: red;
+}

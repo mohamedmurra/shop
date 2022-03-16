@@ -1,0 +1,87 @@
+.blog-content{
+    .widget{
+        h3 {
+            color: var(--color-text);
+            font-size: $font-size-lg;
+            font-family: $font-family-base-bold;
+            margin-bottom: 30px;
+            margin-top: -3px;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            margin-bottom: 30px;
+            li{
+                margin-bottom: 1rem;
+                &:last-child{
+                    margin-bottom: 0;
+                }
+            }
+        }
+        .media{
+            margin-bottom: 30px;
+            color: var(--color-text);
+            .media-body{
+                margin-left: 15px;
+            }
+        }
+        .post-date{
+            color: var(--color-text);
+        }
+    }
+    .widget-cats{
+        a {
+            display: block;
+            font-weight: 300;
+            font-size: $font-size-base;
+            line-height: 1.5;
+            span {
+                float: right;
+            }
+        }
+    }
+    .socials {
+        display: flex;
+        justify-content: start;
+        margin-bottom: 0;
+
+        li{
+            font-size: ($font-size-lg + 0.475);
+            margin-left: 15px;
+            list-style: none;
+            a {
+                color:var(--color-text-secondary);
+                transition: 0.4s;
+
+                &.fb:hover{
+                    color: #3b5998;
+                }
+                
+                &.tw:hover {
+                    color: #00acee;
+                }
+                &.sk:hover {
+                    color: #00aff0;
+                }
+                &.In:hover {
+                    color: #0077B5;
+                }
+                &.ig:hover {
+                    color: #3f729b;
+                }
+
+            }
+        }
+    } 
+}
+  
+.bodyrtl{
+    .blog-content .widget .media .media-body{
+        margin-left: 0px;
+        margin-right: 15px;
+    }
+    .pro-blog-content .blog .blog-info .blog-meta a:first-child{
+        float: right;
+    }
+}

@@ -3,18 +3,19 @@ from django.http import HttpRequest ,Http404
 import random
 from django.views.decorators.csrf import csrf_exempt
 from decimal import Decimal
-from paypal.standard.forms import PayPalPaymentsForm
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate ,login ,logout
-from .models import Product, Catagory, Order, OrderItem, shippingAddress, Customer, Review, WhishList,MailMsg,Brand
+
+from account.models import Acount
+from .models import Product, Catagory, Order, OrderItem, shippingAddress, Customer, Review, WhishList,MailMsg,Brand,Wherehouse,Transfere, suplier,Expense,Purchase
 from django.http import JsonResponse,HttpResponse
 import json
 from Coupon.models import Coupons
 from Coupon.form import coupon_form
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.contrib import messages
-from .forms import product_form, catagory_form, register_form, AuthenticationForm, CustomerUpdateForm, UserUpdateForm, ReviewForm, searsh_form, subscrbe_form, Contact_form, brand_form, coupon_update_form, order_update_form, Shipping_form
+from .forms import product_form, catagory_form, register_form, AuthenticationForm, CustomerUpdateForm, UserUpdateForm, ReviewForm, searsh_form, subscrbe_form, Contact_form, brand_form, coupon_update_form, order_update_form, Shipping_form,wherehouse_form,Transfere_form,Suplier_form,Expense_form,Purchase_form
 import datetime
 from django.core.mail import send_mail,BadHeaderError
 from .utils import CartCoocies,cartData
@@ -23,7 +24,86 @@ import random
 from django.db.models import Sum
 from django.views.decorators.http import require_POST
 import csv
+import stripe
 # Create your views here.
+
+def cancelled_view(request):
+   return render(request,'not.html',{})
+
+@csrf_exempt
+def stripe_config(request):
+    if request.method == 'GET':
+        stripe_config = {'publicKey': settings.STRIPE_PUBLISHABLE_KEY}
+        return JsonResponse(stripe_config, safe=False)
+
+
+
+@csrf_exempt
+def create_checkout_session(request):
+    customer = request.user.customer
+    order= Order.objects.get(
+       customer=customer, complete=False)
+    if request.method == 'GET':
+        domain_url = 'http://localhost:8000/'
+        stripe.api_key = settings.STRIPE_SECRET_KEY
+        try:
+            # Create new Checkout Session for the order
+            # Other optional params include:
+            # [billing_address_collection] - to display billing address details on the page
+            # [customer] - if you have an existing Stripe Customer ID
+            # [payment_intent_data] - capture the payment later
+            # [customer_email] - prefill the email input in the form
+            # For full details see https://stripe.com/docs/api/checkout/sessions/create
+
+            # ?session_id={CHECKOUT_SESSION_ID} means the redirect will have the session ID set as a query param
+            checkout_session = stripe.checkout.Session.create(
+                customer=customer,
+                success_url="thank_you/?session_id={CHECKOUT_SESSION_ID}",
+                cancel_url=domain_url + 'cancelled/',
+                payment_method_types=['card'],
+                mode='payment',
+                line_items=[
+                    {
+                        'name': request.user.customer,
+                        'quantity': '1',
+                        'currency': 'usd',
+                        'amount': order.get_cart_total_after_discount * 100,
+                    }
+                ]
+            )
+
+
+            return JsonResponse({'sessionId': checkout_session['id']})
+        except Exception as e:
+            return JsonResponse({'error': str(e)})
+
+@csrf_exempt
+def stripe_webhook(request):
+    stripe.api_key = settings.STRIPE_SECRET_KEY
+    endpoint_secret = settings.STRIPE_ENDPOINT_SECRET
+    payload = request.body
+    sig_header = request.META['HTTP_STRIPE_SIGNATURE']
+    event = None
+
+    try:
+        event = stripe.Webhook.construct_event(
+            payload, sig_header, endpoint_secret
+        )
+    except ValueError as e:
+        # Invalid payload
+        return HttpResponse(status=400)
+    except stripe.error.SignatureVerificationError as e:
+        # Invalid signature
+        return HttpResponse(status=400)
+
+    # Handle the checkout.session.completed event
+    if event['type'] == 'checkout.session.completed':
+         print("Payment was successful.")
+        # TODO: run some custom code here
+
+
+    return HttpResponse(status=200)
+
 
 def Subscriber_view(request):
    form = subscrbe_form(request.POST)
@@ -100,14 +180,16 @@ def Erro_view(request):
    return render(request, '404.html', {'cartitems': cartItems, 'items': items, 'order': order, 'wish': wish})
 
 def add_product(request):
+   catagory =Catagory.objects.all()
+   brand =Brand.objects.all()
    form =product_form()
    if request.method == 'POST': 
       form =product_form(request.POST or None,request.FILES or None)
       if form.is_valid():
          form.save()
-         return redirect('add-product')
+         return redirect('product')
 
-   return render(request, 'home/add-prouduct.html', {'form': form})
+   return render(request, 'panel/add-product.html', {'form': form,'catagorys':catagory,'brands':brand})
 
 @login_required()
 def add_catagory(request):
@@ -119,11 +201,14 @@ def add_catagory(request):
          form.save()
          return redirect('add-catagory')
 
-   return render(request ,'home/add_catagory.html',{'form':form,'catagorys':catagorys})
+   return render(request ,'panel/product-category-list.html',{'form':form,'catagorys':catagorys})
 
 
 def add_brand(request):
-   form = brand_form()
+   try:    
+      form = brand_form(initial=request.POST)
+   except:
+      form = brand_form()
    brands =Brand.objects.all()
    if request.method == 'POST':
       form = brand_form(request.POST, request.FILES)
@@ -131,10 +216,11 @@ def add_brand(request):
          form.save()
          return redirect('add-brand')
 
-   return render(request, 'home/add_brand.html', {'form': form,'brands':brands})
+   return render(request, 'panel/product-brands-list.html', {'form': form,'brands':brands})
 
 
 def add_coupons(request):
+   coupons =Coupons.objects.all()
    form = coupon_update_form()
    if request.method == 'POST':
       form = coupon_update_form(request.POST)
@@ -142,7 +228,7 @@ def add_coupons(request):
          form.save()
          return redirect('coupons')
 
-   return render(request, 'home/add_coupon.html', {'form': form})
+   return render(request, 'panel/coupons.html', {'form': form,'coupons':coupons})
 
 
 def update_product(request,slug):
@@ -152,7 +238,7 @@ def update_product(request,slug):
    if request.method == 'POST':
       if form.is_valid():
          form.save()
-   return render(request, 'home/update_product.html', {'form': form, 'product': product})
+   return render(request, 'panel/update-product.html', {'form': form, 'product': product})
 
 
 def update_coupon(request, slug):
@@ -179,7 +265,7 @@ def delete_coupon(request, slug):
 
 def product(request):
    products =Product.objects.all()
-   return render(request,'home/product.html',{'products':products})
+   return render(request,'panel/products.html',{'products':products,'count':products.count()})
 
 def whishlist(request):
    page_obj = WhishList.objects.filter(customer=request.user.customer)
@@ -245,7 +331,6 @@ def checkout(request):
    items =order.orderitem_set.all()
    cartItems = order.get_cart_items
    return render(request, 'checkout.html', {'cartitems': cartItems, 'items': items, 'order': order, 'wish': wish , 'Brands': Brands})
-
 
 def main(request):
    products =Product.objects.all()
@@ -347,39 +432,26 @@ def about_view(request):
    return render(request, 'about.html', {'cartitems': cartItems, 'items': items, 'order': order, 'wish': wish, 'Brands': Brands})
 
 def thankyou_view(request):
+   session = stripe.checkout.Session.retrieve(request.args.get('session_id'))
+   customer = stripe.Customer.retrieve(session.customer)
+   order= Order.objects.get(
+       customer=customer, complete=False)
+   if order.get_cart_total_after_discount > 0 :
+      order.status = 'Paid'
+      order.complete = True
+      order.save()
+      if order.coupon:
+         del request.session['coupon_id']
    data = cartData(request)
    cartItems = data['cartitems']
    items = data['items']
    order = data['order']
    wish = data['wish']
    Brands = data['Brands']
+   print(order.status,order.complete,order.tansaction_id)
    orders =Order.objects.filter(customer=request.user.customer,complete=True).latest('date_orderd')
-   return render(request, 'thankyou.html', {'orders': orders, 'cartitems': cartItems, 'items': items, 'order': order, 'wish': wish, 'Brands': Brands})
+   return render(request, 'thankyou.html', {'orders': orders,'cartitems': cartItems, 'items': items, 'order': order, 'wish': wish,'Brands': Brands})
 
-def checkout_prosses(request):
-   data =json.loads(request.body)
-   customer = request.user.customer
-   order= Order.objects.get(
-       customer=customer, complete=False)
-   total =data['totall']
-   order.complete =True
-   order.status ='Paid'
-   try :
-       del request.session['coupon_id']
-   except :
-      None
-   order.save()
-   if order.get_cart_total_after_discount > 0:
-      shippingAddress.objects.create(
-         name=customer,
-         order=order,
-         phone_number=data['shipping_for']['phone_number'],
-         address=data['shipping_for']['address'],
-         city=data['shipping_for']['city'],
-         state=data['shipping_for']['state'],
-         aria=data['shipping_for']['aria'],
-      )
-   return render(request,'payment.html',safe=False)
 
 def search_bar(request):
    search_items = request.GET['items']
@@ -409,7 +481,7 @@ def admin_panel(request):
       sales += order.get_cart_total_after_discount
    products =Product.objects.all()
    users =Customer.objects.all()
-   return render(request, 'home/dashboard.html', {'products_count': products.count(), 'orders_count': orders.count(), 'users_count': users.count(), 'sales': sales, 'orders': orders})
+   return render(request, 'panel/dashbord.html', {'products_count': products.count(), 'orders_count': orders.count(), 'users_count': users.count(), 'sales': sales, 'orders': orders})
 
 def transaction_view(request):
    orders = Order.objects.filter(complete=True).order_by('date_orderd',)
@@ -529,24 +601,6 @@ def shipping_view(request):
    
    return render(request,'home/shipping.html',{'not_shipped':page_obj,'count':count})
 
-def Payment_prosses(request):
-   order_id =request.session.get('order_id')
-   order =get_object_or_404(Order,id=order_id)
-   host =request.get_host()
-
-   paypal_dict ={
-      'business':settings.PAYPAL_RECEIVER_EMAIL,
-      'amount': '%.2f' % order.get_get_cart_total_after_discount().quantity(
-         Decimal('.01')),
-      'item_name':'Order{}'.format(order.id),
-      'invoice':str(order.id),
-      'currency_code':'USD',
-      'notify_url':'http://{}{}'.format(host,reverse('paypal_ipn')),
-      'return_url':'http://{}{}'.format(host,reverse('payment_done')),
-      'cancel_return':'http: // {}{}'.format(host,reverse('payment_cancelled')),
-   }
-   form =PayPalPaymentsForm(initial=paypal_dict)
-   return render(request,'prosses_payment.html',{'order':order,'form':form})
 
 def product_report(request):
    products =Product.objects.all()
@@ -562,6 +616,7 @@ def product_report(request):
 
 
 def order_report(request):
+
    orders =Order.objects.filter(complete=True)
    response =HttpResponse(content_type='text/csv')
    response['Content-Disposition']='attachment; filename=order.csv'
@@ -574,3 +629,82 @@ def order_report(request):
              [order.tansaction_id, order.customer, item.product.catagory, item.product.name, item.product.price, item.quantity, item.product.discount, order.get_cart_total_after_discount, order.date_orderd])
 
    return response
+
+def Stock_Add(request):
+   wherehouse =Wherehouse.objects.all()
+   form =wherehouse_form()
+   if request.method == 'POST':
+      form =wherehouse_form(request.POST)
+      if form.is_valid():
+         form.save()
+   return render(request,'panel/stock-add.html',{'form':form,'wherehouse':wherehouse})
+
+def stock_transfere(request):
+   transfere =Transfere.objects.all()
+   form =Transfere_form()
+   if request.method == 'POST':
+      form =Transfere_form(request.POST)
+      if form.is_valid():
+         form.save()
+   return render(request,'panel/stock-transfer.html',{'transfere':transfere,'form':form})
+
+
+def order_list(request):
+   order =Order.objects.filter(complete=True)
+   return render(request,'panel/order-list.html',{'orders':order})
+
+def admin_order_detail(request,id):
+   order =get_object_or_404(Order,tansaction_id=id)
+   acount =Acount.objects.get(email=order.customer)
+   try:
+      shipp =shippingAddress.objects.get(order=order)
+   except :
+      shipp =None
+   return render(request,'panel/order-detail.html',{'order':order,'acount':acount,'ship':shipp})
+
+def user_list(request):
+   userrs =Acount.objects.all()
+   return render(request,'panel/admin-list.html',{'users':userrs})
+
+def user_detail(request,id):
+   userr =get_object_or_404(Acount,id=id)
+   customer =Customer.objects.get(id=userr.id)
+   shippig =shippingAddress.objects.filter(name=customer)[0]
+   whish =WhishList.objects.filter(customer=customer)
+   orders =Order.objects.filter(customer=customer).order_by('date_orderd')
+   return render(request,'panel/customer-edit.html',{'userr':userr,'ship':shippig,'shishlist':whish,'count':whish.count(),'orders':orders})
+
+def suplier_view(request):
+   form =Suplier_form()
+   supplier =suplier.objects.all()
+   if request.method == 'POST':
+      form =Suplier_form(request.POST or None,request.FILES or None)
+      if form.is_valid():
+         form.save()
+   return render(request,'panel/supplier-list.html',{'supplier':supplier,'form':form})
+
+def expenses_view(request):
+   form =Expense_form()
+   expenses =Expense.objects.all()
+   totall = 0
+   for ex in expenses:
+      totall += ex.amount
+   if request.method == 'POST':
+      form =Expense_form(request.POST or None)
+      if form.is_valid():
+         form.save()
+      return redirect('expense-list')
+   return render(request,'panel/expenses-list.html',{'form':form,'expenses':expenses,'totall':totall})
+
+def add_pur(request):
+   form =Purchase_form()
+   if request.method =='POST':
+      form=Purchase_form(request.POST)
+      if form.is_valid():
+         form.save()
+      return redirect('purr')
+   return render(request,'panel/purchase-add.html',{'form':form})
+
+def Purchase_view(request):
+   purr =Purchase.objects.all()
+   return render(request,'panel/purr.html',{'purr':purr})

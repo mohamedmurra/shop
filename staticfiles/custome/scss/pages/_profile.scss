@@ -1,0 +1,94 @@
+// ....profile....
+
+.profile-content{
+    h2,h3{
+        color: var(--color-text);
+        font-family: $font-family-base-bold;
+        font-size: $font-size-lg;
+    }
+     
+}
+              
+
+#datepicker{width:100%;}
+#datepicker > span:hover{cursor: pointer;}
+
+.account-content{
+    h2,h3{
+        color: var(--color-text);
+        font-family: $font-family-base-bold;
+        font-size: $font-size-lg;
+    }
+     
+    .left{
+        display: flex;
+        .btn{
+            margin-right: 15px;
+            display: flex;
+            
+        }
+    }
+   
+}
+.bodyrtl{
+    .account-content .left .btn{
+        margin-right: 0px;
+        margin-left:15px;
+    }
+}
+@media only screen and (max-width:991px){
+    .account-content .left{
+        .btn {
+            margin-bottom: 30px;
+            &:last-child{
+                margin-right: 0px;
+            }
+        }
+    }
+    .registration-process{
+        .Login-btn{
+            display: flex;
+            flex-direction: column;
+           
+        }
+        
+    }
+}
+@media only screen and (max-width:991px){
+    .account-content h2{
+        margin-top: 15px;
+    }
+}
+@media only screen and (max-width:576px){
+    .account-content .left{
+        flex-direction: column;
+      
+        .btn {
+            margin-bottom: 15px;
+            margin-right: 0;
+            &:last-child{
+                margin-bottom: 30px;
+            }
+        }
+    }
+    .left{
+        .from-group{
+            .btn{
+                width: 100%;
+                margin-bottom: 15px;
+                &:last-child{
+                    margin-bottom: 0;
+                }
+            }
+        }
+    }
+}
+@media only screen and (min-width:992px) and (max-width:1200px){
+    .account-content .left{
+        .btn {
+          .fab{
+              display: none;
+          }
+        }
+    }
+}

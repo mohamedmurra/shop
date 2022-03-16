@@ -1,0 +1,180 @@
+// ...........footer.............
+
+
+
+.footer-two{
+
+    background-color: var( --color-article4-background);
+    margin: 60px 0 0 0;
+    
+.newsletter-outer{
+    padding: 60px 0;
+    background-color: var( --color-article3-background);
+    .justify-content-center{
+        align-items: center;
+    }
+    .newsletter{
+     
+        h5{
+            color: $white;
+            font-family: $font-family-base-bold;
+            font-size: 2rem;
+         
+            margin-bottom: 0;
+        }
+      
+        .input-group{
+            border: 1px solid;
+            border-color: var(--color-border);
+            .form-control{
+                height: auto;
+             border: none;
+            
+            }
+         
+        }
+    }
+
+}
+  
+  .footer-bottom{
+    padding-top: 60px;
+    padding-bottom: 60px;
+  
+    h3{
+        color: var(--color-text);
+        font-family: $font-family-base-bold;
+        font-size: $font-size-lg;
+    }
+    p{
+        color: var(--color-text);
+        font-family: $font-family-base;
+        line-height: 1.5;
+        white-space: normal;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+    }
+    ul{
+        list-style-type: none;
+        margin: 0;
+        li{
+            margin-bottom: 5px;
+            color: var(--color-text);
+            a{
+                font-family: $font-family-base;
+                .fb{
+                    &:hover{
+                        color: #3b5998 !important;
+                    }
+                }
+                
+                .tw{
+                    &:hover {
+                        color: #00acee;
+                    }
+                }
+              .sk{
+                &:hover {
+                    color: #00aff0;
+                }
+              }
+              .In{
+                &:hover {
+                    color: #0077B5;
+                }
+               }
+               .ig{
+                &:hover {
+                    color: #3f729b;
+                }
+               }
+            }
+                .fas, .fab{
+                    margin-right: 20px;
+                    font-size: 15px;
+                   
+                }
+                &:last-child .fas{
+                    margin-right: 15px;
+                }
+           &:last-child{
+               margin-bottom: 0;
+           }     
+          
+        }
+    }
+  }   
+    
+   .copyright-main{
+       border-top: 1px solid;
+       border-color: var(--color-border);
+       padding: 0;
+    
+    .copyright-content {
+        background-color: var(--color-article2-background);
+        color: var(--color-text);
+        padding-top: 10px;
+        padding-bottom: 10px;
+        
+        .footer-info {
+            font-size: $font-size-sm;
+           
+        }
+
+        .socials {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 0;
+
+            li{
+                font-size: ($font-size-lg + 0.475);
+                margin-left: 15px;
+                list-style: none;
+                a {
+                    color: $gray-700;
+                    transition: 0.4s;
+
+                 
+
+                }
+            }
+        } 
+    }
+   }
+ 
+}
+.bodyrtl{
+    .footer-one .newsletter .input-group .form-control{
+        border-radius: 0 20px 20px 0;
+    }
+    .footer-one .newsletter .input-group .btn{
+        border-radius: 20px 0 0 20px ;
+    }
+    .footer-two .footer-bottom ul li .fas, .footer-two .footer-bottom ul li .fab{
+        margin-left: 20px;
+        margin-right: 0px;
+    }
+}
+
+@media only screen and (max-width:1200px){
+    .footer-one .newsletter h3{
+        font-size: 2rem;
+    }
+}
+@media only screen and (max-width:991px){
+    .footer-two .footer-bottom ul {
+        margin-bottom: 30px;
+     
+    }
+    .footer-two .newsletter-outer .newsletter h5{
+        margin-bottom: 30px;
+    }
+    .footer-two .footer-bottom .socials {
+        margin-bottom: 0px;
+     
+    }
+    
+}

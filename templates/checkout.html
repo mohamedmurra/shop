@@ -1,10 +1,12 @@
 {% extends 'base.html' %}
 {% load static %}
+{% block title %}Checkout{% endblock title %}
 {% block content %}
 <style type='text/css'>
 .hidden{
   display: none ;
 }
+
 </style>
       <!-- Page Header -->
       <div class="container-fuild">
@@ -112,56 +114,25 @@
                                         </div>   
                                       </div>
                                     </div>
-                                    <div class="col-12 col-sm-12 ">
+                                    <div  id='payement_list' class="col-12 col-sm-12 hidden">
                                         <div class="row">
                                           <div class="heading">
                                             <h4>Payment Methods</h4>
                                        
                                           </div>
                                        
-                                          <ul hidden id='payement_list' class="payement-way">
-                                              <li>
-                                                  <!-- Default checked -->
-                                            <div class="custom-control custom-radio">
-                                                <input type="radio" class="custom-control-input" 
-                                                id="defaultChecked" name="defaultExampleRadios" checked>
-                                                <label class="custom-control-label"
-                                                  for="defaultChecked"><img src="{% static 'custome/images/miscellaneous/instamojo.png' %}" alt="Image"></label>
+                                          <ul  class="payement-way">
+                                            <li>
+                                            <form id="payment-form">
+                                              <div id="payment-element">
+                                                <!--Stripe.js injects the Payment Element-->
                                               </div>
-                                              </li>
-                                            <li>  <!-- Default unchecked -->
-                                              <div class="custom-control custom-radio">
-                                                  <input type="radio" class="custom-control-input" 
-                                                  id="defaultUnchecked1" name="defaultExampleRadios">
-                                                  <label class="custom-control-label" 
-                                                  for="defaultUnchecked1"><img src="{% static 'custome/images/miscellaneous/hyperpay.png' %}" alt="Image"></label>
-                                              </div>
-                                            </li>
-                                          
-                                            <li>
-                                                <div class="custom-control custom-radio">
-                                                    <input type="radio" class="custom-control-input" 
-                                                    id="defaultUnchecked2" name="defaultExampleRadios">
-                                                    <label class="custom-control-label" 
-                                                    for="defaultUnchecked2"><img src="{% static 'custome/images/miscellaneous/cod.png' %}" alt="Image"></label>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="custom-control custom-radio">
-                                                    <input type="radio" class="custom-control-input" 
-                                                    id="defaultUnchecked3" name="defaultExampleRadios">
-                                                    <label class="custom-control-label" 
-                                                    for="defaultUnchecked3"><img src="{% static 'custome/images/miscellaneous/stripe.png' %}" alt="Image"></label>
-                                                </div>
-                                            </li>
-                                          
-                                            <li>
-                                                <div class="custom-control custom-radio">
-                                                    <input type="radio" class="custom-control-input" 
-                                                    id="defaultUnchecked4" name="defaultExampleRadios">
-                                                    <label class="custom-control-label" 
-                                                    for="defaultUnchecked4">  <img src="{% static 'custome/images/miscellaneous/paypal.png' %}" alt="Image"></label>
-                                                </div>
+                                              <button id="submit">
+                                                <div class="spinner hidden" id="spinner"></div>
+                                                <span id="button-text">Pay now</span>
+                                              </button>
+                                              <div id="payment-message" class="hidden"></div>
+                                            </form>
                                             </li>
                                           </ul>                      
                                         </div>   
@@ -174,7 +145,7 @@
                                     <div class="col-12 col-sm-12 justify-content-end btn-cont">
                                         <div class="row">
                                         
-                                      <a href=""  class="btn btn-secondary" >Place Order</a>
+                                      <button class="btn btn-secondary" id="submitBtn">Purchase!</button>
                                         </div>
                                     </div>
                                     {% else %}
@@ -197,5 +168,30 @@
           </div>
         </div>
       </section>
+<script>
+
+// new
+// Get Stripe publishable key
+fetch("{% url 'payment_config' %}")
+.then((result) => { return result.json(); })
+.then((data) => {
+  // Initialize Stripe.js
+  const stripe = Stripe(data.publicKey);
+
+  // new
+  // Event handler
+  document.querySelector("#submitBtn").addEventListener("click", () => {
+    // Get Checkout Session ID
+    fetch("{% url 'checkout_session' %}")
+    .then((result) => { return result.json(); })
+    .then((data) => {
+      // Redirect to Stripe Checkout
+      return stripe.redirectToCheckout({sessionId: data.sessionId})
+    })
+    .then((res) => {
+    });
+  });
+});
+</script>
 {% endblock content %}
      

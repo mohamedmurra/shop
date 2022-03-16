@@ -2,11 +2,17 @@
 <!DOCTYPE html>
 <html class="no-js" lang="zxx">
 <head>
+
  <meta charset="UTF-8">
  <meta http-equiv="X-UA-Compatible" content="IE=edge">
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>
+   {% block title %}{% endblock %}
+</title>
+
 <link rel="stylesheet" type="text/css" href="{% static 'custome/css/style.css' %}">
 
+<script src="https://js.stripe.com/v3/"></script>
 
 <!-- Slider Revolution CSS Files -->
 <link rel="stylesheet" type="text/css" href="{% static 'custome/revolution/css/settings.css' %}">
@@ -49,7 +55,7 @@
 </script>
   
       <!-- Core CSS Files -->
-
+      
 {% include 'header.html' %}
 </head>
 <body>
@@ -169,5 +175,6 @@
                               location.reload();
                         })
             }
+            
 </script>
 </html>

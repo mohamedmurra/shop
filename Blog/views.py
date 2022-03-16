@@ -9,12 +9,14 @@ from MyStore.utils import CartCoocies, cartData
 
 
 def homepage(request):
+  
   data = cartData(request)
   cartItems = data['cartitems']
   items = data['items']
   order = data['order']
   wish = data['wish']
   catagorys = Catagory.objects.all()
+  popu =blog.objects.all()[:4]
   blogs = blog.objects.all()
   p = Paginator(blogs, 4)
   page_number = request.GET.get('page', 1)
@@ -24,7 +26,7 @@ def homepage(request):
     page_obj = p.page(1)
   except EmptyPage:
     page_obj = p.page(p.page_number)
-  return render(request, 'blog/blog.html', { 'cartitems': cartItems, 'items': items, 'order': order, 'wish': wish, 'page_obj': page_obj, 'catagory': catagorys})
+  return render(request, 'blog/blog.html', { 'cartitems': cartItems, 'items': items, 'order': order, 'wish': wish, 'page_obj': page_obj, 'catagorys': catagorys,'popu':popu})
 
 
 def create_blog_view(request):
@@ -39,7 +41,7 @@ def create_blog_view(request):
     obj.save()
     form = Create_blog_post()
   context = {'form': form}
-  return render(request, 'create_blog.html', context=context)
+  return render(request, 'home/add_blog.html', context=context)
 
 
 def update_blog_view(request, slug):
@@ -56,10 +58,9 @@ def update_blog_view(request, slug):
         author = Acount.objects.filter(email=user.email).first()
         obj.author = author
         obj.save()
-        form = Create_blog_post()
   else:
-    return redirect('home')
-  return render(request, 'update_form.html', {'form': form, 'post': post})
+    return redirect('blog_manage')
+  return render(request, 'home/update_blog.html', {'form': form, 'post': post})
 
 
 def delete_blog_view(request, slug):
@@ -69,14 +70,22 @@ def delete_blog_view(request, slug):
   post = get_object_or_404(blog, slug=slug)
   if post.author == request.user:
     post.delete()
+  elif request.user.is_superuser :
+    post.delete()
   else:
-    return redirect('home')
-  return redirect('account')
+    return redirect('blog_manage')
+  return redirect('blog_manage')
 
 
 def post_detail(request, slug):
+  data = cartData(request)
+  cartItems = data['cartitems']
+  items = data['items']
+  order = data['order']
+  wish = data['wish']
   post = get_object_or_404(blog, slug=slug)
   comments = post.comments.all()
+  counts =comments.count()
   comment_form = CommentForm()
   new_comment = None
   if request.method == 'POST':
@@ -98,4 +107,28 @@ def post_detail(request, slug):
       new_comment.user = request.user
       new_comment.save()
 
-  return render(request, 'blog/blog-single-page.html', {'posts': post, 'comments': comments, 'new_comment': new_comment, 'comment_form': comment_form})
+  return render(request, 'blog/blog-single-page.html', {'cartitems': cartItems, 'items': items, 'order': order, 'wish': wish,'post': post, 'comments': comments, 'new_comment': new_comment, 'comment_form': comment_form,'count':counts})
+
+
+def cata_fil(request, slug):
+  data = cartData(request)
+  cartItems = data['cartitems']
+  items = data['items']
+  order = data['order']
+  wish = data['wish']
+  popu =blog.objects.all()[:4]
+  catagorys = Catagory.objects.all()
+  blogs = blog.objects.filter(catagory__slug=slug)
+  p = Paginator(blogs, 4)
+  page_number = request.GET.get('page', 1)
+  try:
+    page_obj = p.get_page(page_number)
+  except PageNotAnInteger:
+    page_obj = p.page(1)
+  except EmptyPage:
+    page_obj = p.page(p.page_number)
+  return render(request, 'blog/blog_filter.html', { 'cartitems': cartItems, 'items': items, 'order': order, 'wish': wish, 'page_obj': page_obj, 'catagorys': catagorys,'popu':popu})
+
+def blog_manage(request):
+  blogs =blog.objects.all()
+  return render(request,'home/blog_manage.html',{'blogs':blogs})

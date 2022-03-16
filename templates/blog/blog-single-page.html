@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
-
+{% block title %}Post detail{% endblock title %}
 {% block content %}
 
 
@@ -15,7 +15,8 @@
           <div class="container">
               <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{% url 'store' %}">Home</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Blog</li>
+                <li class="breadcrumb-item"><a href="{% url 'blog_home' %}">Blog</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Post Detail</li>
               </ol>
           </div>
         </nav>
@@ -32,88 +33,67 @@
                     <div class="col-12 col-md-12">
                         <div class="blog">
                           <div class="blog-thumb">
-                            <img class="img-fluid" src="images/blogs/f_blog_post_1.jpg" style="width: 100%;" alt="Blog-Image">
+                            <img class="img-fluid" src="{{post.image.url}}" style="width: 100%;" alt="Blog-Image">
                           </div>
                           
                           <div class="blog-info">
                               <div class="blog-meta">
                                   <a >
                                       <i class="far fa-calendar-alt"></i>
-                                      14 November, 2018
+                                      {{post.date_published}}
                                     </a>
-                                  <a >
+                                    <a >
                                     <i class="fas fa-comments"></i>
-                                    33 Comments
+                                    {{count}} Comments
                                   </a>
+
                                 </div>
-                                  <h3>A Meetup for People of e-Commerce Business</h3>
-                                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                     Animi ea libero nobis hic impedit similique, iste possimus. 
-                                     Libero delectus hic tempore suscipit blanditiis? Odit consequuntur 
-                                     facilis debitis quam accusamus ducimus? It is a long established fact 
-                                     that a reader will be distracted by the readable content of a page 
-                                     when looking at its layout. The point of using Lorem Ipsum is that 
-                                     it has a more-or-less normal distribution of letters, as opposed to 
-                                     using 'Content here, content here', making it look like readable English.
-                                      Many desktop publishing packages and web page editors now use Lorem 
-                                      Ipsum as their default model text, and a search for 'lorem ipsum' 
-                                      will uncover many web sites still in their infancy. Various versions
-                                       have evolved over the years, sometimes by accident, It is a long 
-                                       established fact that a reader will be distracted by the readable 
-                                       content of a page when looking at its layout. The point of using 
-                                       Lorem Ipsum is that it has a more-or-less normal distribution of
-                                        letters, as opposed to using 'Content here, content here', making
-                                      it look like readable English. 
-                                  </p> 
-                                  <p>Many desktop publishing
-                              packages and web page editors now use Lorem Ipsum as their 
-                              default model text, and a search for 'lorem ipsum' will uncover many
-                                web sites still in their infancy. Various versions have evolved over 
-                                the years, sometimes by accident, sometimes on purpose (injected humour 
-                                and the like). sometimes on purpose (injected humour and the like). 
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi ea 
-                                libero nobis hic impedit similique, iste possimus. Libero delectus
-                                  hic tempore suscipit blanditiis? Odit consequuntur facilis debitis
-                                  quam accusamus ducimus? It is a long established fact that a reader
-                                    will be distracted by the readable content of a page when looking 
-                                    at its layout. The point of using Lorem Ipsum is that it has a
-                                    more-or-less normal distribution of letters, as opposed to using
-                                      'Content here, content here', making it look like readable English.
-                                      Many desktop publishing packages and web page editors now use 
-                                      Lorem Ipsum as their default model text, and a search for
-                                        'lorem ipsum' will uncover many web sites still in their 
-                                        infancy. Various versions have evolved over the years,
-                                        sometimes by accident, It is a long established fact
-                                          that a reader will be distracted by the readable 
-                                          content of a page when looking at its layout. 
-                                          The point of using Lorem Ipsum is that it has
-                                          a more-or-less normal distribution of letters,
-                                            as opposed to using 'Content here, content here', 
-                                    making it look like readable English. 
-                                  </p>
+                                  <h3>{{post.title}}</h3>
+                                  <p>{{post.body}}</p>
                                                     
                           </div>
+                        <section class="mb-5">
+                        <div class="card bg-light">
+                            <div class="card-body">
+                                <!-- Comment form-->
+                                
+                                {% if request.user.is_authenticated %} 
+                                <form action="" method="POST" class="mb-4">
+                                    <textarea class='form-control' rows='10' type="text" name="body" id="id_body" placeholder='Leave a comment here ...'required></textarea>
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-primary ">Submit</button>
+                                </form>
+                                {% else %}
+                                <p>u need to register to add comment <a href="{% url 'register' %}">register</a>
+                                {% endif %}
+                                <!-- Comment with nested comments-->
+                                
+                                {% for comment in comments %}        
+                                <div class="d-flex mb-4">
+                                    <!-- Parent comment-->
+                                    <div class="ms-3">
+                                        <div class="fw-bold">{{comment.user.username}} <span class="text-muted font-weight-normal">{{comment.created}}</span></div>
+                                        {{comment.body}}.
+                                        <!-- Child comment 1-->   
+                                        <!-- {% for replay in comment.replies.all %}
+                                            <div class="d-flex mt-4">
+                                                <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." />
+                                                </div>
+                                                <div class="ms-3">
+                                                    <div class="fw-bold">{{replay.name}}</div>
+                                                    {{replay.body}}
+                                                </div>
+                                            </div>
+                                        {% endfor %}  -->     
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </section>
                         </div>
                     </div>
                 </div>
-                <nav aria-label="navigation">
-                    <ul class="pagination">
-                        <li class="page-item disabled">
-                            <a class="page-link page-link-prev" href="#" aria-label="Previous" tabindex="-1" aria-disabled="true">
-                                Prev
-                            </a>
-                        </li>
-                        <li class="page-item" aria-current="page"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item-total">of 6</li>
-                        <li class="page-item">
-                            <a class="page-link page-link-next" href="#" aria-label="Next">
-                                Next
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
             </div>
           
         </div>

@@ -1,0 +1,93 @@
+
+// Custom variables
+@import "private/variables";
+
+// Bootstrap and its default variables
+@import "../../node_modules/bootstrap/scss/bootstrap";
+
+
+
+// Custom Css
+@import "private/functions-override";
+// @import "private/mixins";
+@import "private/base";
+@import "private/animation";
+@import "private/button";
+
+
+@import "components/skelton";
+@import "components/popup";
+@import "components/modal";
+@import "components/revolution-layer-carousel";
+@import "components/banners";
+@import "components/product";
+@import "components/pagination";
+@import "components/tabs";
+@import "components/accordion";
+@import "components/slick-carousel";
+
+
+
+@import "layouts/header/header-one";
+@import "layouts/header/header-two";
+@import "layouts/header/header-three";
+@import "layouts/header/header-four";
+@import "layouts/header/header-five";
+@import "layouts/header/header-six";
+@import "layouts/header/header-seven";
+@import "layouts/header/header-eight";
+@import "layouts/header/header-nine";
+@import "layouts/header/header-mobile";
+@import "layouts/header/header-sticky";
+
+@import "layouts/footer/footer-one";
+@import "layouts/footer/footer-two";
+@import "layouts/footer/footer-three";
+@import "layouts/footer/footer-four";
+@import "layouts/footer/footer-five";
+@import "layouts/footer/footer-six";
+@import "layouts/footer/footer-seven";
+@import "layouts/footer/footer-eight";
+@import "layouts/footer/footer-nine";
+@import "layouts/footer/footer-mobile";
+
+@import "layouts/sidebar/shop-filters";
+@import "layouts/sidebar/account-sidebar";
+@import "layouts/sidebar/blog-sidebar";
+
+@import "layouts/banners/banners";
+
+@import "components/modal";
+
+@import "pages/index";
+@import "pages/index-2";
+@import "pages/index-3";
+@import "pages/index-4";
+@import "pages/index-5";
+@import "pages/index-6";
+@import "pages/index-7";
+@import "pages/index-8";
+@import "pages/index-9";
+@import "pages/404";
+@import "pages/shop-page";
+@import "pages/product-page";
+@import "pages/cart-page";
+@import "pages/orders";
+@import "pages/order-detail";
+@import "pages/shipping-address";
+@import "pages/profile";
+@import "pages/checkout";
+@import "pages/compare";
+@import "pages/wishlist";
+@import "pages/registration";
+@import "pages/about-page";
+@import "pages/contact-page";
+@import "pages/blog-page";
+
+
+@import "api/bootstrap-datepicker";
+@import "api/bootstrap-select.min";
+@import "api/jquery.fancybox";
+@import "api/slick-theme";
+@import "api/slick";
+
