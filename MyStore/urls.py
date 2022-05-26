@@ -1,5 +1,5 @@
 from django.urls import path,re_path
-from .views import  store, login_view, logout_view, cart, checkout, update_item, add_product, add_catagory, detail, register_view, account_view, whishlist, Product_main, main, Erro_view, search_bar, thankyou_view, admin_panel, contact_view, about_view, transaction_view, admin_settigns, Subscriber_view, searsh_order, update_product, delete_product, product, searsh_product, add_brand, manage_coupon_view, delete_coupon, update_coupon, add_coupons, update_transaction, shipping_view, shipping_address,product_report,order_report,create_checkout_session,stripe_config,cancelled_view,stripe_webhook,Stock_Add,stock_transfere,order_list,admin_order_detail,user_list,user_detail,suplier_view,expenses_view,add_pur,Purchase_view
+from .views import  store, login_view, logout_view, cart, checkout, update_item, add_product, add_catagory, detail, register_view, account_view, whishlist, Product_main, main, Erro_view, search_bar, thankyou_view, admin_panel, contact_view, about_view, transaction_view, admin_settigns, Subscriber_view, searsh_order, update_product, delete_product, product, searsh_product, add_brand, manage_coupon_view, delete_coupon, update_coupon, add_coupons, update_transaction, shipping_view, shipping_address,product_report,order_report,Stock_Add,stock_transfere,order_list,admin_order_detail,user_list,user_detail,suplier_view,expenses_view,add_pur,Purchase_view,purr_prosses
 
 urlpatterns = [
     path('',store,name='store'),
@@ -13,10 +13,7 @@ urlpatterns = [
     path('thank_you/', thankyou_view, name='thank_you'),
     path('whishlist/', whishlist, name='whishlist'),
     path('checkout/',checkout ,name='checkout'),
-    path('cancelled/',cancelled_view ,name='cancelled'),
-    path('config/',stripe_config ,name='payment_config'),
-    path('create-checkout-session/', create_checkout_session,name='checkout_session'),
-    path('webhook/', stripe_webhook,name='stripe_webhook'),
+    path('checkout/prosses',purr_prosses ,name='prosses'),
     path('order-shipping/', shipping_address, name='order_shipping'),
     path('update_item',update_item ,name='update_item'),
     path('product/<slug>/', detail, name='detail'),

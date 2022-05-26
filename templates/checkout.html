@@ -1,197 +1,178 @@
-{% extends 'base.html' %}
-{% load static %}
-{% block title %}Checkout{% endblock title %}
-{% block content %}
-<style type='text/css'>
-.hidden{
-  display: none ;
-}
-
+{% extends 'base.html' %} {% load static %} {% block title %} Checkout {% endblock %} {% block content %}
+<style type="text/css">
+  .hidden {
+    display: none;
+  }
 </style>
-      <!-- Page Header -->
-      <div class="container-fuild">
-        <div class="page-header">
-          <div class="container">
-            <h1 class="page-title">Checkout</h1>
-          </div><!-- End .container -->
-        </div>
-        <nav aria-label="breadcrumb">
-          <div class="container">
-            <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="{% url 'store' %}">Home</a></li>
-              <li class="breadcrumb-item active" aria-current="page">Checkout</li>
-            </ol>
+<!-- Page Header -->
+<div class="container-fuild">
+  <div class="page-header">
+    <div class="container">
+      <h1 class="page-title">Checkout</h1>
+    </div>
+    <!-- End .container -->
+  </div>
+  <nav aria-label="breadcrumb">
+    <div class="container">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'store' %}">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Checkout</li>
+      </ol>
+    </div>
+  </nav>
+</div>
+<!-- checkout Content -->
+<section class="pro-content checkout-area">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-xl-12">
+        <div class="row">
+          <div class="col-12 col-lg-3">
+            <div class="checkoutd-nav">
+              <ul
+                class="nav flex-column nav-pills mb-3"
+                id="pills-tab"
+                role="tablist"
+              >
+                <li class="nav-item">
+                  <a
+                    class="nav-link active"
+                    id="pa_payment"
+                    data-toggle="pill"
+                    href="#pills-order"
+                    >Payment</a
+                  >
+                </li>
+              </ul>
+            </div>
           </div>
-        </nav>
-      
-      
-      </div>
-       <!-- checkout Content -->
-       <section class="pro-content checkout-area">             
-        <div class="container"> 
-          <div class="row">
-              <div class="col-12 col-xl-12">
-                  <div class="row">
-                      <div class="col-12 col-lg-3">
-                       <div class="checkoutd-nav">
-                          <ul class="nav flex-column nav-pills mb-3" id="pills-tab" role="tablist">
-                              <li class="nav-item">
-                                  <a class="nav-link  active" id="pa_payment" data-toggle="pill" href="#pills-order"  >Payment</a>
-                                </li>
-                            </ul>
-                       </div>
-                 
-                    </div>
-                    <div class="col-12 col-lg-9">
-                        <div class="checkout-module">
-                   
-                        
-                            <div class="tab-content" >
-                              <div class="tab-pane fade show active" id="pills-order" role="tabpanel" aria-labelledby="pills-order-tab">
-                                  <table class="table top-table">
-                                      <tbody>
-                                        
-                                        {% for item in items %}
-                                          
-                                      
-                                          <tr class="d-flex">
-                                              <td class="col-12 col-md-2">
-                                                    <img class="img-fluid" src="{{item.product.image.url}}" alt="Imagetag">
-                                              </td>
-                                              <td class="col-12 col-md-4">
-                                                  <div class="item-detail">
-                                                      <span class="pro-category">{{item.product.catagory}}</span>
-                                                      <h3>{{item.product.name}}
-                                                      </h3>
-                                                      <div class="item-attributes"></div>
-                                                      
-                                                  </div>
-                                              </td>
-                                              <td class="col-12 col-md-1 item-price">${% if item.product.discount %}
-                                              <ins>${{item.product.new_price|floatformat:2}}
-                                                <del>
-                                                  ${{item.product.price|floatformat:2}}
-                                                </del>
-                                              </ins>
-                                              {% else %}
-                                              <ins>${{item.product.price|floatformat:2}}</ins>
-                                              {% endif %}</td>
-                                              <td class="col-12 col-md-3 justify-content-center" >
-                                                  <div class="input-group-control">
-                                                    <span class="form-control" >{{item.quantity}}</span>                 
-                                                </div>
-                                              </td>
-                                              <td class="col-12 col-md-2 item-total">${{item.get_total}}</td>
-                                           
-                                            
-                                          </tr>
-                                            {% endfor %}
-                                      </tbody>
-                                    </table>
-                                    <div class="row justify-content-end"> 
-                                      <div class="col-12">
-                                        <div class="bill-total"> 
-                                            <ul>
-                                                
-                                                {% if order.coupon.code %}
-                                                <li>Subtotal</li>
-                                                <li>Discount(Coupon)</li>
-                                                <li>Code</li>
-                                                  
-                                                {% endif %}
-                                                  
-                                                <li class="text-danger">Total</li>
-                                              </ul>
-                                              <ul>
-                                                {% if order.coupon.code %}
-                                                <li>${{order.get_cart_total}}</li>
-                                                 <li>${{order.get_discount}}</li>
-                                                <li>{{order.coupon.code}}</li>
-                                                
-                                                {% endif %}
-                                                <li class="text-danger">${{order.get_cart_total_after_discount}}</li>
-                                               </ul>
-                                        </div>   
-                                      </div>
-                                    </div>
-                                    <div  id='payement_list' class="col-12 col-sm-12 hidden">
-                                        <div class="row">
-                                          <div class="heading">
-                                            <h4>Payment Methods</h4>
-                                       
-                                          </div>
-                                       
-                                          <ul  class="payement-way">
-                                            <li>
-                                            <form id="payment-form">
-                                              <div id="payment-element">
-                                                <!--Stripe.js injects the Payment Element-->
-                                              </div>
-                                              <button id="submit">
-                                                <div class="spinner hidden" id="spinner"></div>
-                                                <span id="button-text">Pay now</span>
-                                              </button>
-                                              <div id="payment-message" class="hidden"></div>
-                                            </form>
-                                            </li>
-                                          </ul>                      
-                                        </div>   
-                                    </div>
-                                
-                                    
-                                    {% if order.get_cart_total_after_discount > 0 %}
-                                      
-                                    
-                                    <div class="col-12 col-sm-12 justify-content-end btn-cont">
-                                        <div class="row">
-                                        
-                                      <button class="btn btn-secondary" id="submitBtn">Purchase!</button>
-                                        </div>
-                                    </div>
-                                    {% else %}
-                                    <div class="col-12 col-sm-12 justify-content-end btn-cont">
-                                      <div class="row">
-                                    
-                                        <a href="{% url 'main' %}" class="btn btn-secondary">Continue shopping</a>
-                                      </div>
-                                    </div>
-                                    {% endif %}
-                                    
-                              </div>
-                            </div>
-                        </div>
-                    </div>
+          <div class="col-12 col-lg-9">
+            <div class="checkout-module">
+              <div class="tab-content">
+                <div
+                  class="tab-pane fade show active"
+                  id="pills-order"
+                  role="tabpanel"
+                  aria-labelledby="pills-order-tab"
+                >
+                  <table class="table top-table">
+                    <tbody>
+                      {% for item in items %}
 
+                      <tr class="d-flex">
+                        <td class="col-12 col-md-2">
+                          <img
+                            class="img-fluid"
+                            src="{{item.product.image.url}}"
+                            alt="Imagetag"
+                          />
+                        </td>
+                        <td class="col-12 col-md-4">
+                          <div class="item-detail">
+                            <span class="pro-category"
+                              >{{item.product.catagory}}</span
+                            >
+                            <h3>{{item.product.name}}</h3>
+                            <div class="item-attributes"></div>
+                          </div>
+                        </td>
+                        <td class="col-12 col-md-1 item-price">
+                          ${% if item.product.discount %}
+                          <ins
+                            >${{item.product.new_price|floatformat:2}}
+                            <del> ${{item.product.price|floatformat:2}} </del>
+                          </ins>
+                          {% else %}
+                          <ins>${{item.product.price|floatformat:2}}</ins>
+                          {% endif %}
+                        </td>
+                        <td class="col-12 col-md-3 justify-content-center">
+                          <div class="input-group-control">
+                            <span class="form-control">{{item.quantity}}</span>
+                          </div>
+                        </td>
+                        <td class="col-12 col-md-2 item-total">
+                          ${{item.get_total}}
+                        </td>
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                  <div class="row justify-content-end">
+                    <div class="col-12">
+                      <div class="bill-total">
+                        <ul>
+                          {% if order.coupon.code %}
+                          <li>Subtotal</li>
+                          <li>Discount(Coupon)</li>
+                          <li>Code</li>
+
+                          {% endif %}
+
+                          <li class="text-danger">Total</li>
+                        </ul>
+                        <ul>
+                          {% if order.coupon.code %}
+                          <li>${{order.get_cart_total}}</li>
+                          <li>${{order.get_discount}}</li>
+                          <li>{{order.coupon.code}}</li>
+
+                          {% endif %}
+                          <li class="text-danger">
+                            ${{order.get_cart_total_after_discount}}
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
                   </div>
+                  <div id="payement_list" class="col-12 col-sm-12 hidden">
+                    <div class="row">
+                      <div class="heading">
+                        <h4>Payment Methods</h4>
+                      </div>
+
+                      <ul class="payement-way">
+                        <li>
+                          <form id="payment-form">
+                            <div id="payment-element">
+                              <!--Stripe.js injects the Payment Element-->
+                            </div>
+                            <button id="submit">
+                              <div class="spinner hidden" id="spinner"></div>
+                              <span id="button-text">Pay now</span>
+                            </button>
+                            <div id="payment-message" class="hidden"></div>
+                          </form>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  {% if order.get_cart_total_after_discount > 0 %}
+
+                  <div class="col-12 col-sm-12 justify-content-end btn-cont">
+                    <div class="row">
+                      <a here="{% url 'prosses' %}" class="btn btn-secondary">
+                        Purchase!
+                      </a>
+                    </div>
+                  </div>
+                  {% else %}
+                  <div class="col-12 col-sm-12 justify-content-end btn-cont">
+                    <div class="row">
+                      <a href="{% url 'main' %}" class="btn btn-secondary"
+                        >Continue shopping</a
+                      >
+                    </div>
+                  </div>
+                  {% endif %}
+                </div>
               </div>
-       
+            </div>
           </div>
         </div>
-      </section>
-<script>
-
-// new
-// Get Stripe publishable key
-fetch("{% url 'payment_config' %}")
-.then((result) => { return result.json(); })
-.then((data) => {
-  // Initialize Stripe.js
-  const stripe = Stripe(data.publicKey);
-
-  // new
-  // Event handler
-  document.querySelector("#submitBtn").addEventListener("click", () => {
-    // Get Checkout Session ID
-    fetch("{% url 'checkout_session' %}")
-    .then((result) => { return result.json(); })
-    .then((data) => {
-      // Redirect to Stripe Checkout
-      return stripe.redirectToCheckout({sessionId: data.sessionId})
-    })
-    .then((res) => {
-    });
-  });
-});
-</script>
+      </div>
+    </div>
+  </div>
+</section>
 {% endblock content %}
-     

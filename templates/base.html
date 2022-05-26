@@ -1,180 +1,197 @@
 {% load static %}
 <!DOCTYPE html>
 <html class="no-js" lang="zxx">
-<head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}{% endblock %}</title>
 
- <meta charset="UTF-8">
- <meta http-equiv="X-UA-Compatible" content="IE=edge">
- <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>
-   {% block title %}{% endblock %}
-</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'custome/css/style.css' %}"
+    />
 
-<link rel="stylesheet" type="text/css" href="{% static 'custome/css/style.css' %}">
+    <script src="https://js.stripe.com/v3/"></script>
 
-<script src="https://js.stripe.com/v3/"></script>
+    <!-- Slider Revolution CSS Files -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'custome/revolution/css/settings.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'custome/revolution/css/layers.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'custome/revolution/css/navigation.css' %}"
+    />
+    <script>
+      const user = '{{request.user}}'
 
-<!-- Slider Revolution CSS Files -->
-<link rel="stylesheet" type="text/css" href="{% static 'custome/revolution/css/settings.css' %}">
-<link rel="stylesheet" type="text/css" href="{% static 'custome/revolution/css/layers.css' %}">
-<link rel="stylesheet" type="text/css" href="{% static 'custome/revolution/css/navigation.css' %}">
-<script>
-  const user ='{{request.user}}'
-
-  function getCookie(name){
-        var cookieValue =null;
-        if(document.cookie && document.cookie !== ''){
-              var cookies = document.cookie.split(';');
-              for(var i =0 ;i<cookies.length ;i++){
-                    var cookie =cookies[i].trim();
-                    if (cookie.substring(0 ,name.length +1)===(name+'=')){
-                          cookieValue=decodeURIComponent(cookie.substring(name.length +1));
-                          break;
-                    }
-              }
-        }
-        return cookieValue;
-  };
-  var csrftoken = getCookie('csrftoken');
-
-  function getCookies(name){
-        var cookieArr =document.cookie.split(';');
-        for(var i=0; i < cookieArr.length; i++){
-            var cookiePair =cookieArr[i].split('=');
-            if(name == cookiePair[0].trim()){
-                  return decodeURIComponent(cookiePair[1]);
+      function getCookie(name) {
+        var cookieValue = null
+        if (document.cookie && document.cookie !== '') {
+          var cookies = document.cookie.split(';')
+          for (var i = 0; i < cookies.length; i++) {
+            var cookie = cookies[i].trim()
+            if (cookie.substring(0, name.length + 1) === name + '=') {
+              cookieValue = decodeURIComponent(
+                cookie.substring(name.length + 1)
+              )
+              break
             }
+          }
         }
-        return null;
-  }
-      var cart=JSON.parse(getCookie('cart'))
-      if(cart == undefined){
-            cart ={}
-            document.cookie ='cart=' + JSON.stringify(cart) + ';domain=;path=/'
-            }
-</script>
-  
-      <!-- Core CSS Files -->
-      
-{% include 'header.html' %}
-</head>
-<body>
- {% block content %}
- {% endblock content %}
- <div class="dropdown switecher-new">
-       <button class="btn btn-primary swipe-to-top dropdown-toggle" type="button" id="headerOneCartButton"
-             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-             <i class="fa fa-cogs" aria-hidden="true"></i>
-       </button>
-       <div class="dropdown-menu dropdown-menu-right" aria-labelledby="headerOneCartButton">
- 
-             <a href="#" class="swticher-rtl">
-                   <div class="text ">Use demo with RTL</div>
-                   <div class="toggle">
-                         <span class="circle "></span>
-                   </div>
- 
-             </a>
-             <div class="swicher-color">
-                   <div class="text "><b>Use demo with Colors</b></div>
-                   <ul id="switchColor">
-                         <li class="active">
-                               <a href="#" id="default">
-                                     <div id="default-sprite"></div>
-                               </a>
-                         </li>
-                         <li>
-                               <a href="#" id="yellow">
-                                     <div id="yellow-sprite"></div>
-                               </a>
-                         </li>
-                         <li>
-                               <a href="#" id="blue">
-                                     <div id="blue-sprite"></div>
-                               </a>
-                         </li>
-                         <li>
-                               <a href="#" id="green">
-                                     <div id="green-sprite"></div>
-                               </a>
-                         </li>
-                         <li>
-                               <a href="#" id="navy-blue">
-                                     <div id="navy-blue-sprite"></div>
-                               </a>
-                         </li>
-                         <li>
-                               <a href="#" id="red">
-                                     <div id="red-sprite"></div>
-                               </a>
-                         </li>
-                         <li>
-                               <a href="#" id="pink">
-                                     <div id="pink-sprite"></div>
-                               </a>
-                         </li>
-                   </ul>
-             </div>
- 
-       </div>
- </div>
- {% include 'footer.html' %}
-</body>
-
-<button class="switch btn btn-secondary btn-sm" data-switch-dark>Dark</button>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="{% static 'custome/js/scripts.js' %}"></script>
-<script src="{% static 'assets/vendor/@popperjs/core/dist/umd/popper.min.js' %}"></script>
-<script src="{% static 'assets/vendor/bootstrap/dist/js/bootstrap.min.js' %}"></script>
-
-
-<!-- Slider Revolution core JavaScript files -->
-<script src="{% static 'custome/revolution/js/jquery.themepunch.tools.min.js' %}"></script>
-<script src="{% static 'custome/revolution/js/jquery.themepunch.revolution.min.js' %}"></script>
-
-<!-- Slider Revolution extension scripts. ONLY NEEDED FOR LOCAL TESTING -->
-<script src="{% static 'custome/revolution/js/extensions/revolution.extension.actions.min.js' %}"></script>
-<script src="{% static 'custome/revolution/js/extensions/revolution.extension.carousel.min.js' %}"></script>
-<script src="{% static 'custome/revolution/js/extensions/revolution.extension.kenburn.min.js' %}"></script>
-<script src="{% static 'custome/revolution/js/extensions/revolution.extension.layeranimation.min.js' %}"></script>
-<script src="{% static 'custome/revolution/js/extensions/revolution.extension.migration.min.js' %}"></script>
-<script src="{% static 'custome/revolution/js/extensions/revolution.extension.navigation.min.js' %}"></script>
-<script src="{% static 'custome/revolution/js/extensions/revolution.extension.parallax.min.js' %}"></script>
-<script src="{% static 'custome/revolution/js/extensions/revolution.extension.slideanims.min.js' %}"></script>
-<script src="{% static 'custome/revolution/js/extensions/revolution.extension.video.min.js' %}"></script>
-
-<script type="text/javascript">
-      const updateBtn = document.getElementsByClassName('update-cart')
-
-      for (i = 0; i < updateBtn.length; i++) {
-            updateBtn[i].addEventListener('click', function () {
-                  const productId = this.dataset.product
-                  const action = this.dataset.action
-               if (user === 'AnonymousUser') {
-                        alert('login First')
-                  }
-                  else {
-                        updateuserOrder(productId, action)
-                  }
-            })
+        return cookieValue
       }
-            const updateuserOrder=(productId, action)=> {
-                  const url ="{% url 'update_item' %}"
-                  fetch(url,{
-                        method:'POST',
-                        headers: {
-                              'Content-Type': 'application/json',
-                              'X-CSRFToken': csrftoken,
-                        },
-                          body: JSON.stringify({ 'productId': productId, 'action': action })
-                  })
-                        .then((response) => {
-                              return response.json()
-                        })
-                         .then((data) => {
-                              location.reload();
-                        })
-            }
-            
-</script>
+      var csrftoken = getCookie('csrftoken')
+
+      function getCookies(name) {
+        var cookieArr = document.cookie.split(';')
+        for (var i = 0; i < cookieArr.length; i++) {
+          var cookiePair = cookieArr[i].split('=')
+          if (name == cookiePair[0].trim()) {
+            return decodeURIComponent(cookiePair[1])
+          }
+        }
+        return null
+      }
+      var cart = JSON.parse(getCookie('cart'))
+      if (cart == undefined) {
+        cart = {}
+        document.cookie = 'cart=' + JSON.stringify(cart) + ';domain=;path=/'
+      }
+    </script>
+
+    <!-- Core CSS Files -->
+
+    {% include 'header.html' %}
+  </head>
+  <body>
+    {% block content %} {% endblock content %}
+    <div class="dropdown switecher-new">
+      <button
+        class="btn btn-primary swipe-to-top dropdown-toggle"
+        type="button"
+        id="headerOneCartButton"
+        data-toggle="dropdown"
+        aria-haspopup="true"
+        aria-expanded="false"
+      >
+        <i class="fa fa-cogs" aria-hidden="true"></i>
+      </button>
+      <div
+        class="dropdown-menu dropdown-menu-right"
+        aria-labelledby="headerOneCartButton"
+      >
+        <a href="#" class="swticher-rtl">
+          <div class="text">Use demo with RTL</div>
+          <div class="toggle">
+            <span class="circle"></span>
+          </div>
+        </a>
+        <div class="swicher-color">
+          <div class="text"><b>Use demo with Colors</b></div>
+          <ul id="switchColor">
+            <li class="active">
+              <a href="#" id="default">
+                <div id="default-sprite"></div>
+              </a>
+            </li>
+            <li>
+              <a href="#" id="yellow">
+                <div id="yellow-sprite"></div>
+              </a>
+            </li>
+            <li>
+              <a href="#" id="blue">
+                <div id="blue-sprite"></div>
+              </a>
+            </li>
+            <li>
+              <a href="#" id="green">
+                <div id="green-sprite"></div>
+              </a>
+            </li>
+            <li>
+              <a href="#" id="navy-blue">
+                <div id="navy-blue-sprite"></div>
+              </a>
+            </li>
+            <li>
+              <a href="#" id="red">
+                <div id="red-sprite"></div>
+              </a>
+            </li>
+            <li>
+              <a href="#" id="pink">
+                <div id="pink-sprite"></div>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    {% include 'footer.html' %}
+  </body>
+
+  <button class="switch btn btn-secondary btn-sm" data-switch-dark>Dark</button>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="{% static 'custome/js/scripts.js' %}"></script>
+  <script src="{% static 'assets/vendor/@popperjs/core/dist/umd/popper.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/bootstrap/dist/js/bootstrap.min.js' %}"></script>
+
+  <!-- Slider Revolution core JavaScript files -->
+  <script src="{% static 'custome/revolution/js/jquery.themepunch.tools.min.js' %}"></script>
+  <script src="{% static 'custome/revolution/js/jquery.themepunch.revolution.min.js' %}"></script>
+
+  <!-- Slider Revolution extension scripts. ONLY NEEDED FOR LOCAL TESTING -->
+  <script src="{% static 'custome/revolution/js/extensions/revolution.extension.actions.min.js' %}"></script>
+  <script src="{% static 'custome/revolution/js/extensions/revolution.extension.carousel.min.js' %}"></script>
+  <script src="{% static 'custome/revolution/js/extensions/revolution.extension.kenburn.min.js' %}"></script>
+  <script src="{% static 'custome/revolution/js/extensions/revolution.extension.layeranimation.min.js' %}"></script>
+  <script src="{% static 'custome/revolution/js/extensions/revolution.extension.migration.min.js' %}"></script>
+  <script src="{% static 'custome/revolution/js/extensions/revolution.extension.navigation.min.js' %}"></script>
+  <script src="{% static 'custome/revolution/js/extensions/revolution.extension.parallax.min.js' %}"></script>
+  <script src="{% static 'custome/revolution/js/extensions/revolution.extension.slideanims.min.js' %}"></script>
+  <script src="{% static 'custome/revolution/js/extensions/revolution.extension.video.min.js' %}"></script>
+
+  <script type="text/javascript">
+    const updateBtn = document.getElementsByClassName('update-cart')
+
+    for (i = 0; i < updateBtn.length; i++) {
+      updateBtn[i].addEventListener('click', function () {
+        const productId = this.dataset.product
+        const action = this.dataset.action
+        if (user === 'AnonymousUser') {
+          alert('login First')
+        } else {
+          updateuserOrder(productId, action)
+        }
+      })
+    }
+    const updateuserOrder = (productId, action) => {
+      const url = "{% url 'update_item' %}"
+      fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRFToken': csrftoken,
+        },
+        body: JSON.stringify({ productId: productId, action: action }),
+      })
+        .then((response) => {
+          return response.json()
+        })
+        .then((data) => {
+          location.reload()
+        })
+    }
+  </script>
 </html>

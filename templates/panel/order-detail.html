@@ -48,16 +48,13 @@ License: You must have a valid license purchased only from themeforest(the above
 		<!--begin::Logo-->
 		<a href="index.html" class="brand-logo">
 
-			<span class="brand-text"><img style="height: 25px;" alt="Logo" src="assets/images/misc/logo.png" /></span>
+			<span class="brand-text"><img style="height: 25px;" alt="Logo" src="{% static 'panel/assets/images/misc/logo.png' %}" /></span>
 
 		</a>
 		<!--end::Logo-->
 		<!--begin::Toolbar-->
 		<div class="d-flex align-items-center">
 
-			 <div class="posicon">
-				<a href="pos.html" class="btn btn-primary d-flex align-items-center justify-content-center white mr-2">POS</a>
-			</div>
 			<button class="btn p-0" id="tc_aside_mobile_toggle">
 				<svg width="20px" height="20px" viewBox="0 0 16 16" class="bi bi-justify-right" fill="currentColor"
 					xmlns="http://www.w3.org/2000/svg">
@@ -92,14 +89,13 @@ License: You must have a valid license purchased only from themeforest(the above
 					<div class="brand flex-column-auto" id="tc_brand">
 						<!--begin::Logo-->
 	
-						<a href="index.html" class="brand-logo">
+						<a href="{% url 'store' %}" class="brand-logo">
 							<img class="brand-image" style="height: 25px;" alt="Logo" src="{% static 'panel/assets/images/misc/k.png' %}" />
 							<span class="brand-text"><img style="height: 25px;" alt="Logo"
 									src="{% static 'panel/assets/images/misc/logo.png' %}" /></span>
 	
 						</a>
 						<!--end::Logo-->
-	
 	
 					</div>
 					<!--end::Brand-->
