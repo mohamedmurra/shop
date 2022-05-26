@@ -1,4 +1,15 @@
+
 @charset "UTF-8";
+.navigation-mobile-toggler{
+  background: linear-gradient(
+  to bottom,rgba(0,0,0,0)
+  41%,rgba(0,0,0,0.65)
+  100%
+), url('../../custome/revolution/assets/svg/action/ic_list_24px.svg');
+background-size: 100% ,cover;
+background-position: center;
+
+}
 :root {
   --primary: #131313;
   --secondary: #fe4536;

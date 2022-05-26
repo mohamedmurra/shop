@@ -25,13 +25,7 @@ from django.db.models import Sum
 from django.views.decorators.http import require_POST
 import csv
 
-def purr_prosses(request):
-   customer = request.user.customer
-   order = Order.objects.get(customer=customer ,complete=False)
-   order.status == 'Paid'
-   order.complete = True
-   order.save()
-   return redirect('thank_you')
+
 
 def Subscriber_view(request):
    form = subscrbe_form(request.POST)
@@ -72,7 +66,7 @@ def manage_coupon_view(request):
 def account_view(request):
    if not request.user.is_authenticated:
     return redirect('login')
-   orders = Order.objects.filter(customer=request.user.customer,complete=True)
+   orders = Order.objects.filter(customer=request.user.customer,complete=True).order_by('-date_orderd')
    if request.method == 'POST':
      form = UserUpdateForm(request.POST or None,
                            request.FILES or None, instance=request.user)
@@ -360,8 +354,7 @@ def about_view(request):
    return render(request, 'about.html', {'cartitems': cartItems, 'items': items, 'order': order, 'wish': wish, 'Brands': Brands})
 
 def thankyou_view(request):
-   session = stripe.checkout.Session.retrieve(request.args.get('session_id'))
-   customer = stripe.Customer.retrieve(session.customer)
+   customer = request.user.customer
    order= Order.objects.get(
        customer=customer, complete=False)
    if order.get_cart_total_after_discount > 0 :
@@ -376,7 +369,6 @@ def thankyou_view(request):
    order = data['order']
    wish = data['wish']
    Brands = data['Brands']
-   print(order.status,order.complete,order.tansaction_id)
    orders =Order.objects.filter(customer=request.user.customer,complete=True).latest('date_orderd')
    return render(request, 'thankyou.html', {'orders': orders,'cartitems': cartItems, 'items': items, 'order': order, 'wish': wish,'Brands': Brands})
 
