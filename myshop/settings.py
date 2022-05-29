@@ -46,13 +46,12 @@ INSTALLED_APPS = [
 ]
 
 
+CRISPY_ALLOWD_TEMPLATE = 'bootstrap5'
+CRISPY_TEMPLATE_PACK = 'bootstrap5'
 
-CRISPY_ALLOWD_TEMPLATE ='bootstrap5'
-CRISPY_TEMPLATE_PACK ='bootstrap5'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-EMAIL_BACKEND='django.core.mail.backends.console.EmailBackend'
-
-DEFAULT_AUTO_FIELD ='django.db.models.BigAutoField'
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_URL = '/login/'
 
@@ -95,11 +94,11 @@ WSGI_APPLICATION = 'myshop.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'Murra',
-        'USER': 'postgres',
-        'PASSWORD':'mo111995',
-        'HOST':'127.0.0.1',
-        'PORT': '5432'
+        'NAME': 'database1',
+        'USER': 'root',
+        'PASSWORD': '123456',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 
@@ -148,4 +147,3 @@ STATICFILES_DIRS = [
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR / 'static/media')
-
