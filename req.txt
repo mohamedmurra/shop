@@ -11,6 +11,7 @@ Pillow==9.0.1
 psycopg2==2.9.3
 requests==2.27.1
 sqlparse==0.4.2
+stripe==2.66.0
 tzdata==2021.5
 urllib3==1.26.8
 whitenoise==6.0.0
