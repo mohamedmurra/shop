@@ -190,6 +190,8 @@ def product(request):
    return render(request,'panel/products.html',{'products':products,'count':products.count()})
 
 def whishlist(request):
+   if not request.user.is_authenticated:
+    return redirect('login')
    page_obj = WhishList.objects.filter(customer=request.user.customer)
    data = cartData(request)
    cartItems = data['cartitems']
@@ -277,7 +279,6 @@ def main(request):
 
 def Product_main(request ,slug):
    catagory =Catagory.objects.all()
-   catagory_filter=Catagory.objects.filter(slug=slug)
    product =Product.objects.filter(catagory__slug=slug)
    cata_name = Catagory.objects.get(slug=slug)
    caount =product.count()

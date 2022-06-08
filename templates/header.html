@@ -1,6 +1,10 @@
 {% load static %}
 <!-- Paste this code after body tag -->
-
+   <div class="se-pre-con">
+	<div class="pre-loader">
+	  <img class="img-fluid" src="{% static 'panel/assets/images/loadergif.gif' %}" alt="loading">
+	</div>
+  </div>
 <div class="wrapper" style="display: none">
   <!-- //header style One-->
   <header id="headerOne" class="header-area header-one header-desktop">
@@ -48,13 +52,7 @@
                             </li>
 
                             {% if request.user.is_authenticated %}
-                            {% if request.user.is_admin %}
-                            <a
-                                class="dropdown-item"
-                                href="{% url 'panel' %}"
-                                >Admin Panel</a
-                              >
-                            {% else %}
+                             
                             <li>
                               <a
                                 class="dropdown-item"
@@ -62,7 +60,7 @@
                                 >My Account</a
                               >
                             </li>
-                            {% endif %}
+                           
                             <li>
                               <a class="dropdown-item" href="{% url 'logout' %}"
                                 >Logout</a
@@ -200,16 +198,12 @@
                 class="dropdown-menu dropdown-menu-right"
                 aria-labelledby="dropdownAccountButton42"
               >
-                {% if request.user.is_authenticated %}
-                {% if request.user.is_admin %}
-              <a class="dropdown-item" href="{% url 'panel' %}"
-                  >Admin Panel</a
-                >
-                {% else %}
+                {% if request.user.is_authenticated %} 
+                
                 <a class="dropdown-item" href="{% url 'account' %}"
                   >Dashboard</a
                 >
-                {% endif %}
+              
                 <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
                 {% else %}
                 <a class="dropdown-item" href="{% url 'login' %}">login</a>
@@ -229,6 +223,7 @@
                 <span class="badge badge-secondary">{{wish}}</span>
               </a>
             </li>
+            
 
             <li class="dropdown">
               <button
@@ -359,22 +354,12 @@
                             </li>
 
                             {% if request.user.is_authenticated %}
-                            {% if request.user.is_admin %}
-                                                          
-                            
-                            <li>
-                              <a
-                                class="dropdown-item"
-                                href="{% url 'panel' %}"
-                                >Admin Panel</a
-                              >
-                              {% else %}
                               <a
                                 class="dropdown-item"
                                 href="{% url 'account' %}"
                                 >My Account</a
                               >
-                              {% endif %}
+                              
                             </li>
                             <li>
                               <a class="dropdown-item" href="{% url 'logout' %}"
@@ -523,15 +508,10 @@
                 aria-labelledby="dropdownAccountButton42"
               >
                 {% if request.user.is_authenticated %}
-                {% if request.user.is_admin %}
-                <a class="dropdown-item" href="{% url 'panel' %}"
-                  >Admin Panel</a
-                >
-                {% else %}
                 <a class="dropdown-item" href="{% url 'account' %}"
                   >Dashboard</a
                 >
-                {% endif %}
+              
                 <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
                 {% else %}
                 <a class="dropdown-item" href="{% url 'login' %}">login</a>
@@ -659,6 +639,8 @@
                     >
                   </ul>
                 </div>
+                <a href="{% url 'main' %}" class="main-manu btn"> Shop </a>
+                 
 
                 <a href="{% url 'cart' %}" class="main-manu btn">
                   Shopping Cart
@@ -670,16 +652,11 @@
                   Wishlist ({{wish}})
                 </a>
                 {% if request.user.is_authenticated %}
-                {% if request.user.is_admin %}
-                <a href="{% url 'panel' %}" class="main-manu btn">
-                  Admin Panel
-                </a>
-                {% else %}
-                                <a href="{% url 'account' %}" class="main-manu btn">
+                
+                <a href="{% url 'account' %}" class="main-manu btn">
                   Account
                 </a>
-                {% endif%}
-
+               
 
                 <a href="{% url 'logout' %}" class="main-manu btn"> Logout </a>
                 {% else %}
@@ -708,6 +685,17 @@
                   <span class="badge badge-secondary">{{wish}}</span>
                 </a>
               </li>
+              {% if request.user.is_admin %}
+                            <li>
+                <a href="{% url 'panel' %}" class="btn btn-light">
+                  <img
+                    src="{% static 'custome\revolution\assets\svg\action\ic_account_box_24px.svg' %}"
+                    alt=""
+                  />
+                  <i class="far fa-heart"></i>
+                  
+                </a>
+              </li>{% endif %}
 
               <li class="dropdown">
                 <button
@@ -723,7 +711,9 @@
                     alt=""
                   />
                   <i class="fas fa-shopping-bag"></i>
-                  <span class="badge badge-secondary">{{cartitems}}</span>
+                  <span class="cart-count badge badge-secondary"
+                    >{{cartitems}}</span
+                  >
                 </button>
                 <div
                   class="dropdown-menu"
