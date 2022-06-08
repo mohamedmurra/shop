@@ -1,0 +1,46 @@
+{% extends 'base.html' %} {% include static %} {% block content %}
+<!-- Page Header -->
+<div class="container-fuild">
+  <div
+    class="page-header"
+    style="background-image: url('images/miscellaneous/page-header.png')"
+  >
+    <div class="container">
+      <h1 class="page-title">ERROR<span>Ooops !!! Sorry</span></h1>
+    </div>
+    <!-- End .container -->
+  </div>
+  <nav aria-label="breadcrumb">
+    <div class="container">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'store' %}">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Error</li>
+      </ol>
+    </div>
+  </nav>
+</div>
+
+<!-- 404 Content -->
+<section class="pro-content empty-content">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="pro-empty-page">
+          <h2>Error 500...</h2>
+          <h3>Page Not Found</h3>
+          <p>
+            We looked everywhere for this page. Are you sure the website URL is
+            correct? Go to the
+            <strong
+              ><a href="{% url 'store' %}" class="btn-link"
+                >main page</a
+              ></strong
+            >
+            or select suitable category.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock content %}

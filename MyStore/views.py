@@ -58,11 +58,12 @@ def detail(request,slug):
    Brands = data['Brands']
 
    return render(request, 'product.html', {'wish': wish, 'cartitems': cartItems, 'items': items, 'order': order, 'objects': qs, 'reviews': comments[:3], 'new_review': new_comment, 'form': comment_form, 'counted': coounted, 'products': related, 'Brands': Brands})
-
+@login_required()
 def manage_coupon_view(request):
    coupons =Coupons.objects.all()
    return render(request, 'home/coupons.html', {'coupons': coupons})
 
+@login_required()
 def account_view(request):
    if not request.user.is_authenticated:
     return redirect('login')
@@ -100,7 +101,7 @@ def Erro_view(request):
    order = data['order']
    wish = data['wish']
    return render(request, '404.html', {'cartitems': cartItems, 'items': items, 'order': order, 'wish': wish})
-
+@login_required()
 def add_product(request):
    catagory =Catagory.objects.all()
    brand =Brand.objects.all()
@@ -125,7 +126,7 @@ def add_catagory(request):
 
    return render(request ,'panel/product-category-list.html',{'form':form,'catagorys':catagorys})
 
-
+@login_required()
 def add_brand(request):
    try:    
       form = brand_form(initial=request.POST)
@@ -140,7 +141,7 @@ def add_brand(request):
 
    return render(request, 'panel/product-brands-list.html', {'form': form,'brands':brands})
 
-
+@login_required()
 def add_coupons(request):
    coupons =Coupons.objects.all()
    form = coupon_update_form()
@@ -152,7 +153,7 @@ def add_coupons(request):
 
    return render(request, 'panel/coupons.html', {'form': form,'coupons':coupons})
 
-
+@login_required()
 def update_product(request,slug):
    product =get_object_or_404(Product,slug=slug)
    form = product_form(request.POST or None,
@@ -162,7 +163,7 @@ def update_product(request,slug):
          form.save()
    return render(request, 'panel/update-product.html', {'form': form, 'product': product})
 
-
+@login_required()
 def update_coupon(request, slug):
    coupon = get_object_or_404(Coupons, code=slug)
    form = coupon_update_form(request.POST or None,
@@ -172,13 +173,13 @@ def update_coupon(request, slug):
          form.save()
    return render(request, 'home/update_coupon.html', {'form': form, 'coupon': coupon})
 
-
+@login_required()
 def delete_product(request,slug):
    product =get_object_or_404(Product,slug=slug)
    product.delete()
    return redirect('product')
 
-
+@login_required()
 def delete_coupon(request, slug):
    coupon = get_object_or_404(Coupons, code=slug)
    coupon.delete()
@@ -354,6 +355,7 @@ def about_view(request):
    Brands = data['Brands']
    return render(request, 'about.html', {'cartitems': cartItems, 'items': items, 'order': order, 'wish': wish, 'Brands': Brands})
 
+@login_required()
 def thankyou_view(request):
    customer = request.user.customer
    order= Order.objects.get(
@@ -395,6 +397,7 @@ def searsh_product(request):
    products = Product.objects.filter(name__icontains=searsh_product)
    return render(request, 'home/searsh_product.html', {'products': products, 'count': products.count(), })
 
+@login_required()
 def admin_panel(request):
    orders = Order.objects.filter(complete=True).order_by('date_orderd',)
    sales=0
@@ -403,7 +406,7 @@ def admin_panel(request):
    products =Product.objects.all()
    users =Customer.objects.all()
    return render(request, 'panel/dashbord.html', {'products_count': products.count(), 'orders_count': orders.count(), 'users_count': users.count(), 'sales': sales, 'orders': orders})
-
+@login_required()
 def transaction_view(request):
    orders = Order.objects.filter(complete=True).order_by('date_orderd',)
    count =orders.count()
@@ -416,7 +419,7 @@ def transaction_view(request):
    except EmptyPage:
       page_obj = p.page(p.page_number)
    return render(request, 'home/transactions.html', {'orders': page_obj,'count':count})
-
+@login_required()
 def update_transaction(request,slug):
    order = get_object_or_404(Order,tansaction_id=slug)
    form = order_update_form(request.POST or None,instance=order)
@@ -447,7 +450,7 @@ def shipping_address(request):
    Brands = data['Brands']
    return render(request,'shipping.html',{'form':form, 'cartitems': cartItems, 'items': items, 'order': order, 'wish': wish, 'Brands': Brands})
          
-
+@login_required()
 def admin_settigns(request):
    form =UserUpdateForm(
        initial={
@@ -467,7 +470,7 @@ def admin_settigns(request):
          form.save()
          return redirect('setting')
    return render(request, 'home/settings.html', {'form': form})
-
+@login_required()
 def delete_Brand(request,slug):
    brand =get_object_or_404(Brand,slug=slug)
    brand.delete()
@@ -507,6 +510,7 @@ def contact_view(request):
    Brands = data['Brands']
    return render(request, 'contact.html', {'form':form,'cartitems': cartItems, 'items': items, 'order': order, 'wish': wish, 'Brands': Brands})
 
+@login_required()
 def shipping_view(request):
 
    not_shipped = shippingAddress.objects.all()
@@ -522,7 +526,7 @@ def shipping_view(request):
    
    return render(request,'home/shipping.html',{'not_shipped':page_obj,'count':count})
 
-
+@login_required()
 def product_report(request):
    products =Product.objects.all()
    response =HttpResponse(content_type='text/csv')
@@ -535,7 +539,7 @@ def product_report(request):
                       product.price, product.brand, product.stack, product.description])
    return response
 
-
+@login_required()
 def order_report(request):
 
    orders =Order.objects.filter(complete=True)
@@ -551,6 +555,7 @@ def order_report(request):
 
    return response
 
+@login_required()
 def Stock_Add(request):
    wherehouse =Wherehouse.objects.all()
    form =wherehouse_form()
@@ -560,6 +565,7 @@ def Stock_Add(request):
          form.save()
    return render(request,'panel/stock-add.html',{'form':form,'wherehouse':wherehouse})
 
+@login_required()
 def stock_transfere(request):
    transfere =Transfere.objects.all()
    form =Transfere_form()
@@ -569,11 +575,12 @@ def stock_transfere(request):
          form.save()
    return render(request,'panel/stock-transfer.html',{'transfere':transfere,'form':form})
 
-
+@login_required()
 def order_list(request):
    order =Order.objects.filter(complete=True)
    return render(request,'panel/order-list.html',{'orders':order})
 
+@login_required()
 def admin_order_detail(request,id):
    order =get_object_or_404(Order,tansaction_id=id)
    acount =Acount.objects.get(email=order.customer)
@@ -583,10 +590,11 @@ def admin_order_detail(request,id):
       shipp =None
    return render(request,'panel/order-detail.html',{'order':order,'acount':acount,'ship':shipp})
 
+@login_required()
 def user_list(request):
    userrs =Acount.objects.all()
    return render(request,'panel/admin-list.html',{'users':userrs})
-
+@login_required()
 def user_detail(request,id):
    userr =get_object_or_404(Acount,id=id)
    customer =Customer.objects.get(id=userr.id)
@@ -594,7 +602,7 @@ def user_detail(request,id):
    whish =WhishList.objects.filter(customer=customer)
    orders =Order.objects.filter(customer=customer).order_by('date_orderd')
    return render(request,'panel/customer-edit.html',{'userr':userr,'ship':shippig,'shishlist':whish,'count':whish.count(),'orders':orders})
-
+@login_required()
 def suplier_view(request):
    form =Suplier_form()
    supplier =suplier.objects.all()
@@ -603,7 +611,7 @@ def suplier_view(request):
       if form.is_valid():
          form.save()
    return render(request,'panel/supplier-list.html',{'supplier':supplier,'form':form})
-
+@login_required()
 def expenses_view(request):
    form =Expense_form()
    expenses =Expense.objects.all()
@@ -616,7 +624,7 @@ def expenses_view(request):
          form.save()
       return redirect('expense-list')
    return render(request,'panel/expenses-list.html',{'form':form,'expenses':expenses,'totall':totall})
-
+@login_required()
 def add_pur(request):
    form =Purchase_form()
    if request.method =='POST':
@@ -625,7 +633,7 @@ def add_pur(request):
          form.save()
       return redirect('purr')
    return render(request,'panel/purchase-add.html',{'form':form})
-
+@login_required()
 def Purchase_view(request):
    purr =Purchase.objects.all()
    return render(request,'panel/purr.html',{'purr':purr})
