@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 import os
 from pathlib import Path
-import django_on_heroku
+import dj_database_url
 import cloudinary
 import cloudinary.uploader
 import cloudinary.api
@@ -49,7 +49,7 @@ INSTALLED_APPS = [
     'Blog',
     'crispy_forms',
     'crispy_bootstrap5',
-    'gunicorn'
+    'gunicorn',
 
 ]
 
@@ -103,14 +103,15 @@ WSGI_APPLICATION = 'myshop.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'railway',
-        'USER': 'postgres',
-        'PASSWORD': 'pEEZRpZwsg2nvbPPoaax',
-        'HOST': 'containers-us-west-73.railway.app',
-        'PORT': '5480',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 
+        'NAME': 'daldeak05mfa34',                      # Or path to 
+        'USER': 'ifuddsvhkvtzkv',
+        'PASSWORD': '4f261515aa87f15c9334e7305ea7f46bfe3a83651f4602ed086001a1ae9f05ff',
+        'HOST': 'ec2-100-26-39-41.compute-1.amazonaws.com',                     
+        'PORT': '5432',                      # Set to empty string 
     }
 }
+
 
 
 # Password validation
@@ -163,4 +164,6 @@ cloudinary.config(
   api_key = "879941374338654", 
   api_secret = "6RXWhRBAWm3Ht84g22ecYyUW-oo" 
 )
+
+import django_on_heroku
 django_on_heroku.settings(locals())
