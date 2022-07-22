@@ -74,7 +74,6 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
-
 ROOT_URLCONF = 'myshop.urls'
 
 AUTH_USER_MODEL = 'account.Acount'
@@ -165,5 +164,3 @@ cloudinary.config(
   api_secret = "6RXWhRBAWm3Ht84g22ecYyUW-oo" 
 )
 
-import django_on_heroku
-django_on_heroku.settings(locals())
