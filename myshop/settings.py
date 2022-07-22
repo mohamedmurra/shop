@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'Blog',
     'crispy_forms',
     'crispy_bootstrap5',
+    'gunicorn'
 
 ]
 
@@ -101,7 +102,7 @@ WSGI_APPLICATION = 'myshop.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'railway',
         'USER': 'postgres',
         'PASSWORD': 'pEEZRpZwsg2nvbPPoaax',
