@@ -24,6 +24,7 @@ import random
 from django.db.models import Sum
 from django.views.decorators.http import require_POST
 import csv
+from cloudinary.forms import cl_init_js_callbacks
 
 
 

@@ -10,6 +10,7 @@ import string
 from Coupon.models import Coupons
 from PIL import Image
 from decimal import Decimal
+from cloudinary.models import CloudinaryField
 
 
 # Create your models here.
@@ -33,7 +34,7 @@ def Brand_lucation(instance, filename):
 
 class Brand(models.Model):
   name = models.CharField(max_length=100)
-  image = models.ImageField(blank=True, null=True)
+  image = CloudinaryField('Brand-image')
   slug = models.SlugField(unique=True)
   note =models.TextField(blank=True,null=True)
 
@@ -50,7 +51,7 @@ class Tags(models.Model):
 
 class Catagory(models.Model):
   name = models.CharField(max_length=200,unique=True)
-  image = models.ImageField(upload_to=product_lucation, blank=True, null=True)
+  image = CloudinaryField('Catagory-image')
   slug =models.SlugField(unique=True ,blank=True,null=True)
 
   def __str__(self):
@@ -76,7 +77,7 @@ def post_save_reciver(sender, instance, created,*args, **kwargs):
 class Product(models.Model):
   name = models.CharField(max_length=200, blank=False, null=False)
   catagory = models.ForeignKey(Catagory, on_delete=models.SET_NULL, null=True)
-  image = models.ImageField(upload_to=uplaod_lucation,null=False, blank=False)
+  image = CloudinaryField('Product-image')
   discount =models.IntegerField(blank=True,null=True)
   description = models.TextField(blank=True, null=True)
   price =models.IntegerField(blank=True, null=True)
@@ -296,7 +297,7 @@ class suplier(models.Model):
   name =models.CharField(max_length=100)
   phone =models.CharField(max_length=100)
   Company =models.CharField(max_length=100)
-  image = models.ImageField(upload_to='Supplier',null=False, blank=False)
+  image = CloudinaryField('Supplier-image')
   email =models.EmailField()
   address =models.TextField()
 

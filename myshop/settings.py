@@ -11,6 +11,10 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 import os
 from pathlib import Path
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
+from stripe import api_key
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = BASE_DIR = Path(__file__).resolve().parent.parent
@@ -43,6 +47,7 @@ INSTALLED_APPS = [
     'Blog',
     'crispy_forms',
     'crispy_bootstrap5',
+    'cloudinary',
 ]
 
 
@@ -147,3 +152,9 @@ STATICFILES_DIRS = [
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR / 'static/media')
+
+cloudinary.config(
+    cloud_name ='murra',
+    api_key ='879941374338654',
+    api_secret ='6RXWhRBAWm3Ht84g22ecYyUW-oo'
+)

@@ -5,6 +5,7 @@ from .forms import CommentForm ,Create_blog_post
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.contrib.auth.decorators import login_required
 from MyStore.utils import CartCoocies, cartData
+from cloudinary.forms import cl_init_js_callbacks
 # Create your views here.
 
 
