@@ -34,7 +34,7 @@ def Brand_lucation(instance, filename):
 
 class Brand(models.Model):
   name = models.CharField(max_length=100)
-  image = CloudinaryField('Brand-image')
+  image = CloudinaryField('Brand-image',null=True)
   slug = models.SlugField(unique=True)
   note =models.TextField(blank=True,null=True)
 
@@ -51,7 +51,7 @@ class Tags(models.Model):
 
 class Catagory(models.Model):
   name = models.CharField(max_length=200,unique=True)
-  image = CloudinaryField('Catagory-image')
+  image = CloudinaryField('Catagory-image',null=True)
   slug =models.SlugField(unique=True ,blank=True,null=True)
 
   def __str__(self):
@@ -77,7 +77,7 @@ def post_save_reciver(sender, instance, created,*args, **kwargs):
 class Product(models.Model):
   name = models.CharField(max_length=200, blank=False, null=False)
   catagory = models.ForeignKey(Catagory, on_delete=models.SET_NULL, null=True)
-  image = CloudinaryField('Product-image')
+  image = CloudinaryField('Product-image',null=True)
   discount =models.IntegerField(blank=True,null=True)
   description = models.TextField(blank=True, null=True)
   price =models.IntegerField(blank=True, null=True)
@@ -297,7 +297,7 @@ class suplier(models.Model):
   name =models.CharField(max_length=100)
   phone =models.CharField(max_length=100)
   Company =models.CharField(max_length=100)
-  image = CloudinaryField('Supplier-image')
+  image = CloudinaryField('Supplier-image',null=True)
   email =models.EmailField()
   address =models.TextField()
 

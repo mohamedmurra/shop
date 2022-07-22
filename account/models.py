@@ -1,5 +1,6 @@
 from django.db import models 
 from django.contrib.auth.models import AbstractBaseUser,BaseUserManager
+from cloudinary.models import CloudinaryField
 # Create your models here.
 
 
@@ -44,8 +45,7 @@ class Acount(AbstractBaseUser):
  first_name = models.CharField(max_length=50, blank=True, null=True, )
  last_name = models.CharField(max_length=50, blank=True, null=True, )
  phone_number = models.CharField(max_length=20,blank=True, null=True, )
- image = models.ImageField(
-     blank=True, null=True, upload_to=uplaod_lucation)
+ image = CloudinaryField('Blog-image',null=True)
  date_joined = models.DateTimeField(auto_now_add=True)
  last_login = models.DateTimeField( auto_now=True)
  is_active = models.BooleanField(default=True)
