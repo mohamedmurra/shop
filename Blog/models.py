@@ -26,7 +26,7 @@ class blog(models.Model):
  title = models.CharField(max_length=60, blank=False, null=False)
  body = models.TextField(max_length=5000, blank=False, null=False)
  catagory =models.ForeignKey(Catagory,on_delete=models.SET_NULL,blank=True,null=True)
- image = CloudinaryField('image')
+ image = models.ImageField(upload_to=uplaod_lucation)
  date_published = models.DateTimeField(auto_now_add=True)
  date_updated = models.DateTimeField(auto_now=True)
  author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)

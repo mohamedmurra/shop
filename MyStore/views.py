@@ -41,7 +41,7 @@ def detail(request,slug):
    qs = get_object_or_404(Product,slug=slug)
    comments = qs.comments.all().order_by('created')
    coounted = comments.count()
-   related =Product.objects.filter(catagory=qs.catagory)
+   related =Product.objects.filter(catagory=qs.catagory).exclude(id=qs.id)
    comment_form = ReviewForm()
    new_comment =None
    if request.method == 'POST':

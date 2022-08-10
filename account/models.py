@@ -45,7 +45,7 @@ class Acount(AbstractBaseUser):
  first_name = models.CharField(max_length=50, blank=True, null=True, )
  last_name = models.CharField(max_length=50, blank=True, null=True, )
  phone_number = models.CharField(max_length=20,blank=True, null=True, )
- image = CloudinaryField('image')
+ image = models.ImageField(upload_to=uplaod_lucation)
  date_joined = models.DateTimeField(auto_now_add=True)
  last_login = models.DateTimeField( auto_now=True)
  is_active = models.BooleanField(default=True)

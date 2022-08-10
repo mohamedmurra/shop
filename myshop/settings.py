@@ -28,7 +28,7 @@ BASE_DIR = BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'u0fyg)nuq*rhb$ahkfrwz^^5l6rs+g4nm+j4%a8w4ru7s#i$2a'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -102,16 +102,10 @@ WSGI_APPLICATION = 'myshop.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 
-        'NAME': 'daldeak05mfa34',                      # Or path to 
-        'USER': 'ifuddsvhkvtzkv',
-        'PASSWORD': '4f261515aa87f15c9334e7305ea7f46bfe3a83651f4602ed086001a1ae9f05ff',
-        'HOST': 'ec2-100-26-39-41.compute-1.amazonaws.com',                     
-        'PORT': '5432',                      # Set to empty string 
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -158,9 +152,5 @@ STATICFILES_DIRS = [
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR / 'static/media')
 
-cloudinary.config( 
-  cloud_name = "murra", 
-  api_key = "879941374338654", 
-  api_secret = "6RXWhRBAWm3Ht84g22ecYyUW-oo" 
-)
+
 
