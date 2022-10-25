@@ -28,7 +28,7 @@ SECRET_KEY = 'u0fyg)nuq*rhb$ahkfrwz^^5l6rs+g4nm+j4%a8w4ru7s#i$2a'
 DEBUG = False
 
 ALLOWED_HOSTS = ['*']
-
+CSRF_TRUSTED_ORIGINS = ['https://murra.up.railway.app']
 
 # Application definition
 
