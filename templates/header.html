@@ -46,14 +46,22 @@
                               <h5>Account Pages</h5>
                             </li>
 
-                            {% if request.user.is_authenticated %}
+                            {% if request.user.is_authenticated  %}
                              
                             <li>
+                              {% if request.user.is_admin %}
+                              <a
+                                class="dropdown-item"
+                                href="{% url 'panel' %}"
+                                >Admin</a
+                              >
+                              {% else %}
                               <a
                                 class="dropdown-item"
                                 href="{% url 'account' %}"
                                 >My Account</a
                               >
+                              {% endif %}
                             </li>
                            
                             <li>
@@ -87,6 +95,15 @@
                       </div>
                     </div>
                   </div>
+                </li>
+                                <li class="nav-item dropdown">
+                  <a class="nav-link" href="{% url 'blog_home' %}">
+                    <img
+                      src="{% static 'custome\revolution\assets\svg\action\ic_description_24px.svg' %}"
+                      alt=""
+                    />
+                    Blog
+                  </a>
                 </li>
                 <li class="nav-item dropdown">
                   <a class="nav-link" href="#">
@@ -349,11 +366,19 @@
                             </li>
 
                             {% if request.user.is_authenticated %}
+                            {% if request.user.is_admin %}
+                              <a
+                                class="dropdown-item"
+                                href="{% url 'panel' %}"
+                                >Admin</a
+                              >
+                              {% else %}
                               <a
                                 class="dropdown-item"
                                 href="{% url 'account' %}"
                                 >My Account</a
                               >
+                              {% endif %}
                               
                             </li>
                             <li>
@@ -503,6 +528,7 @@
                 aria-labelledby="dropdownAccountButton42"
               >
                 {% if request.user.is_authenticated %}
+                
                 <a class="dropdown-item" href="{% url 'account' %}"
                   >Dashboard</a
                 >
@@ -647,10 +673,16 @@
                   Wishlist ({{wish}})
                 </a>
                 {% if request.user.is_authenticated %}
+                {% if request.user.is_admin %}
                 
+                <a href="{% url 'panel' %}" class="main-manu btn">
+                  Admin
+                </a>
+                {% else %}
                 <a href="{% url 'account' %}" class="main-manu btn">
                   Account
                 </a>
+                {% endif %}
                
 
                 <a href="{% url 'logout' %}" class="main-manu btn"> Logout </a>

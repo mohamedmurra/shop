@@ -1,11 +1,11 @@
 from django.shortcuts import render,redirect,get_object_or_404
+from django.urls import reverse
 from .models import blog, comment, Catagory
 from account.models import Acount
-from .forms import CommentForm ,Create_blog_post
+from .forms import CommentForm ,Create_blog_post, Create_catagory
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.contrib.auth.decorators import login_required
 from MyStore.utils import CartCoocies, cartData
-from cloudinary.forms import cl_init_js_callbacks
 # Create your views here.
 
 
@@ -29,6 +29,16 @@ def homepage(request):
     page_obj = p.page(p.page_number)
   return render(request, 'blog/blog.html', { 'cartitems': cartItems, 'items': items, 'order': order, 'wish': wish, 'page_obj': page_obj, 'catagorys': catagorys,'popu':popu})
 
+def create_catagory(request):
+  if not request.user.is_authenticated:
+    return redirect('login')
+  cata =Catagory.objects.all()
+  form = Create_catagory(request.POST or None, request.FILES or None)
+  if form.is_valid():
+     form.save()
+  context = {'form': form,'cata':cata}
+  return render(request, 'panel/add_blog_catagory.html', context=context)
+
 
 def create_blog_view(request):
   if not request.user.is_authenticated:
@@ -40,9 +50,22 @@ def create_blog_view(request):
     author = Acount.objects.filter(email=user.email).first()
     obj.author = author
     obj.save()
-    form = Create_blog_post()
+    return redirect('blog_manage')
   context = {'form': form}
-  return render(request, 'home/add_blog.html', context=context)
+  return render(request, 'panel/add_blog.html', context=context)
+
+
+def update_catagory(request, slug):
+  if not request.user.is_authenticated:
+    return redirect('login')
+  cata = get_object_or_404(Catagory, slug=slug)
+  form = Create_catagory(request.POST or None,
+                         request.FILES or None, instance=cata)
+  if request.method == 'POST':
+      if form.is_valid():
+        form.save()
+        return redirect('add_blog_Catagory')
+  return render(request, 'panel/update_blog_catagory.html', {'form': form, 'cata': cata})
 
 
 def update_blog_view(request, slug):
@@ -61,8 +84,19 @@ def update_blog_view(request, slug):
         obj.save()
   else:
     return redirect('blog_manage')
-  return render(request, 'home/update_blog.html', {'form': form, 'post': post})
+  return render(request, 'panel/update_blog.html', {'form': form, 'post': post})
 
+def delete_catagory(request, slug):
+  if not request.user.is_authenticated:
+    return redirect('login')
+  cata = get_object_or_404(Catagory, slug=slug)
+  if request.user.is_admin:
+    cata.delete()
+  elif request.user.is_superuser :
+    cata.delete()
+  else:
+    return redirect('add_blog_Catagory')
+  return redirect('add_blog_Catagory')
 
 def delete_blog_view(request, slug):
   if not request.user.is_authenticated:
@@ -107,6 +141,7 @@ def post_detail(request, slug):
       new_comment.post = post
       new_comment.user = request.user
       new_comment.save()
+      return redirect(reverse('post_detail',args=[post.slug]))
 
   return render(request, 'blog/blog-single-page.html', {'cartitems': cartItems, 'items': items, 'order': order, 'wish': wish,'post': post, 'comments': comments, 'new_comment': new_comment, 'comment_form': comment_form,'count':counts})
 
@@ -119,6 +154,7 @@ def cata_fil(request, slug):
   wish = data['wish']
   popu =blog.objects.all()[:4]
   catagorys = Catagory.objects.all()
+  blog_name =Catagory.objects.get(slug=slug)
   blogs = blog.objects.filter(catagory__slug=slug)
   p = Paginator(blogs, 4)
   page_number = request.GET.get('page', 1)
@@ -128,8 +164,8 @@ def cata_fil(request, slug):
     page_obj = p.page(1)
   except EmptyPage:
     page_obj = p.page(p.page_number)
-  return render(request, 'blog/blog_filter.html', { 'cartitems': cartItems, 'items': items, 'order': order, 'wish': wish, 'page_obj': page_obj, 'catagorys': catagorys,'popu':popu})
-
+  return render(request, 'blog/blog_filter.html', { 'cartitems': cartItems, 'items': items, 'order': order, 'wish': wish, 'page_obj': page_obj, 'catagorys': catagorys,'popu':popu,'blog_name':blog_name,'popular':blogs[:3]})
+@login_required()
 def blog_manage(request):
   blogs =blog.objects.all()
-  return render(request,'home/blog_manage.html',{'blogs':blogs})
+  return render(request,'panel/blog_manage.html',{'blogs':blogs})

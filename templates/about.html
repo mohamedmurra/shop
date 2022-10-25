@@ -1,180 +1,128 @@
-{% extends 'base.html' %}
-{% load static %}
+{% extends 'base.html' %} {% load static %} {% block content %}
+<!-- Page Header -->
+<div class="container-fuild">
+  <div
+    class="page-header"
+    style="background-image: url('images/miscellaneous/page-header.png')"
+  >
+    <div class="container">
+      <h1 class="page-title">About<span>Who we are</span></h1>
+    </div>
+    <!-- End .container -->
+  </div>
+  <nav aria-label="breadcrumb">
+    <div class="container">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'store' %}">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">About</li>
+      </ol>
+    </div>
+  </nav>
+</div>
 
-{% block content %}
-      <!-- Page Header -->
-      <div class="container-fuild">
-          <div class="page-header" style="background-image: url('images/miscellaneous/page-header.png')">
-            <div class="container">
-              <h1 class="page-title">About<span>Who we are</span></h1>
-            </div><!-- End .container -->
-          </div>
-          <nav aria-label="breadcrumb">
-            <div class="container">
-                <ol class="breadcrumb">
-                  <li class="breadcrumb-item"><a href="{% url 'store' %}">Home</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">About</li>
-                </ol>
+<!-- About  -->
+
+<section class="pro-content page-content aboutus-content">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-md-6">
+        <h3 class="title">Our Vision</h3>
+        <!-- End .title -->
+        <p>
+          Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus
+          hendrerit. Pellentesque aliquet nibh nec urna. In nisi neque, aliquet
+          vel, dapibus id, mattis vel, nisi. Sed pretium, ligula sollicitudin
+          laoreet viverra, tortor libero sodales leo, eget blandit nunc tortor
+          eu nibh.
+        </p>
+      </div>
+      <div class="col-12 col-md-6">
+        <h3 class="title">Our Mission</h3>
+        <!-- End .title -->
+        <p>
+          this store help u get the best product u want without even lift
+          afinger .
+        </p>
+      </div>
+    </div>
+  </div>
+  <section class="pro-content">
+    <div class="container-fluid pro-content about-detial">
+      <div class="container">
+        <div class="row">
+          <div class="col-12 col-md-6">
+            <div class="peragraph">
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              </p>
+              <div class="pre-info">
+                <h3 class="widget-title">ADDRESS</h3>
+                <p class="widget-content">
+                  1800 Abbot Kinney Blvd. Unit D &amp; E Venice
+                </p>
+              </div>
+              <div class="pre-info">
+                <h3 class="widget-title">PHONE</h3>
+                <p class="widget-content">Mobile: +88 – 1990</p>
+                <p class="widget-content">Hotline: 1800 – 1102</p>
+              </div>
+              <div class="pre-info">
+                <h3 class="widget-title">EMAIL</h3>
+                <p class="widget-content">Support@ecommerce.com</p>
+              </div>
             </div>
-          </nav>
-  
-  
-        </div> 
-  
-       <!-- About  -->
-     
-      <section class="pro-content page-content aboutus-content">
-        <div class="container">
-          <div class="row">
-            <div class="col-12 col-md-6">
-                <h3 class="title">Our Vision</h3> <!-- End .title -->
-                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. 
-                Phasellus hendrerit. Pellentesque aliquet nibh nec urna. In nisi neque, aliquet vel, dapibus id, mattis vel, nisi. Sed pretium, 
-                  ligula sollicitudin laoreet viverra, tortor libero sodales leo, eget blandit nunc tortor eu nibh. </p>
+          </div>
+          <div class="col-12 col-md-6">
+            <div class="about-images">
+              <img
+                src="{% static 'custome/images/amazing-deals.html.png' %}"
+                class="about-img-front"
+                alt="abouts"
+              />
             </div>
-            <div class="col-12 col-md-6">
-                <h3 class="title">Our Mission</h3> <!-- End .title -->
-                <p>this store help u get the best product u want without even lift afinger . </p>
-              </div>
           </div>
-           
-        </div>
-     <section class="pro-content">
-      <div class="container-fluid pro-content about-detial">
-        <div class="container">
-          <div class="row">
-              <div class="col-12 col-md-6">
-                  <div class="peragraph">
-                      <p>
-                         Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-                         sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                         Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-                         sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                      </p>
-                      <div class="pre-info">
-                          <h3 class="widget-title">ADDRESS</h3>
-                          <p class="widget-content">1800 Abbot Kinney Blvd. Unit D &amp; E Venice</p>
-                      </div>
-                    <div class="pre-info">
-                        <h3 class="widget-title">PHONE</h3>
-                        <p class="widget-content">Mobile: +88 – 1990</p>
-                        <p class="widget-content">Hotline: 1800 – 1102</p>
-                    </div>
-                    <div class="pre-info">
-                        <h3 class="widget-title">EMAIL</h3>
-                          <p class="widget-content">Support@ecommerce.com</p>
-                    </div>
-                    </div>
-              </div>
-              <div class="col-12 col-md-6">
-                  <div class="about-images">
-                      <img src="{% static 'custome/images/about-us/abouts-detial.jpg' %}" class="about-img-front" alt="abouts">
-                    
-                  </div>
-              
-              </div>
-          </div>
-           
         </div>
       </div>
-     </section>
-      <section class="pro-content">
-        <div class="container-fluid profile-div">
-          <div class="container">
-              <div class="media-main">
-                  <div class="row">
-                     <div class="col-12 col-md-6 media-col">
-                         <div class="media">
-                             <img src="{% static 'custome/images/about-us/profile1.png' %}" alt="profile" class="rounded-circle" style="width:100px;">
-                             <div class="media-body">
-                               <h3>John Doe <small>Sales Executive</small></h3>
-                               <p>  Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-                                   sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                   Lorem ipsum dolor sit amet, consectetur adipiscing elit, </p>
-                             </div>
-                           </div>
-                      </div>
-                      <div class="col-12 col-md-6">
-                         <div class="media">
-                             <img src="{% static 'custome/images/about-us/profile1.png' %}" alt="profile" class="rounded-circle" style="width:100px;">
-                             <div class="media-body">
-                               <h3>John Doe  <small>Sales Executive</small></h3>
-                               <p>  Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-                                   sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                   Lorem ipsum dolor sit amet, consectetur adipiscing elit, </p>
-                             </div>
-                           </div>
-                      </div>
-                  </div>
-                  
-              </div>
-          </div>
+    </div>
+  </section>
+</section>
+<!-- News -->
+<section class="pro-about-content pro-content">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-12 col-md-6">
+        <div class="pro-heading-title">
+          <h2>Our Team</h2>
+          <p>Lorem ipsum dolor sit amet, consectetur</p>
+        </div>
       </div>
-      </section>
-      
-      </section>
-                <!-- News -->
-                <section class="pro-about-content pro-content">
-                  <div class="container">
-                    <div class="row align-items-center">
-                      <div class="col-12 col-md-6">
-                        <div class="pro-heading-title">
-                          <h2> Our Team
-                          </h2>
-                          <p>Lorem ipsum dolor sit amet, consectetur
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-12">
-                        <div class="about-carousel-js row">
-                          <div class="col-12 col-md-4">
-                            <div class="blog">
-                              <img class="img-fluid" src="{% static 'custome/images/about-us/14_01_about-us1.jpg' %}" alt="About-Image">
-                              <div class="member-content">
-                                <h5 class="member-title">
-                                  Bruce Sutton<span>Sales &amp; Marketing Manager</span>
-                                </h5>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="col-12 col-md-4">
-                            <div class="blog">
-                              <img class="img-fluid" src="{% static 'custome/images/about-us/14_01_about-us2.jpg' %}" alt="About-Image">
-                              <div class="member-content">
-                                <h5 class="member-title">
-                                  Bruce Sutton<span>Sales &amp; Marketing Manager</span>
-                                </h5>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="col-12 col-md-4">
-                            <div class="blog">
-                              <img class="img-fluid" src="{% static 'custome/images/about-us/14_01_about-us3.jpg' %}" alt="About-Image">
-                              <div class="member-content">
-                                <h5 class="member-title">
-                                  Bruce Sutton<span>Sales &amp; Marketing Manager</span>
-                                </h5>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="col-12 col-md-4">
-                            <div class="blog">
-                              <img class="img-fluid" src="{% static 'custome/images/about-us/14_01_about-us1.jpg' %}" alt="About-Image">
-                              <div class="member-content">
-                                <h5 class="member-title">
-                                  Bruce Sutton<span>Sales &amp; Marketing Manager</span>
-                                </h5>
-                              </div>
-                            </div>
-                          </div>
-                
-                
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </section>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <div class="about-carousel-js row">
+          {% for user in users %}
+          <div class="col-12 col-md-4">
+            <div class="blog">
+              <img
+                class="img-fluid"
+                src="{{user.image.url}}"
+                alt="About-Image"
+              />
+              <div class="member-content">
+                <h5 class="member-title">
+                  {{user.username}}<span>Sales &amp; {{user.position}}</span>
+                </h5>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
 {% endblock content %}

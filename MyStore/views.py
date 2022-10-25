@@ -1,6 +1,7 @@
 from django.shortcuts import render ,redirect,get_object_or_404,HttpResponseRedirect,HttpResponse
 from django.http import HttpRequest ,Http404
 import random
+from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 from decimal import Decimal
 from django.conf import settings
@@ -8,7 +9,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate ,login ,logout
 
 from account.models import Acount
-from .models import Product, Catagory, Order, OrderItem, shippingAddress, Customer, Review, WhishList,MailMsg,Brand,Wherehouse,Transfere, suplier,Expense,Purchase
+from .models import TESTIMONIALS, Product, Catagory, Order, OrderItem, shippingAddress, Customer, Review, WhishList,MailMsg,Brand,Wherehouse,Transfere, suplier,Expense,Purchase
 from django.http import JsonResponse,HttpResponse
 import json
 from Coupon.models import Coupons
@@ -51,14 +52,15 @@ def detail(request,slug):
          new_comment.product = qs
          new_comment.user = request.user.customer
          new_comment.save()
+         return redirect(reverse('detail',args=[qs.slug]))
    data = cartData(request)
    cartItems = data['cartitems']
    items = data['items']
    order = data['order']
    wish = data['wish']
    Brands = data['Brands']
-
    return render(request, 'product.html', {'wish': wish, 'cartitems': cartItems, 'items': items, 'order': order, 'objects': qs, 'reviews': comments[:3], 'new_review': new_comment, 'form': comment_form, 'counted': coounted, 'products': related, 'Brands': Brands})
+
 @login_required()
 def manage_coupon_view(request):
    coupons =Coupons.objects.all()
@@ -102,6 +104,7 @@ def Erro_view(request):
    order = data['order']
    wish = data['wish']
    return render(request, '404.html', {'cartitems': cartItems, 'items': items, 'order': order, 'wish': wish})
+
 @login_required()
 def add_product(request):
    catagory =Catagory.objects.all()
@@ -150,9 +153,10 @@ def add_coupons(request):
       form = coupon_update_form(request.POST)
       if form.is_valid():
          form.save()
-         return redirect('coupons')
+         return redirect('add_coupons')
 
    return render(request, 'panel/coupons.html', {'form': form,'coupons':coupons})
+   
 
 @login_required()
 def update_product(request,slug):
@@ -166,13 +170,13 @@ def update_product(request,slug):
 
 @login_required()
 def update_coupon(request, slug):
-   coupon = get_object_or_404(Coupons, code=slug)
+   coupon = get_object_or_404(Coupons, id=slug)
    form = coupon_update_form(request.POST or None,
                              request.FILES or None, instance=coupon)
    if request.method == 'POST':
       if form.is_valid():
          form.save()
-   return render(request, 'home/update_coupon.html', {'form': form, 'coupon': coupon})
+   return render(request, 'panel/update_coupon.html', {'form': form, 'coupon': coupon})
 
 @login_required()
 def delete_product(request,slug):
@@ -181,15 +185,61 @@ def delete_product(request,slug):
    return redirect('product')
 
 @login_required()
+def update_brand(request,slug):
+   brand =get_object_or_404(Brand,slug=slug)
+   form = brand_form(request.POST or None,
+                         request.FILES or None, instance=brand)
+   if request.method == 'POST':
+      if form.is_valid():
+         form.save()
+      return redirect('add-brand')
+   return render(request, 'panel/update-brand.html', {'form': form, 'brand': brand})
+
+@login_required()
+def update_catagory(request,slug):
+   cata =get_object_or_404(Catagory,slug=slug)
+   form = catagory_form(request.POST or None,
+                         request.FILES or None, instance=cata)
+   if request.method == 'POST':
+      if form.is_valid():
+         form.save()
+      return redirect('add-catagory')
+   return render(request, 'panel/update-catagory.html', {'form': form, 'cata': cata})
+
+
+
+@login_required()
+def delete_brand(request,slug):
+   brand =get_object_or_404(Brand,slug=slug)
+   brand.delete()
+   return redirect('add-brand')
+
+@login_required()
+def delete_catagory(request,slug):
+   cata =get_object_or_404(Catagory,slug=slug)
+   cata.delete()
+   return redirect('add-catagory')
+
+
+
+@login_required()
 def delete_coupon(request, slug):
-   coupon = get_object_or_404(Coupons, code=slug)
+   coupon = get_object_or_404(Coupons, id=slug)
    coupon.delete()
    return redirect('coupons')
 
 
 def product(request):
    products =Product.objects.all()
-   return render(request,'panel/products.html',{'products':products,'count':products.count()})
+   p = Paginator(products, 6)
+   page_number = request.GET.get('page', 1)
+   try:
+      page_obj = p.get_page(page_number)
+   except PageNotAnInteger:
+      page_obj = p.page(1)
+   except EmptyPage:
+      page_obj = p.page(p.page_number)
+   return render(request,'panel/products.html',{'products':page_obj,'count':products.count()})
 
 def whishlist(request):
    if not request.user.is_authenticated:
@@ -206,8 +256,9 @@ def whishlist(request):
 def store(request):
    shop_product = Product.objects.all()
    cata = Catagory.objects.all()
-   top = Product.objects.all()[:5]
+   top = Product.objects.all().order_by('-created')[:5]
    product_filter = Product.objects.all()
+   testo=TESTIMONIALS.objects.all().order_by('-created')[:5]
    data =cartData(request)
    cartItems= data['cartitems']
    items = data['items']
@@ -215,7 +266,7 @@ def store(request):
    wish =data['wish']
    Brands = data['Brands']
 
-   return render(request, 'shop.html', {'cartitems': cartItems, 'items': items, 'order': order, 'wish': wish, 'products': product_filter, 'catagory': cata, 'shop_product': shop_product, 'top': top, 'Brands': Brands})
+   return render(request, 'shop.html', {'cartitems': cartItems, 'items': items, 'order': order, 'wish': wish, 'products': product_filter, 'catagory': cata, 'shop_product': shop_product, 'top': top, 'Brands': Brands,'testo':testo})
 
 def cart(request):
    form =coupon_form()
@@ -348,13 +399,14 @@ def update_item(request):
    return JsonResponse('item was add', safe=False)
 
 def about_view(request):
+   users =Acount.objects.filter(is_staff =True)
    data = cartData(request)
    cartItems = data['cartitems']
    items = data['items']
    order = data['order']
    wish = data['wish']
    Brands = data['Brands']
-   return render(request, 'about.html', {'cartitems': cartItems, 'items': items, 'order': order, 'wish': wish, 'Brands': Brands})
+   return render(request, 'about.html', {'users':users,'cartitems': cartItems, 'items': items, 'order': order, 'wish': wish, 'Brands': Brands})
 
 @login_required()
 def thankyou_view(request):
@@ -388,15 +440,7 @@ def search_bar(request):
    Brands = data['Brands']
    return render(request, 'search_result.html', {'Products': products, 'count': products.count(), 'cartitems': cartItems, 'items': items, 'order': order, 'wish': wish,'Brands': Brands})
 
-def searsh_order(request):
-   searsh_order =request.GET['order']
-   orders = Order.objects.filter(tansaction_id__icontains=searsh_order)
-   return render(request, 'home/searsh_order.html', {'orders': orders,'count':orders.count(),})
 
-def searsh_product(request):
-   searsh_product = request.GET['product']
-   products = Product.objects.filter(name__icontains=searsh_product)
-   return render(request, 'home/searsh_product.html', {'products': products, 'count': products.count(), })
 
 @login_required()
 def admin_panel(request):
@@ -405,12 +449,7 @@ def admin_panel(request):
    for order in orders:
       sales += order.get_cart_total_after_discount
    products =Product.objects.all()
-   users =Customer.objects.all()
-   return render(request, 'panel/dashbord.html', {'products_count': products.count(), 'orders_count': orders.count(), 'users_count': users.count(), 'sales': sales, 'orders': orders})
-@login_required()
-def transaction_view(request):
-   orders = Order.objects.filter(complete=True).order_by('date_orderd',)
-   count =orders.count()
+   users =Customer.objects.all().exclude(user__is_staff = True)
    p = Paginator(orders, 10)
    page_number = request.GET.get('page', 1)
    try:
@@ -419,14 +458,8 @@ def transaction_view(request):
       page_obj = p.page(1)
    except EmptyPage:
       page_obj = p.page(p.page_number)
-   return render(request, 'home/transactions.html', {'orders': page_obj,'count':count})
-@login_required()
-def update_transaction(request,slug):
-   order = get_object_or_404(Order,tansaction_id=slug)
-   form = order_update_form(request.POST or None,instance=order)
-   if form.is_valid():
-      form.save()
-   return render(request, 'home/update_order.html', {'form': form, 'order': order})
+   return render(request, 'panel/dashbord.html', {'products_count': products.count(), 'orders_count': orders.count(), 'users_count': users.count(), 'sales': sales, 'orders': page_obj})
+
 
 def shipping_address(request):
    if request.user.is_authenticated:
@@ -471,11 +504,7 @@ def admin_settigns(request):
          form.save()
          return redirect('setting')
    return render(request, 'home/settings.html', {'form': form})
-@login_required()
-def delete_Brand(request,slug):
-   brand =get_object_or_404(Brand,slug=slug)
-   brand.delete()
-   return redirect('panel')
+
 
 def register_view(request):
    if request.user.is_authenticated:
@@ -511,21 +540,7 @@ def contact_view(request):
    Brands = data['Brands']
    return render(request, 'contact.html', {'form':form,'cartitems': cartItems, 'items': items, 'order': order, 'wish': wish, 'Brands': Brands})
 
-@login_required()
-def shipping_view(request):
 
-   not_shipped = shippingAddress.objects.all()
-   count = not_shipped.count()
-   p = Paginator(not_shipped, 10)
-   page_number = request.GET.get('page', 1)
-   try:
-      page_obj = p.get_page(page_number)
-   except PageNotAnInteger:
-      page_obj = p.page(1)
-   except EmptyPage:
-      page_obj = p.page(p.page_number)
-   
-   return render(request,'home/shipping.html',{'not_shipped':page_obj,'count':count})
 
 @login_required()
 def product_report(request):

@@ -31,12 +31,26 @@ def Brand_lucation(instance, filename):
       name=str(instance.name),  filename=filename)
   return file_path
 
+def TESTIMONIALS_lucation(instance, filename):
+  file_path = 'TESTIMONIALS/-{filename}'.format(
+      name=str(instance.name),  filename=filename)
+  return file_path
+
 
 class Brand(models.Model):
   name = models.CharField(max_length=100)
   image = models.ImageField(upload_to=Brand_lucation)
   slug = models.SlugField(unique=True)
   note =models.TextField(blank=True,null=True)
+
+  def __str__(self):
+    return self.name
+
+class TESTIMONIALS(models.Model):
+  name = models.CharField(max_length=100)
+  image = models.ImageField(upload_to=TESTIMONIALS_lucation)
+  note =models.TextField(blank=True,null=True)
+  created =models.DateTimeField(auto_now_add=True)
 
   def __str__(self):
     return self.name
@@ -86,6 +100,7 @@ class Product(models.Model):
   stack = models.IntegerField(default=0)
   slug = models.SlugField(unique=True,blank=True )
   tags = models.ManyToManyField(Tags,related_name='tags',blank=True)
+  created =models.DateTimeField(auto_now_add=True)
 
   def __str__(self):
       return self.name

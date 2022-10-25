@@ -14,9 +14,9 @@
                 <ol class="breadcrumb">
                   <li class="breadcrumb-item"><a href="{% url 'store' %}">Home</a></li>
                   <li class="breadcrumb-item"><a href="{% url 'blog_home' %}"> All Blog</a></li>
-                  {% for post in page_obj %}
-                  <li class="breadcrumb-item active" aria-current="page">{{post.catagory.name}}</li>
-                  {% endfor %}
+
+                  <li class="breadcrumb-item active" aria-current="page">{{blog_name.name}}</li>
+                 
                 </ol>
             </div>
           </nav>
@@ -46,8 +46,7 @@
                                   </div>
                                     <h3><a href="{% url 'post_detail' post.slug %}">{{post.title}}</a></h3>
 
-                                    <p>{{post.body}} </p>
-                                      
+                                
                             </div>
                           </div>
                       </div>
@@ -81,26 +80,29 @@
 
                       <ul>
                         {% for cata in catagorys %}
-                          <li><a href="{% url 'post_filter' cata.slug %}">{{cata}}<span></span></a></li>
-
+                        {% if blog_home.slug == cata.slug %}
+                        <li class="active"><a href="{% url 'post_filter' cata.slug %}">{{cata.name}}<span></span></a></li>
+                        {% else %}
+                        <li><a href="{% url 'post_filter' cata.slug %}">{{cata.name}}<span></span></a></li>
+                        {% endif %}
                         {% endfor %}
                       </ul>
                   </div>
                 <div class="widget">
                     <h3 class="widget-title">Popular Post</h3><!-- End .widget-title -->
+                    {% for post in popular %}
                       <div class="media">
-                          <img src="images/blogs/Recent-posts-image1.jpg" alt="John Doe">
+                          <img class='w-50 h-30' src="{{post.image.url}}" alt="John Doe">
                           <div class="media-body">
-                              <h3 ><a href="product-page1.html">Modern Single Sofa</a></h3>
+                              <h3 ><a href="{% url 'post_detail' post.slug %}">{{post.title}}</a></h3>
                             <div class="post-date">
                                 <i class="fa fa-calendar" aria-hidden="true"></i>
-                                <a> june 5, 2018</a>
+                                <a> {{post.date_published}}</a>
                               </div>
                            
                           </div>
                         </div>
-                                                 
-                </div>
+                        {% endfor %}
                 <ul class="socials">
                     <li><a href="#" class="fab fb fa-facebook-square"></a></li>
                     <li><a href="#" class="fab tw fa-twitter-square"></a></li>

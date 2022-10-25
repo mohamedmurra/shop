@@ -3,8 +3,7 @@ from django.db.models.signals import pre_save, post_delete
 from django.conf import settings
 from django.dispatch import receiver
 from django.utils.text import slugify
-from cloudinary.models import CloudinaryField
-
+from ckeditor.fields import RichTextField
 # Create your models here.
 
 
@@ -24,7 +23,7 @@ class Catagory(models.Model):
 
 class blog(models.Model):
  title = models.CharField(max_length=60, blank=False, null=False)
- body = models.TextField(max_length=5000, blank=False, null=False)
+ body = RichTextField( blank=False, null=False)
  catagory =models.ForeignKey(Catagory,on_delete=models.SET_NULL,blank=True,null=True)
  image = models.ImageField(upload_to=uplaod_lucation)
  date_published = models.DateTimeField(auto_now_add=True)

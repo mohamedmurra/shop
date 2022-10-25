@@ -1,5 +1,5 @@
 from django.urls import path,re_path
-from .views import  store, login_view, logout_view, cart, checkout, update_item, add_product, add_catagory, detail, register_view, account_view, whishlist, Product_main, main, Erro_view, search_bar, thankyou_view, admin_panel, contact_view, about_view, transaction_view, admin_settigns, Subscriber_view, searsh_order, update_product, delete_product, product, searsh_product, add_brand, manage_coupon_view, delete_coupon, update_coupon, add_coupons, update_transaction, shipping_view, shipping_address,product_report,order_report,Stock_Add,stock_transfere,order_list,admin_order_detail,user_list,user_detail,suplier_view,expenses_view,add_pur,Purchase_view
+from .views import  delete_brand, delete_catagory, store, login_view, logout_view, cart, checkout, update_brand, update_catagory, update_item, add_product, add_catagory, detail, register_view, account_view, whishlist, Product_main, main, Erro_view, search_bar, thankyou_view, admin_panel, contact_view, about_view,  admin_settigns, Subscriber_view,  update_product, delete_product, product,  add_brand, manage_coupon_view, delete_coupon, update_coupon, add_coupons,  shipping_address,product_report,order_report,Stock_Add,stock_transfere,order_list,admin_order_detail,user_list,user_detail,suplier_view,expenses_view,add_pur,Purchase_view
 
 urlpatterns = [
     path('',store,name='store'),
@@ -22,25 +22,22 @@ urlpatterns = [
     path('panel/', admin_panel, name='panel'),
     path('about/', about_view, name='about'),
     path('contact/', contact_view, name='contact'),
-    path('panel/transactions', transaction_view, name='transaction'),
-    path('panel/transactions/update/<slug>', update_transaction, name='order_update'),
-    path('panel/transactions/searsh/', searsh_order, name='searsh_order'),
     path('panel/settings', admin_settigns, name='setting'),
     path('panel/stock/add', Stock_Add, name='add_stock'),
     path('panel/stock/transfer', stock_transfere, name='stock_transfer'),
-    path('panel/shipping', shipping_view, name='shipping'),
-    path('panel/coupons/', manage_coupon_view, name='coupons'),
     path('panel/product_csv/', product_report, name='product_csv'),
     path('panel/order_csv/', order_report, name='order_csv'),
     path('panel/coupons/add', add_coupons, name='add_coupons'),
     path('panel/coupons/update/<slug>', update_coupon, name='update_coupon'),
     path('panel/coupons/delete/<slug>', delete_coupon, name='delete_coupon'),
     path('panel/product/', product, name='product'),
-    path('panel/product/searsh', searsh_product, name='searsh_product'),
     path('panel/add-product/', add_product, name='add-product'),
     path('panel/add-catagory/', add_catagory, name='add-catagory'),
+    path('panel/update-catagory/<slug>', update_catagory, name='update-catagory'),
+    path('panel/delete-catagory/<slug>', delete_catagory, name='delete-catagory'),
     path('panel/add-brand/', add_brand, name='add-brand'),
-    path('panel/delete-brand/<slug>', add_brand, name='delete-brand'),
+    path('panel/update-brand/<slug>', update_brand, name='update-brand'),
+    path('panel/delete-brand/<slug>', delete_brand, name='delete-brand'),
     path('panel/update-product/<slug>', update_product, name='update_product'),
     path('panel/delete-product/<slug>', delete_product, name='delete_product'),
     path('panel/order/list', order_list, name='order-list'),
