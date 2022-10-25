@@ -10,8 +10,6 @@ import string
 from Coupon.models import Coupons
 from PIL import Image
 from decimal import Decimal
-from cloudinary.models import CloudinaryField
-
 
 # Create your models here.
 
