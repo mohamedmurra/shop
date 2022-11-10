@@ -73,9 +73,12 @@
 
     {% include 'header.html' %}
   </head>
-  <body>
-    <div id='spine' class="se-pre-con justify-content-center align-items-center">
-      <div class="pre-loader ">
+  <body
+    id="tc_body"
+    class="header-fixed header-mobile-fixed subheader-enabled aside-enabled aside-fixed"
+  >
+    <div class="se-pre-con">
+      <div class="pre-loader">
         <img
           class="img-fluid"
           src="{% static 'panel/assets/images/loadergif.gif' %}"
@@ -91,6 +94,7 @@
   <script src="{% static 'custome/js/scripts.js' %}"></script>
   <script src="{% static 'assets/vendor/@popperjs/core/dist/umd/popper.min.js' %}"></script>
   <script src="{% static 'assets/vendor/bootstrap/dist/js/bootstrap.min.js' %}"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 
   <!-- Slider Revolution core JavaScript files -->
   <script src="{% static 'custome/revolution/js/jquery.themepunch.tools.min.js' %}"></script>

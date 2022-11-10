@@ -7,6 +7,7 @@ from django.utils.text import slugify
 from django.db.models.signals import pre_save, post_save
 import random
 import string
+from cloudinary.models import CloudinaryField
 from Coupon.models import Coupons
 from PIL import Image
 from decimal import Decimal
@@ -37,7 +38,7 @@ def TESTIMONIALS_lucation(instance, filename):
 
 class Brand(models.Model):
   name = models.CharField(max_length=100)
-  image = models.ImageField(upload_to=Brand_lucation)
+  image = CloudinaryField('image')
   slug = models.SlugField(unique=True)
   note =models.TextField(blank=True,null=True)
 
@@ -46,7 +47,7 @@ class Brand(models.Model):
 
 class TESTIMONIALS(models.Model):
   name = models.CharField(max_length=100)
-  image = models.ImageField(upload_to=TESTIMONIALS_lucation)
+  image = CloudinaryField('image')
   note =models.TextField(blank=True,null=True)
   created =models.DateTimeField(auto_now_add=True)
 
@@ -63,7 +64,7 @@ class Tags(models.Model):
 
 class Catagory(models.Model):
   name = models.CharField(max_length=200,unique=True)
-  image = models.ImageField(upload_to=product_lucation)
+  image = CloudinaryField('image')
   slug =models.SlugField(unique=True ,blank=True,null=True)
 
   def __str__(self):
@@ -89,7 +90,7 @@ def post_save_reciver(sender, instance, created,*args, **kwargs):
 class Product(models.Model):
   name = models.CharField(max_length=200, blank=False, null=False)
   catagory = models.ForeignKey(Catagory, on_delete=models.SET_NULL, null=True)
-  image = models.ImageField(upload_to=uplaod_lucation)
+  image = CloudinaryField('image')
   discount =models.IntegerField(blank=True,null=True)
   description = models.TextField(blank=True, null=True)
   price =models.IntegerField(blank=True, null=True)
@@ -310,7 +311,7 @@ class suplier(models.Model):
   name =models.CharField(max_length=100)
   phone =models.CharField(max_length=100)
   Company =models.CharField(max_length=100)
-  image = models.ImageField(upload_to='suplier')
+  image = CloudinaryField('image')
   email =models.EmailField()
   address =models.TextField()
 

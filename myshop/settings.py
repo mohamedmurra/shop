@@ -11,7 +11,9 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 import os
 from pathlib import Path
-import dj_database_url
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -46,6 +48,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'crispy_bootstrap5',
     'ckeditor',
+    'cloudinary',
 
 ]
 
@@ -138,6 +141,13 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+cloudinary.config(
+    cloud_name ='murra',
+    api_key ='879941374338654',
+    api_secret ='6RXWhRBAWm3Ht84g22ecYyUW-oo'
+)
+DEFAULT_FILE_STORAGE ='cloudinary_storage.MediaCloudinaryStorage'
 
 
 # Static files (CSS, JavaScript, Images)

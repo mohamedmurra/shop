@@ -15,7 +15,7 @@ idna==3.3
 jsonfield==3.1.0
 Pillow==9.0.1
 psycopg2==2.9.3
-
+cloudinary==1.30.0
 pytz==2022.1
 requests==2.27.1
 six==1.16.0
