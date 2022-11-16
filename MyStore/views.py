@@ -1,5 +1,5 @@
 from django.shortcuts import render ,redirect,get_object_or_404,HttpResponseRedirect,HttpResponse
-from django.http import HttpRequest ,Http404
+from django.http import HttpRequest ,HttpResponseBadRequest
 import random
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
@@ -376,27 +376,33 @@ def login_view(request):
       return render(request,'login.html',{'form':form})
 
 def update_item(request):
-   data =json.loads(request.body)
-   customer = request.user.customer
-   productId = data['productId']
-   action =data['action']
-   product = Product.objects.get(id=productId)
-   if action == 'wish':
-      wishlist, created = WhishList.objects.get_or_create(
-           customer=customer, product=product)
-   else:
-      order, created = Order.objects.get_or_create(
-         customer=customer, complete=False)
-      orderitem ,created =OrderItem.objects.get_or_create(order=order,product=product)
+   is_ajax = request.headers.get('X-Requested-With') == 'XMLHttpRequest'
+   if is_ajax:
+      if request.method == 'POST':
+         data =json.loads(request.body)
+         customer = request.user.customer
+         productId = data['productId']
+         action =data['action']
+         product = Product.objects.get(id=productId)
+         if action == 'wish':
+            wishlist, created = WhishList.objects.get_or_create(
+               customer=customer, product=product)
+         else:
+            order, created = Order.objects.get_or_create(
+               customer=customer, complete=False)
+            orderitem ,created =OrderItem.objects.get_or_create(order=order,product=product)
 
-      if action == 'add':
-         orderitem.quantity =(orderitem.quantity +1)
-      elif action == 'remove':
-         orderitem.quantity = (orderitem.quantity -1)
-      orderitem.save()
-      if orderitem.quantity <= 0:
-         orderitem.delete()
-   return JsonResponse('item was add', safe=False)
+            if action == 'add':
+               orderitem.quantity =(orderitem.quantity +1)
+            elif action == 'remove':
+               orderitem.quantity = (orderitem.quantity -1)
+            orderitem.save()
+            if orderitem.quantity <= 0:
+               orderitem.delete()
+         return JsonResponse({'status': 'Product updated!'})
+      return JsonResponse({'status': 'Invalid request'}, status=400)
+   else:
+      return HttpResponseBadRequest('Invalid request')
 
 def about_view(request):
    users =Acount.objects.filter(is_staff =True)
