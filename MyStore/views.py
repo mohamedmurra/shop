@@ -16,7 +16,7 @@ from Coupon.models import Coupons
 from Coupon.form import coupon_form
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.contrib import messages
-from .forms import product_form, catagory_form, register_form, AuthenticationForm, CustomerUpdateForm, UserUpdateForm, ReviewForm, searsh_form, subscrbe_form, Contact_form, brand_form, coupon_update_form, order_update_form, Shipping_form,wherehouse_form,Transfere_form,Suplier_form,Expense_form,Purchase_form
+from .forms import TESTO_form, product_form, catagory_form, register_form, AuthenticationForm, CustomerUpdateForm, UserUpdateForm, ReviewForm, searsh_form, subscrbe_form, Contact_form, brand_form, coupon_update_form, order_update_form, Shipping_form,wherehouse_form,Transfere_form,Suplier_form,Expense_form,Purchase_form
 import datetime
 from django.core.mail import send_mail,BadHeaderError
 from .utils import CartCoocies,cartData
@@ -256,9 +256,9 @@ def whishlist(request):
 def store(request):
    shop_product = Product.objects.all()
    cata = Catagory.objects.all()
-   top = Product.objects.all().order_by('-created')[:5]
-   product_filter = Product.objects.all()
-   testo=TESTIMONIALS.objects.all().order_by('-created')[:5]
+   top = Product.objects.all().order_by('-created')[:4]
+   product_filter = Product.objects.filter(discount__gte= 1)[:5]
+   testo=TESTIMONIALS.objects.all().order_by('-created')[:4]
    data =cartData(request)
    cartItems= data['cartitems']
    items = data['items']
@@ -545,7 +545,20 @@ def contact_view(request):
    wish = data['wish']
    Brands = data['Brands']
    return render(request, 'contact.html', {'form':form,'cartitems': cartItems, 'items': items, 'order': order, 'wish': wish, 'Brands': Brands})
+def store(request):
+   shop_product = Product.objects.all()
+   cata = Catagory.objects.all()
+   top = Product.objects.all().order_by('-created')[:4]
+   product_filter = Product.objects.filter(discount__gte= 1)
+   testo=TESTIMONIALS.objects.all().order_by('-created')[:4]
+   data =cartData(request)
+   cartItems= data['cartitems']
+   items = data['items']
+   order = data['order']
+   wish =data['wish']
+   Brands = data['Brands']
 
+   return render(request, 'shop.html', {'cartitems': cartItems, 'items': items, 'order': order, 'wish': wish, 'products': product_filter, 'catagory': cata, 'shop_product': shop_product, 'top': top, 'Brands': Brands,'testo':testo})
 
 
 @login_required()

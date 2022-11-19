@@ -3,7 +3,7 @@ from  django import forms
 from account.models import Acount
 from Coupon.models import Coupons
 from django.contrib.auth.forms import UserCreationForm ,authenticate
-from .models import Product, Catagory, Wherehouse, shippingAddress, Customer, Review, MailMsg, Subscriber,Brand,Order,Wherehouse,Expense,Transfere,suplier,Purchase
+from .models import Product, Catagory, Wherehouse, shippingAddress, Customer, Review, MailMsg, Subscriber,Brand,Order,Wherehouse,Expense,Transfere,suplier,Purchase,TESTIMONIALS
 
 
 
@@ -140,3 +140,9 @@ class Transfere_form(forms.ModelForm):
   class Meta:
     model = Transfere
     fields =('code','take_from','give_to','status','product','stack','shupping_charge','note')
+
+
+class TESTO_form(forms.ModelForm):
+  class Meta:
+    model = TESTIMONIALS
+    fields ='__all__'

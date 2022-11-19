@@ -301,20 +301,28 @@
         </div>
       </div>
     </div>
-    {% if messages %}
-    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-      <ul class="message-wrapper">
-        {% for message in messages %}
-        <li {% if message.tags %} class="{{message.tags}}" {% endif %}>
-          <strong>{{message}}</strong>
-          <button type="button" class="close" data-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </li>
-        {% endfor %}
-      </ul>
-    </div>
-    {% endif %}
+               {% if messages %}
+        <div
+          class="alert alert-warning alert-dismissible fade show"
+          role="alert"
+        >
+          <ul class="message-wrapper">
+            {% for message in messages %}
+            <li {% if message.tags %} class="{{message.tags}}" {% endif %}>
+              <strong>{{message}}</strong>
+              <button
+                type="button"
+                class="Close"
+                data-dismiss="alert"
+                data-label="Close"
+              >
+                <span aria-hidden="True">&times;</span>
+              </button>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+        {% endif %}
   </header>
 
   <!-- //Sticky Header -->
@@ -631,6 +639,15 @@
               <nav id="navigation-mobile">
                 <div class="logout-main">
                   <div class="welcome">
+                                                        <a
+                  href="javascript:void(0)" class="navigation-mobile-toggler "
+                >
+                  <img
+                    src="{% static 'custome\revolution\assets\svg\action\back-arrow-svgrepo-com.svg' %}"
+                    alt=""
+                  />
+                  <i class="fas fa-shopping-bag"></i>
+                </a>
                     {% if request.user.is_authenticated %}
                     <span>Welcome&nbsp;{{request.user.username}}</span>
                     {% else %}
@@ -791,7 +808,7 @@
             </ul>
           </div>
         </div>
-        {% if messages %}
+            {% if messages %}
         <div
           class="alert alert-warning alert-dismissible fade show"
           role="alert"
@@ -800,8 +817,13 @@
             {% for message in messages %}
             <li {% if message.tags %} class="{{message.tags}}" {% endif %}>
               <strong>{{message}}</strong>
-              <button type="button" class="close" data-label="Close">
-                <span aria-hidden="true">&times;</span>
+              <button
+                type="button"
+                class="Close"
+                data-dismiss="alert"
+                data-label="Close"
+              >
+                <span aria-hidden="True">&times;</span>
               </button>
             </li>
             {% endfor %}

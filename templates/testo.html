@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}TESTIMONIALS{% endblock title %}
+{% block content %}
+  
+
+      <!-- Page Header -->
+    <div class="container-fuild">
+        <div class="page-header" style="background-image: url('images/miscellaneous/page-header.png')">
+          <div class="container">
+            <h1 class="page-title">What you<span>think about websity</span></h1>
+          </div><!-- End .container -->
+        </div>
+        <nav aria-label="breadcrumb">
+          <div class="container">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{% url 'store' %}">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">testimonial</li>
+              </ol>
+          </div>
+        </nav>
+
+
+    </div>       
+        <!-- contact Content -->
+    <section class="pro-content contact-content">
+      <div class="container"> 
+        <div class="row">
+          <div class="col-12 col-sm-12">
+            <div class="row">
+                <div class="col-12 col-lg-6">
+                    <div class="form-start">
+                        <form method="POST" action='' enctype="multipart/form-data">
+                          {% csrf_token %}
+                          <label class="first-label">name</label>
+                          <div class="input-group">
+                              
+                          
+                              <input name="name" type="text" class="form-control" id="validationCustomUsername0" placeholder="Enter Your Name"  required>
+                              <div class="invalid-feedback">
+                                your name
+                              </div>
+                          </div>
+
+																<label > Image</label>
+																<div class="custom-file">
+																	<input name='image' type="file" class="custom-file-input" id="customFile">
+																	<label class="custom-file-label" for="customFile">Upload Image</label>
+																  </div> 
+														
+                          
+                          <label >Note</label>
+                          <textarea  name="note"  placeholder="write..." rows="5" cols="56"></textarea>
+                      
+                          <button type="submit" class="btn btn-secondary swipe-to-top">SUBMIT <i class="fas fa-location-arrow"></i></button>
+                        </form>
+                    </div>
+              </div>     
+            </div>
+          </div>
+        </div>
+        
+      </div>      
+    </section>
+    {% endblock content %}

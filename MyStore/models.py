@@ -36,14 +36,15 @@ def TESTIMONIALS_lucation(instance, filename):
   return file_path
 
 
-class Brand(models.Model):
+class TESTIMONIALS(models.Model):
   name = models.CharField(max_length=100)
   image = CloudinaryField('image')
-  slug = models.SlugField(unique=True)
   note =models.TextField(blank=True,null=True)
+  created =models.DateTimeField(auto_now_add=True)
 
   def __str__(self):
     return self.name
+
 
 class TESTIMONIALS(models.Model):
   name = models.CharField(max_length=100)
