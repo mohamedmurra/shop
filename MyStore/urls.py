@@ -1,5 +1,5 @@
 from django.urls import path,re_path
-from .views import  delete_brand, delete_catagory, store, login_view, logout_view, cart, checkout, update_brand, update_catagory, update_item, add_product, add_catagory, detail, register_view, account_view, whishlist, Product_main, main, Erro_view, search_bar, thankyou_view, admin_panel, contact_view, about_view,  admin_settigns, Subscriber_view,  update_product, delete_product, product,  add_brand, manage_coupon_view, delete_coupon, update_coupon, add_coupons,  shipping_address,product_report,order_report,Stock_Add,stock_transfere,order_list,admin_order_detail,user_list,user_detail,suplier_view,expenses_view,add_pur,Purchase_view
+from .views import  delete_brand, delete_catagory, store, login_view, logout_view, cart, checkout, update_brand, update_catagory, update_item, add_product, add_catagory, detail, register_view, account_view, whishlist, Product_main, main, Erro_view, search_bar, thankyou_view, admin_panel, contact_view, about_view,  admin_settigns, Subscriber_view,  update_product, delete_product, product,  add_brand, manage_coupon_view, delete_coupon, update_coupon, add_coupons,  shipping_address,product_report,order_report,Stock_Add,stock_transfere,order_list,admin_order_detail,user_list,user_detail,suplier_view,expenses_view,add_pur,Purchase_view,testo_view
 
 urlpatterns = [
     path('',store,name='store'),
@@ -18,6 +18,7 @@ urlpatterns = [
     path('product/<slug>/', detail, name='detail'),
     path('register/',register_view,name='register'),
     path('search/',search_bar,name='search'),
+    path('testo/',testo_view,name='testo'),
     path('subscribe/', Subscriber_view, name='Subscribe'),
     path('panel/', admin_panel, name='panel'),
     path('about/', about_view, name='about'),

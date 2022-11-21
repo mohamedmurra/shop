@@ -257,7 +257,7 @@ def store(request):
    shop_product = Product.objects.all()
    cata = Catagory.objects.all()
    top = Product.objects.all().order_by('-created')[:4]
-   product_filter = Product.objects.filter(discount__gte= 1)[:5]
+   product_filter = Product.objects.filter(discount__gte= 1)
    testo=TESTIMONIALS.objects.all().order_by('-created')[:4]
    data =cartData(request)
    cartItems= data['cartitems']
@@ -545,20 +545,21 @@ def contact_view(request):
    wish = data['wish']
    Brands = data['Brands']
    return render(request, 'contact.html', {'form':form,'cartitems': cartItems, 'items': items, 'order': order, 'wish': wish, 'Brands': Brands})
-def store(request):
-   shop_product = Product.objects.all()
-   cata = Catagory.objects.all()
-   top = Product.objects.all().order_by('-created')[:4]
-   product_filter = Product.objects.filter(discount__gte= 1)
-   testo=TESTIMONIALS.objects.all().order_by('-created')[:4]
-   data =cartData(request)
-   cartItems= data['cartitems']
+
+def testo_view(request):
+   form =TESTO_form()
+   if request.method == 'POST':
+      form =TESTO_form(request.POST ,request.FILES )
+      if form.is_valid():
+         form.save()
+   data = cartData(request)
+   cartItems = data['cartitems']
    items = data['items']
    order = data['order']
-   wish =data['wish']
+   wish = data['wish']
    Brands = data['Brands']
+   return render(request, 'testo.html', {'form':form,'cartitems': cartItems, 'items': items, 'order': order, 'wish': wish, 'Brands': Brands})
 
-   return render(request, 'shop.html', {'cartitems': cartItems, 'items': items, 'order': order, 'wish': wish, 'products': product_filter, 'catagory': cata, 'shop_product': shop_product, 'top': top, 'Brands': Brands,'testo':testo})
 
 
 @login_required()

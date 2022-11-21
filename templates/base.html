@@ -82,11 +82,8 @@
     </script>
 
     <!-- Core CSS Files -->
-
-    
   </head>
-  <body
-    class="container-w home5">
+  <body >
     <div class="se-pre-con">
       <div class="pre-loader">
         <img
@@ -96,20 +93,24 @@
         />
       </div>
     </div>
+
     <div class="wrapper" style="display: none">
-      {% include 'header.html' %}
-    {% block content %} {% endblock content %} {% include 'footer.html' %}
+      {% include 'header.html' %} {% block content %} {% endblock content %} {% include 'footer.html' %}
     </div>
+    <button class="switch btn btn-secondary btn-sm" data-switch-dark>
+      Dark
+    </button>
+    <script src="{% static 'origin/assets/dist/js/bootstrap.bundle.min.js' %}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{% static 'custome/js/scripts.js' %}"></script>
     <script src="{% static 'assets/vendor/@popperjs/core/dist/umd/popper.min.js' %}"></script>
     <script src="{% static 'assets/vendor/bootstrap/dist/js/bootstrap.min.js' %}"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-  
+
     <!-- Slider Revolution core JavaScript files -->
     <script src="{% static 'custome/revolution/js/jquery.themepunch.tools.min.js' %}"></script>
     <script src="{% static 'custome/revolution/js/jquery.themepunch.revolution.min.js' %}"></script>
-  
+
     <!-- Slider Revolution extension scripts. ONLY NEEDED FOR LOCAL TESTING -->
     <script src="{% static 'custome/revolution/js/extensions/revolution.extension.actions.min.js' %}"></script>
     <script src="{% static 'custome/revolution/js/extensions/revolution.extension.carousel.min.js' %}"></script>
@@ -120,10 +121,10 @@
     <script src="{% static 'custome/revolution/js/extensions/revolution.extension.parallax.min.js' %}"></script>
     <script src="{% static 'custome/revolution/js/extensions/revolution.extension.slideanims.min.js' %}"></script>
     <script src="{% static 'custome/revolution/js/extensions/revolution.extension.video.min.js' %}"></script>
-  
+
     <script type="text/javascript">
       const updateBtn = document.getElementsByClassName('update-cart')
-  
+
       for (i = 0; i < updateBtn.length; i++) {
         updateBtn[i].addEventListener('click', function () {
           const productId = this.dataset.product
@@ -150,10 +151,9 @@
             return response.json()
           })
           .then((data) => {
-            location.reload();
+            location.reload()
           })
       }
     </script>
   </body>
-
 </html>

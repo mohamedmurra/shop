@@ -6,45 +6,24 @@ from django.contrib.auth.models import User
 from django.utils.text import slugify
 from django.db.models.signals import pre_save, post_save
 import random
-import string
 from cloudinary.models import CloudinaryField
+import string
 from Coupon.models import Coupons
 from PIL import Image
 from decimal import Decimal
 
 # Create your models here.
 
-def uplaod_lucation(instance, filename):
-  file_path = 'Product/{catagory}/{name}-{filename}'.format(
-     catagory=str(instance.catagory), name=str(instance.name), filename=filename)
-  return file_path
-
-def product_lucation(instance, filename):
-  file_path = 'Product/Catagory/{name}/{name}-{filename}'.format(
-     name=str(instance.name),  filename=filename)
-  return file_path
 
 
-def Brand_lucation(instance, filename):
-  file_path = 'Product/Catagory/{name}/{name}-{filename}'.format(
-      name=str(instance.name),  filename=filename)
-  return file_path
-
-def TESTIMONIALS_lucation(instance, filename):
-  file_path = 'TESTIMONIALS/-{filename}'.format(
-      name=str(instance.name),  filename=filename)
-  return file_path
-
-
-class TESTIMONIALS(models.Model):
+class Brand(models.Model):
   name = models.CharField(max_length=100)
   image = CloudinaryField('image')
+  slug = models.SlugField(unique=True)
   note =models.TextField(blank=True,null=True)
-  created =models.DateTimeField(auto_now_add=True)
 
   def __str__(self):
     return self.name
-
 
 class TESTIMONIALS(models.Model):
   name = models.CharField(max_length=100)
@@ -72,14 +51,7 @@ class Catagory(models.Model):
     return self.name
   
 
-class Brand(models.Model):
-  name = models.CharField(max_length=100)
-  image = models.ImageField(upload_to='brand')
-  slug = models.SlugField(unique=True)
-  note =models.TextField(blank=True,null=True)
 
-  def __str__(self):
-    return self.name
 
   
 class Customer(models.Model):
