@@ -2,7 +2,7 @@ from django.forms import ModelForm
 from  django import forms
 from account.models import Acount
 from Coupon.models import Coupons
-from django.contrib.auth.forms import UserCreationForm 
+from django.contrib.auth.forms import UserCreationForm ,authenticate
 from .models import Product, Catagory, Wherehouse, shippingAddress, Customer, Review, TESTIMONIALS, Subscriber,Brand,Order,Wherehouse,Expense,Transfere,suplier,Purchase
 
 

@@ -96,10 +96,10 @@
 
     <div class="wrapper" style="display: none">
       {% include 'header.html' %} {% block content %} {% endblock content %} {% include 'footer.html' %}
+      <button class="switch btn btn-secondary btn-sm" data-switch-dark>
+        Dark
+      </button>
     </div>
-    <button class="switch btn btn-secondary btn-sm" data-switch-dark>
-      Dark
-    </button>
     <script src="{% static 'origin/assets/dist/js/bootstrap.bundle.min.js' %}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{% static 'custome/js/scripts.js' %}"></script>
