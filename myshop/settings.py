@@ -99,17 +99,13 @@ WSGI_APPLICATION = 'myshop.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'railway',
-        'USER': 'postgres',
-        'PASSWORD': 'kmtOV4o7PROnS1iEbJpn',
-        'HOST': 'containers-us-west-24.railway.app',
-        'PORT': '8068',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'sqlite3'
     }
 }
-
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
 
