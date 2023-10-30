@@ -101,10 +101,7 @@ WSGI_APPLICATION = 'myshop.wsgi.application'
 
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'sqlite3'
-    }
+    'default': dj_database_url.parse('postgresql://postgres:DIcuy7rlP63AMjIPPhDu@containers-us-west-54.railway.app:6380/railway')
 }
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
