@@ -30,14 +30,6 @@ function addCookieItem(productId,action){
   }
  }
  location.reload()
- $.ajax({
-  type:'POST',
-  url:'',
-  data:'',
-  success:function (data) {
-    alert(`Success ${data}`)
-  },
- });
 }
 
 function updateuserOrder(productId,action){
